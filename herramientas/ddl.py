@@ -36,6 +36,6 @@ for t in ORDEN:
     out.append(f"CREATE TABLE gold.{t} (\n" + ",\n".join(lineas) + "\n);\n")
 con.close()
 ddl = "\n".join(out)
-(RAIZ / "docs" / "1.4-ddl-gold.sql").write_text(ddl)
+(RAIZ / "docs" / "1.4-ddl-gold.sql").write_text(ddl, encoding="utf-8")
 duckdb.connect().execute(ddl)          # validación: el DDL corre en una base vacía
 print("DDL generado y validado:", len(ORDEN), "tablas")

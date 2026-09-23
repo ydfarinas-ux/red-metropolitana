@@ -1,6 +1,6 @@
 -- DDL de la capa Gold (DuckDB / PostgreSQL compatible salvo tipos menores).
 -- Generado desde el warehouse con herramientas/ddl.py. dbt construye estas tablas;
--- este archivo documenta su estructura, llaves primarias y for·neas.
+-- este archivo documenta su estructura, llaves primarias y for√°neas.
 
 CREATE SCHEMA IF NOT EXISTS gold;
 

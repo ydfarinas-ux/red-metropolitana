@@ -24,7 +24,7 @@ sys.path.insert(0, str(RAIZ / "ingesta"))
 
 # carga .env si existe (sin dependencias extra)
 if (RAIZ / ".env").exists():
-    for linea in (RAIZ / ".env").read_text().splitlines():
+    for linea in (RAIZ / ".env").read_text(encoding="utf-8").splitlines():
         if linea.strip() and not linea.startswith("#") and "=" in linea:
             k, v = linea.split("=", 1)
             os.environ.setdefault(k.strip(), v.split("#", 1)[0].strip())
@@ -101,7 +101,7 @@ def dbt_build():
     dbt = Path(sys.executable).parent / ("dbt.exe" if os.name == "nt" else "dbt")
     r = subprocess.run([str(dbt) if dbt.exists() else "dbt", "build", "--profiles-dir", ".", "--target-path", "target"],
                        cwd=RAIZ / "dbt", capture_output=True, text=True, encoding="utf-8", errors="replace")
-    (EVIDENCIA / "ultimo-dbt-build.log").write_text(r.stdout)
+    (EVIDENCIA / "ultimo-dbt-build.log").write_text(r.stdout, encoding="utf-8")
     resumen = [l for l in r.stdout.splitlines() if "Done." in l]
     get_run_logger().info(resumen[-1] if resumen else r.stdout[-2000:])
     if r.returncode != 0:
@@ -111,7 +111,7 @@ def dbt_build():
 @task
 def verificar_linaje():
     """Regla dura del proyecto: ningún modelo de Gold puede depender de una fuente (Bronze)."""
-    manifest = json.loads((RAIZ / "dbt" / "target" / "manifest.json").read_text())
+    manifest = json.loads((RAIZ / "dbt" / "target" / "manifest.json").read_text(encoding="utf-8"))
     violaciones = []
     for nodo in manifest["nodes"].values():
         if nodo["resource_type"] == "model" and nodo["schema"] == "gold":
@@ -151,14 +151,14 @@ def contar(corrida: int):
     con.close()
 
     EVIDENCIA.mkdir(exist_ok=True)
-    with open(EVIDENCIA / f"conteos-corrida-{corrida}.csv", "w", newline="") as f:
+    with open(EVIDENCIA / f"conteos-corrida-{corrida}.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f); w.writerow(["capa", "tabla", "filas"]); w.writerows(filas)
     metricas = {"corrida": corrida, "fecha": datetime.now().isoformat(timespec="seconds"),
                 "duracion_segundos": DURACIONES, "consulta_tablero_ms": consulta_ms,
                 "tamano_mb": {"datos_crudos": tamano_mb(RAIZ / "datos_red"), "bronze": tamano_mb(os.environ["BRONZE_PATH"]),
                               "warehouse_staging_silver_gold": tamano_mb(os.environ["WAREHOUSE_PATH"])}}
-    (EVIDENCIA / f"metricas-corrida-{corrida}.json").write_text(json.dumps(metricas, indent=2, ensure_ascii=False))
-    with open(EVIDENCIA / "bitacora.log", "a") as f:
+    (EVIDENCIA / f"metricas-corrida-{corrida}.json").write_text(json.dumps(metricas, indent=2, ensure_ascii=False), encoding="utf-8")
+    with open(EVIDENCIA / "bitacora.log", "a", encoding="utf-8") as f:
         f.write(f"{metricas['fecha']} corrida={corrida} duraciones={DURACIONES} consulta_ms={consulta_ms}\n")
     get_run_logger().info(f"conteos guardados en evidencia/conteos-corrida-{corrida}.csv ({len(filas)} tablas)")
 
