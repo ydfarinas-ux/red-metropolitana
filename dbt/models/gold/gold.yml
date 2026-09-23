@@ -1,0 +1,33 @@
+version: 2
+models:
+  - name: fct_abordaje
+    description: "Hecho principal. Grano: un abordaje de un usuario en una estación de cualquiera de los cuatro sistemas."
+    columns:
+      - {name: abordaje_key, tests: [unique, not_null]}
+      - name: tiempo_key
+        tests: [not_null, {relationships: {arguments: {to: ref('dim_tiempo'), field: tiempo_key}}}]
+      - name: usuario_sk
+        tests: [not_null, {relationships: {arguments: {to: ref('dim_usuario'), field: usuario_sk}}}]
+      - name: sistema_key
+        tests: [not_null, {relationships: {arguments: {to: ref('dim_sistema'), field: sistema_key}}}]
+      - name: estacion_key
+        tests: [not_null, {relationships: {arguments: {to: ref('dim_estacion'), field: estacion_key}}}]
+      - name: zona_key
+        tests: [not_null, {relationships: {arguments: {to: ref('dim_zona'), field: zona_key}}}]
+  - name: fct_trayecto_metroriel
+    columns:
+      - {name: trayecto_key, tests: [unique, not_null]}
+      - name: zona_destino_key
+        tests: [not_null, {relationships: {arguments: {to: ref('dim_zona'), field: zona_key}}}]
+  - name: dim_tiempo
+    columns: [{name: tiempo_key, tests: [unique, not_null]}]
+  - name: dim_fecha
+    columns: [{name: fecha_key, tests: [unique, not_null]}]
+  - name: dim_zona
+    columns: [{name: zona_key, tests: [unique, not_null]}]
+  - name: dim_estacion
+    columns: [{name: estacion_key, tests: [unique, not_null]}]
+  - name: dim_usuario
+    columns: [{name: usuario_sk, tests: [unique, not_null]}]
+  - name: dim_sistema
+    columns: [{name: sistema_key, tests: [unique, not_null]}]
