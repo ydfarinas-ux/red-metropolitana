@@ -1,8 +1,6 @@
 """
-=====================================================================
-  GENERADOR DE DATOS  ·  Red Metropolitana de Transporte
-  Proyecto 1  ·  Ciencia de Datos  ·  IIS Sección 2
-=====================================================================
+  Generador de datos: Red Metropolitana de Transporte
+  Proyecto 1, Ciencia de Datos, IIS Sección 2
 
   Simula los sistemas de datos de CUATRO operadores que hoy NO están
   integrados. Cada uno registra los viajes a su manera, con su propio
@@ -19,11 +17,9 @@
 
   Requisitos:  solo Python 3
   Ejecutar:    python generar_red_metropolitana.py
-=====================================================================
 """
 import csv, os, json, random, datetime, hashlib
 
-# ---------------------------------------------------------------
 DIAS          = 45          # días de operación a simular
 N_USUARIOS    = 60_000      # usuarios distintos en toda la red
 ESCALA        = 0.08        # fracción del volumen real (0.08 ≈ 8%)
@@ -31,7 +27,6 @@ ESCALA        = 0.08        # fracción del volumen real (0.08 ≈ 8%)
                             # sin necesidad. Con 0.08 son ~200 MB.
 SEMILLA       = 2026
 CARPETA       = "datos_red"
-# ---------------------------------------------------------------
 
 random.seed(SEMILLA)
 os.makedirs(CARPETA, exist_ok=True)
@@ -46,11 +41,9 @@ ZONAS_SERVIDAS = ["Zona 1", "Zona 4", "Zona 6", "Zona 7", "Zona 8", "Zona 9",
                   "Zona 10", "Zona 11", "Zona 12", "Zona 13", "Zona 17", "Zona 18",
                   "Mixco", "Villa Nueva", "San Miguel Petapa"]
 
-# =====================================================================
-#  CATÁLOGOS  ·  cada operador nombra las cosas a su manera
-# =====================================================================
+# Catálogos: cada operador nombra las cosas a su manera
 
-# --- Transmetro: 8 líneas, estaciones con código propio -------------
+# Transmetro: 8 líneas, estaciones con código propio
 tm_lineas = [("L1","Centra Sur - Centro"), ("L2","Eje Central"),
              ("L6","Atanasio Tzul"), ("L7","Calzada San Juan"),
              ("L12","Calzada Aguilar Batres"), ("L13","Villa Nueva"),
@@ -67,7 +60,7 @@ for i, (lin, nom) in enumerate(tm_lineas):
             "lon": round(-90.55 + random.uniform(-0.09, 0.09), 6),
         })
 
-# --- Transurbano: 41 rutas, nombra "paradas", no "estaciones" -------
+# Transurbano: 41 rutas, nombra "paradas", no "estaciones"
 tu_rutas = [f"R-{n:03d}" for n in range(101, 142)]
 tu_paradas = []
 for i, r in enumerate(tu_rutas):
@@ -80,7 +73,7 @@ for i, r in enumerate(tu_rutas):
             "sector": ZONAS_SERVIDAS[(i*2+k) % len(ZONAS_SERVIDAS)].replace("Zona ", "Z").upper(),
         })
 
-# --- MetroRiel: 22 estaciones, zonas 12-8-1-6-17 --------------------
+# MetroRiel: 22 estaciones, zonas 12-8-1-6-17
 mr_zonas = ["Zona 12", "Zona 8", "Zona 1", "Zona 6", "Zona 17"]
 mr_estaciones = [{
     "id_estacion": k,
@@ -89,7 +82,7 @@ mr_estaciones = [{
     "km": round(k * 21 / 22, 2),
 } for k in range(1, 23)]
 
-# --- Aerometro: 2 ejes, cabinas -------------------------------------
+# Aerometro: 2 ejes, cabinas
 am_estaciones = [{
     "station_code": f"AM{e}{k}",
     "station_name": f"Aerometro Eje {e} - Torre {k}",
@@ -97,9 +90,7 @@ am_estaciones = [{
     "district": ("Mixco" if e == 1 else "Zona 7") if k <= 3 else ZONAS_SERVIDAS[(e*4+k) % len(ZONAS_SERVIDAS)],
 } for e in (1, 2) for k in range(1, 8)]
 
-# =====================================================================
-#  USUARIOS  ·  el problema central: cada sistema tiene su propia llave
-# =====================================================================
+# Usuarios, el problema central: cada sistema tiene su propia llave
 # Un mismo usuario puede tener tarjeta de varios sistemas. No hay
 # ninguna tabla que las relacione: los grupos deben resolverlo.
 
@@ -155,9 +146,7 @@ escribir("am_estaciones.csv",
          [[e["station_code"],e["station_name"],e["axis"],e["district"]]
           for e in am_estaciones])
 
-# =====================================================================
-#  1 · TRANSMETRO  ·  CSV de validaciones, una fila por abordaje
-# =====================================================================
+# 1. Transmetro: CSV de validaciones, una fila por abordaje
 print("\nOPERACIÓN")
 
 u_tm = [u for u in usuarios if u["tm"]]
@@ -185,10 +174,8 @@ escribir("transmetro_validaciones.csv",
          ["validacion_id","tarjeta","estacion_id","linea","fecha_hora","tarifa","tipo"],
          gen_tm())
 
-# =====================================================================
-#  2 · TRANSURBANO  ·  CSV con formato distinto: fecha y hora separadas,
-#      monto en centavos, y estado del viaje como código numérico
-# =====================================================================
+# 2. Transurbano: CSV con formato distinto: fecha y hora separadas,
+# monto en centavos, y estado del viaje como código numérico
 u_tu = [u for u in usuarios if u["tu"]]
 ESTADOS_TU = {1:"OK", 2:"OK", 3:"OK", 7:"SALDO_INSUF", 9:"TARJETA_INVALIDA"}
 def gen_tu():
@@ -213,10 +200,8 @@ escribir("transurbano_transacciones.csv",
          ["fecha","hora","num_tarjeta","cod_parada","ruta","monto_centavos","cod_estado"],
          gen_tu())
 
-# =====================================================================
-#  3 · METRORIEL  ·  JSON Lines, con ORIGEN Y DESTINO en la misma fila
-#      (el único sistema que registra el trayecto completo)
-# =====================================================================
+# 3. MetroRiel: JSON Lines, con ORIGEN Y DESTINO en la misma fila
+# (el único sistema que registra el trayecto completo)
 u_mr = [u for u in usuarios if u["mr"]]
 ruta_mr = os.path.join(CARPETA, "metroriel_viajes.jsonl")
 with open(ruta_mr, "w", encoding="utf-8") as f:
@@ -249,10 +234,8 @@ with open(ruta_mr, "w", encoding="utf-8") as f:
             f.write(json.dumps(reg, ensure_ascii=False) + "\n")
 print(f"  {'metroriel_viajes.jsonl':<34} {os.path.getsize(ruta_mr)/1024/1024:8.2f} MB")
 
-# =====================================================================
-#  4 · AEROMETRO  ·  CSV en INGLÉS, timestamp en UTC (no hora local),
-#      y una fila por CABINA, no por pasajero
-# =====================================================================
+# 4. Aerometro: CSV en INGLÉS, timestamp en UTC (no hora local),
+# y una fila por CABINA, no por pasajero
 u_am = [u for u in usuarios if u["am"]]
 def gen_am():
     bid = 0
@@ -276,9 +259,7 @@ escribir("aerometro_boardings.csv",
           "timestamp_utc","cabin_number","fare"],
          gen_am())
 
-# =====================================================================
-#  5 · CDC  ·  cambios en el padrón de usuarios, capturados del log
-# =====================================================================
+# 5. CDC: cambios en el padrón de usuarios, capturados del log
 # Este archivo NO es una foto del padrón: es el registro de CAMBIOS.
 # Incluye inserciones, actualizaciones y BORRADOS (tombstones).
 # Un borrado llega con la llave y sin cuerpo.
