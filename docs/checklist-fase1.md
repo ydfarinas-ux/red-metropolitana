@@ -60,7 +60,7 @@ Cada requisito del enunciado, dónde se cumple y la evidencia medida. Todo se ve
 | Al menos dos tablas de hechos con dimensiones conformadas | ✓ | Tres: `fct_abordaje`, `fct_trayecto_metroriel` y `fct_padron_diario` |
 | Dimensión tiempo con hora del día, día hábil y hora pico | ✓ | `dim_tiempo` (grano hora) + `dim_fecha` (asuetos) |
 | Medidas clasificadas: aditivas, semi-aditivas y no aditivas | ✓ | `docs/1.4-modelo-dimensional.md` (`tarjetas_activas` es la semi-aditiva) |
-| Entregable: diagrama, matriz del bus y DDL | ✓ | `docs/1.4-diagrama-modelo.png`, matriz en `docs/1.4-modelo-dimensional.md` y `docs/1.4-ddl-gold.sql` (validado en una base vacía) |
+| Entregable: diagrama, matriz del bus y DDL | ✓ | `docs/1.4-diagrama-modelo.png` (y `.pdf`), matriz en `docs/1.4-modelo-dimensional.md` y `docs/1.4-ddl-gold.sql` (validado en una base vacía) |
 
 ## 1.5 Orquestación e idempotencia (5 pts)
 

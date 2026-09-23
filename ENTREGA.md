@@ -32,7 +32,7 @@ Los datos y conclusiones de todos los puntos están juntos en **`Datos y conclus
 | **1.3** | Tabla de cuarentena con motivo de rechazo | `docs/1.3-silver.md` | `entregables/1.3-cuarentena.csv` (12,336 registros) |
 | **1.3** | Conteo de registros por regla de calidad | `docs/1.3-silver.md` | `entregables/1.3-conteo-por-regla-de-calidad.csv` |
 | **1.3** | Estrategia de identidad con supuestos y límites | `docs/1.3-silver.md` | `entregables/1.3-identidad-usuario-diagnostico.csv` |
-| **1.4** | Diagrama del modelo | `docs/1.4-diagrama-modelo.png` (y `.svg`) | — |
+| **1.4** | Diagrama del modelo | `docs/1.4-diagrama-modelo.png` y `docs/1.4-diagrama-modelo.pdf` | — |
 | **1.4** | Matriz del bus | `docs/1.4-modelo-dimensional.md` | — |
 | **1.4** | Grano de la tabla principal en una frase | `docs/1.4-modelo-dimensional.md` | — |
 | **1.4** | Clasificación de medidas | `docs/1.4-modelo-dimensional.md` | `entregables/1.4-filas-en-gold.csv` |
