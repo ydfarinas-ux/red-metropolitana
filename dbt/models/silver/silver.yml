@@ -1,0 +1,31 @@
+version: 2
+models:
+  - name: silver_eventos_evaluados
+    columns:
+      - name: sistema
+        tests: [{accepted_values: {arguments: {values: ['TM', 'TU', 'MR', 'AM']}}}]
+  - name: silver_cuarentena
+    description: "Registros rechazados con motivo. Nunca se descartan en silencio."
+    columns:
+      - {name: motivo_rechazo, tests: [not_null]}
+  - name: silver_estaciones
+    columns:
+      - {name: estacion_key, tests: [unique, not_null]}
+  - name: silver_abordajes
+    columns:
+      - {name: abordaje_id, tests: [unique, not_null]}
+      - {name: usuario_sk, tests: [not_null]}
+      - name: zona_key
+        tests: [not_null, {relationships: {arguments: {to: ref('silver_zona'), field: zona_key}}}]
+      - name: estacion_key
+        tests: [{relationships: {arguments: {to: ref('silver_estaciones'), field: estacion_key}}}]
+  - name: silver_trayectos_metroriel
+    columns:
+      - {name: trayecto_id, tests: [unique, not_null]}
+  - name: silver_identidad_usuario
+    tests:
+      - combinacion_unica:
+          arguments: {cols: "sistema, llave_origen"}
+  - name: silver_padron_scd2
+    columns:
+      - {name: version_key, tests: [unique, not_null]}
