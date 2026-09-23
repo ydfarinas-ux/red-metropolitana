@@ -1,0 +1,61 @@
+fuente,valor_origen,clave_normalizada,zona_key,nombre_oficial,es_valida
+AM,Zona 1,Z1,1,Zona 1,true
+CDC,Zona 1,Z1,1,Zona 1,true
+MR,Zona 1,Z1,1,Zona 1,true
+TM,Zona 1,Z1,1,Zona 1,true
+TU,Z1,Z1,1,Zona 1,true
+CDC,Zona 4,Z4,4,Zona 4,true
+TM,Zona 4,Z4,4,Zona 4,true
+TU,Z4,Z4,4,Zona 4,true
+CDC,Zona 6,Z6,6,Zona 6,true
+MR,Zona 6,Z6,6,Zona 6,true
+TM,Zona 6,Z6,6,Zona 6,true
+TU,Z6,Z6,6,Zona 6,true
+AM,Zona 7,Z7,7,Zona 7,true
+CDC,Zona 7,Z7,7,Zona 7,true
+TM,Zona 7,Z7,7,Zona 7,true
+TU,Z7,Z7,7,Zona 7,true
+CDC,Zona 8,Z8,8,Zona 8,true
+MR,Zona 8,Z8,8,Zona 8,true
+TM,Zona 8,Z8,8,Zona 8,true
+TU,Z8,Z8,8,Zona 8,true
+CDC,Zona 9,Z9,9,Zona 9,true
+TM,Zona 9,Z9,9,Zona 9,true
+TU,Z9,Z9,9,Zona 9,true
+CDC,Zona 10,Z10,10,Zona 10,true
+TM,Zona 10,Z10,10,Zona 10,true
+TU,Z10,Z10,10,Zona 10,true
+CDC,Zona 11,Z11,11,Zona 11,true
+TM,Zona 11,Z11,11,Zona 11,true
+TU,Z11,Z11,11,Zona 11,true
+AM,Zona 12,Z12,12,Zona 12,true
+CDC,Zona 12,Z12,12,Zona 12,true
+MR,Zona 12,Z12,12,Zona 12,true
+TM,Zona 12,Z12,12,Zona 12,true
+TU,Z12,Z12,12,Zona 12,true
+AM,Zona 13,Z13,13,Zona 13,true
+CDC,Zona 13,Z13,13,Zona 13,true
+TM,Zona 13,Z13,13,Zona 13,true
+TU,Z13,Z13,13,Zona 13,true
+AM,Zona 17,Z17,17,Zona 17,true
+CDC,Zona 17,Z17,17,Zona 17,true
+MR,Zona 17,Z17,17,Zona 17,true
+TM,Zona 17,Z17,17,Zona 17,true
+TU,Z17,Z17,17,Zona 17,true
+AM,Zona 18,Z18,18,Zona 18,true
+CDC,Zona 18,Z18,18,Zona 18,true
+TM,Zona 18,Z18,18,Zona 18,true
+TU,Z18,Z18,18,Zona 18,true
+AM,Mixco,MIXCO,101,Mixco,true
+CDC,Mixco,MIXCO,101,Mixco,true
+TM,Mixco,MIXCO,101,Mixco,true
+TU,MIXCO,MIXCO,101,Mixco,true
+AM,Villa Nueva,VILLA NUEVA,102,Villa Nueva,true
+CDC,Villa Nueva,VILLA NUEVA,102,Villa Nueva,true
+TM,Villa Nueva,VILLA NUEVA,102,Villa Nueva,true
+TU,VILLA NUEVA,VILLA NUEVA,102,Villa Nueva,true
+AM,San Miguel Petapa,SAN MIGUEL PETAPA,103,San Miguel Petapa,true
+CDC,San Miguel Petapa,SAN MIGUEL PETAPA,103,San Miguel Petapa,true
+TM,San Miguel Petapa,SAN MIGUEL PETAPA,103,San Miguel Petapa,true
+TU,SAN MIGUEL PETAPA,SAN MIGUEL PETAPA,103,San Miguel Petapa,true
+CDC,Santa Catarina Pinula,SANTA CATARINA PINULA,104,Santa Catarina Pinula,true

@@ -1,0 +1,10 @@
+tabla,filas
+dim_estacion,468
+dim_fecha,365
+dim_sistema,4
+dim_tiempo,8760
+dim_usuario,70380
+dim_zona,26
+fct_abordaje,1647569
+fct_padron_diario,8612
+fct_trayecto_metroriel,295511

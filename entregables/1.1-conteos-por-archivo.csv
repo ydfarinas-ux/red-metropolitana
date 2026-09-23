@@ -1,0 +1,10 @@
+archivo,via,filas_en_archivo,filas_en_bronze,cuadra,ruta_bronze
+am_estaciones.csv,batch,14,14,true,lake/bronze/fuente=am_estaciones/fecha_ingesta=2026-09-23/4f3dfe0852beb6f1fb3cce72784de9c9.parquet
+metroriel_viajes.jsonl,batch,299100,299100,true,lake/bronze/fuente=metroriel_viajes/fecha_ingesta=2026-09-23/02b2499f7f01f0d00f9cca8c703d2564.parquet
+mr_estaciones.csv,batch,22,22,true,lake/bronze/fuente=mr_estaciones/fecha_ingesta=2026-09-23/89ae83effdabc33dfb80eceb4bbbfb4d.parquet
+tm_estaciones.csv,batch,104,104,true,lake/bronze/fuente=tm_estaciones/fecha_ingesta=2026-09-23/bf0ade6ccd67077ead5718f6e72299d5.parquet
+transurbano_transacciones.csv,batch,832791,832791,true,lake/bronze/fuente=transurbano_transacciones/fecha_ingesta=2026-09-23/c85ae33807585b2286e57e5feb2337fe.parquet
+tu_paradas.csv,batch,328,328,true,lake/bronze/fuente=tu_paradas/fecha_ingesta=2026-09-23/6f7f90c9761b35cc3c988442d04fd91b.parquet
+cdc_padron_usuarios.csv,cdc,31050,31050,true,lake/bronze/fuente=cdc_padron_usuarios/fecha_ingesta=2026-09-23/ef93b8e134d188149542e8dbe330c65b.parquet
+aerometro_boardings.csv,streaming,203554,203554,true,lake/bronze/fuente=aerometro_boardings/fecha_ingesta=2026-09-23/69f571d8b34bab21dfd36eeca14a0e89.parquet
+transmetro_validaciones.csv,streaming,363221,363221,true,lake/bronze/fuente=transmetro_validaciones/fecha_ingesta=2026-09-23/5f61fa003d4c325d1a4e2b10e52ab8f3.parquet
