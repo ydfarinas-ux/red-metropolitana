@@ -1,0 +1,16 @@
+version: 2
+sources:
+  - name: bronze
+    description: "Capa Bronze en el lake: Parquet particionado por fuente y fecha de ingesta, dato tal como llegó."
+    meta:
+      external_location: "read_parquet('{{ env_var('BRONZE_PATH', '../lake/bronze') }}/fuente={name}/*/*.parquet', hive_partitioning=true, union_by_name=true)"
+    tables:
+      - name: tm_estaciones
+      - name: tu_paradas
+      - name: mr_estaciones
+      - name: am_estaciones
+      - name: transmetro_validaciones
+      - name: transurbano_transacciones
+      - name: metroriel_viajes
+      - name: aerometro_boardings
+      - name: cdc_padron_usuarios

@@ -1,0 +1,8 @@
+# Sin credenciales: DuckDB es un archivo local. La ruta y la sal de seudonimización vienen de variables de entorno.
+red_metropolitana:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('WAREHOUSE_PATH', '../warehouse/red-metropolitana.duckdb') }}"
+      threads: 1

@@ -1,0 +1,14 @@
+version: 2
+seeds:
+  - name: territorios
+    description: >
+      Lista oficial de territorios de la dimensión zona: las 22 zonas de la Ciudad de Guatemala
+      (no existen 20, 22 y 23) y los municipios del área metropolitana que aparecen en los datos.
+      clave_normalizada es contra lo que se compara cualquier forma de escribir la zona.
+    columns:
+      - {name: zona_key, tests: [unique, not_null]}
+      - {name: clave_normalizada, tests: [unique, not_null]}
+  - name: festivos_gt
+    description: "Días de asueto 2026. El 15 de agosto solo aplica a la Ciudad de Guatemala."
+  - name: sistemas
+    columns: [{name: sistema_codigo, tests: [unique, not_null]}]

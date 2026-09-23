@@ -1,0 +1,36 @@
+name: red_metropolitana
+version: "1.0.0"
+config-version: 2
+profile: red_metropolitana
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  # Aerómetro solo entrega un hash de 12 caracteres. Por defecto NO se vincula con las otras tarjetas
+  # (una Agencia real no conoce la regla del hash). Con true se usa la regla md5('am' || numero) que
+  # revela el script generador, solo para medir la sensibilidad del transbordo. Ver docs/1.3-silver.md
+  vincular_aerometro: false
+
+models:
+  red_metropolitana:
+    staging:
+      +schema: staging            # se vacía cada corrida (el flujo hace DROP SCHEMA antes de dbt)
+      +materialized: table
+    cdc:
+      +schema: silver
+      +materialized: table
+    silver:
+      +schema: silver
+      +materialized: table
+    gold:
+      +schema: gold
+      +materialized: table
+
+seeds:
+  red_metropolitana:
+    +schema: silver

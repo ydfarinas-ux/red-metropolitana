@@ -1,0 +1,19 @@
+version: 2
+models:
+  - name: cdc_operaciones
+    description: "Cada operación del log de CDC con la decisión tomada: aplicada, o no aplicada con su motivo."
+    columns:
+      - {name: secuencia, tests: [unique, not_null]}
+  - name: padron_vigente
+    description: "Padrón vigente: una fila por tarjeta, última operación aplicada en orden de secuencia. DELETE = activa false."
+    columns:
+      - {name: tarjeta, tests: [unique, not_null]}
+      - {name: activa, tests: [not_null]}
+      - name: operador_tarjeta
+        tests: [not_null, {accepted_values: {arguments: {values: ['TM', 'TU', 'MR']}}}]
+  - name: cat_usuarios_transurbano
+    columns: [{name: llave_usuario, tests: [unique, not_null]}]
+  - name: cat_usuarios_metroriel
+    columns: [{name: llave_usuario, tests: [unique, not_null]}]
+  - name: cat_usuarios_aerometro
+    columns: [{name: llave_usuario, tests: [unique, not_null]}]

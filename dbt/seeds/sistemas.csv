@@ -1,0 +1,5 @@
+sistema_codigo,sistema_nombre,tipo_transporte,unidad_registro
+TM,Transmetro,Bus de tránsito rápido (BRT),abordaje
+TU,Transurbano,Bus urbano con tarjeta prepago,transacción
+MR,MetroRiel,Tren ligero,viaje completo
+AM,Aerómetro,Transporte por cable,abordaje
