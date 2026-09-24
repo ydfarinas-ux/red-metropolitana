@@ -29,7 +29,7 @@ En Linux/Mac: `python3.12 -m venv .venv`, `.venv/bin/pip install -r requirements
 
 ## Cómo correr el flujo completo
 
-Con el `.venv` activado (`.venvScriptsctivate`), o escribiendo `.venvScriptspython.exe` en lugar de `python`.
+Con el `.venv` activado (`.venv\Scriptsctivate`), o escribiendo `.venv\Scripts\python.exe` en lugar de `python`.
 
 ```bash
 # 1. Datos: poner los 9 archivos en datos_red/ (o generarlos con el script del curso)
