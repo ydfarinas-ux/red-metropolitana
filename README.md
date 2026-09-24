@@ -19,13 +19,17 @@ Pipeline por capas (Bronze → Staging → Silver → Gold) que integra Transmet
 ## Instalación
 
 ```bash
-python -m venv .venv                 # con Python 3.12
-.venv\Scripts\activate               # Linux/Mac: source .venv/bin/activate
-pip install -r requirements.txt
-copy .env.example .env               # Linux/Mac: cp. Poner una PSEUDO_SALT propia y STREAMING_MODO=simulado
+pymanager install 3.12               # si no tienes Python 3.12 (instalador oficial de python.org)
+python3.12 -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements.txt
+copy .env.example .env               # poner una PSEUDO_SALT propia y STREAMING_MODO=simulado
 ```
 
+En Linux/Mac: `python3.12 -m venv .venv`, `.venv/bin/pip install -r requirements.txt` y `cp .env.example .env`.
+
 ## Cómo correr el flujo completo
+
+Con el `.venv` activado (`.venvScriptsctivate`), o escribiendo `.venvScriptspython.exe` en lugar de `python`.
 
 ```bash
 # 1. Datos: poner los 9 archivos en datos_red/ (o generarlos con el script del curso)
