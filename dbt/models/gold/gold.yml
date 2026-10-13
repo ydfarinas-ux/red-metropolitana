@@ -1,33 +1,365 @@
 version: 2
 models:
-  - name: fct_abordaje
-    description: "Hecho principal. Grano: un abordaje de un usuario en una estación de cualquiera de los cuatro sistemas."
-    columns:
-      - {name: abordaje_key, tests: [unique, not_null]}
-      - name: tiempo_key
-        tests: [not_null, {relationships: {arguments: {to: ref('dim_tiempo'), field: tiempo_key}}}]
-      - name: usuario_sk
-        tests: [not_null, {relationships: {arguments: {to: ref('dim_usuario'), field: usuario_sk}}}]
-      - name: sistema_key
-        tests: [not_null, {relationships: {arguments: {to: ref('dim_sistema'), field: sistema_key}}}]
-      - name: estacion_key
-        tests: [not_null, {relationships: {arguments: {to: ref('dim_estacion'), field: estacion_key}}}]
-      - name: zona_key
-        tests: [not_null, {relationships: {arguments: {to: ref('dim_zona'), field: zona_key}}}]
-  - name: fct_trayecto_metroriel
-    columns:
-      - {name: trayecto_key, tests: [unique, not_null]}
-      - name: zona_destino_key
-        tests: [not_null, {relationships: {arguments: {to: ref('dim_zona'), field: zona_key}}}]
-  - name: dim_tiempo
-    columns: [{name: tiempo_key, tests: [unique, not_null]}]
-  - name: dim_fecha
-    columns: [{name: fecha_key, tests: [unique, not_null]}]
-  - name: dim_zona
-    columns: [{name: zona_key, tests: [unique, not_null]}]
-  - name: dim_estacion
-    columns: [{name: estacion_key, tests: [unique, not_null]}]
-  - name: dim_usuario
-    columns: [{name: usuario_sk, tests: [unique, not_null]}]
-  - name: dim_sistema
-    columns: [{name: sistema_key, tests: [unique, not_null]}]
+- name: fct_abordaje
+  description: Una validación de entrada limpia; MR aporta la entrada de su viaje.
+  columns:
+  - name: abordaje_key
+    tests:
+    - unique
+    - not_null
+    description: 'Clave técnica del abordaje; row_number determinístico para esta reconstrucción, no identificador
+      persistente ante nuevos eventos. Transformación: ROW_NUMBER() OVER (ORDER BY a.abordaje_id) AS abordaje_key.
+      Fuente y linaje: dbt/models/gold/fct_abordaje.sql'
+  - name: abordaje_id_origen
+    description: 'Identificador unificado del evento de origen, incluye el operador. TU usa hash del contenido al
+      no traer ID. Transformación: a.abordaje_id AS abordaje_id_origen /* dimensión degenerada */. Fuente y linaje:
+      dbt/models/gold/fct_abordaje.sql'
+  - name: tipo_validacion
+    description: 'Detalle operativo: tipo TM, código de estado TU o cabina AM; puede ser nulo en MR. Transformación:
+      a.tipo_validacion /* degenerada: ENTRADA/TRANSBORDO (TM), cabina (AM), estado (TU) */. Fuente y linaje: dbt/models/gold/fct_abordaje.sql'
+  - name: tiempo_key
+    tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_tiempo')
+          field: tiempo_key
+    description: 'Clave fecha-hora local YYYYMMDDHH; se relaciona con dim_tiempo. Transformación: CAST(STRFTIME(a.fecha,
+      ''%Y%m%d'') AS INT) * 100 + a.hora AS tiempo_key. Fuente y linaje: dbt/models/gold/fct_abordaje.sql'
+  - name: fecha_key
+    description: 'Clave del día YYYYMMDD; se relaciona con dim_fecha. Transformación: CAST(STRFTIME(a.fecha, ''%Y%m%d'')
+      AS INT) AS fecha_key. Fuente y linaje: dbt/models/gold/fct_abordaje.sql'
+  - name: usuario_sk
+    tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_usuario')
+          field: usuario_sk
+    description: 'Seudónimo MD5 de sal concatenada con identidad resuelta; no es una identidad civil ni un dato
+      anónimo. Transformación: a.usuario_sk. Fuente y linaje: dbt/models/gold/fct_abordaje.sql'
+  - name: sistema_key
+    tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_sistema')
+          field: sistema_key
+    description: 'Clave técnica del operador; row_number ordenado por código de sistema. Transformación: s.sistema_key.
+      Fuente y linaje: dbt/models/gold/fct_abordaje.sql'
+  - name: estacion_key
+    tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_estacion')
+          field: estacion_key
+    description: 'Clave técnica de estación; row_number ordenado por código conformado. Transformación: e.estacion_key.
+      Fuente y linaje: dbt/models/gold/fct_abordaje.sql'
+  - name: zona_key
+    tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_zona')
+          field: zona_key
+    description: 'Clave territorial conformada, incluye zonas capitalinas y municipios; -1 significa desconocida
+      en el snapshot del padrón. Transformación: a.zona_key. Fuente y linaje: dbt/models/gold/fct_abordaje.sql'
+  - name: fecha_hora_local
+    description: 'Instante del abordaje en America/Guatemala; MR utiliza la entrada. Transformación: a.ts_local
+      AS fecha_hora_local. Fuente y linaje: dbt/models/gold/fct_abordaje.sql'
+  - name: cantidad_abordajes
+    description: 'Valor 1 por validación limpia de entrada. Suma aditiva; no representa un viaje puerta a puerta.
+      Transformación: 1 AS cantidad_abordajes /* aditiva */. Fuente y linaje: dbt/models/gold/fct_abordaje.sql'
+  - name: monto_q
+    description: 'Importe en quetzales GTQ; TU se convierte de centavos a quetzales en staging. No sumar los mismos
+      importes entre ambos hechos MR. Transformación: a.monto_q /* aditiva */. Fuente y linaje: dbt/models/gold/fct_abordaje.sql'
+- name: fct_trayecto_metroriel
+  columns:
+  - name: trayecto_key
+    tests:
+    - unique
+    - not_null
+    description: 'Clave técnica row_number por trayecto; puede cambiar al agregar nuevos eventos. Transformación:
+      ROW_NUMBER() OVER (ORDER BY t.trayecto_id) AS trayecto_key. Fuente y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: trayecto_id_origen
+    description: 'Identificador conformado del viaje completo MetroRiel. Transformación: t.trayecto_id AS trayecto_id_origen.
+      Fuente y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: tiempo_key
+    description: 'Clave fecha-hora local YYYYMMDDHH; se relaciona con dim_tiempo. Transformación: CAST(STRFTIME(t.ts_entrada_local,
+      ''%Y%m%d'') AS INT) * 100 + HOUR(t.ts_entrada_local) AS tiempo_key. Fuente y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: fecha_key
+    description: 'Clave del día YYYYMMDD; se relaciona con dim_fecha. Transformación: CAST(STRFTIME(t.ts_entrada_local,
+      ''%Y%m%d'') AS INT) AS fecha_key. Fuente y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: usuario_sk
+    description: 'Seudónimo MD5 de sal concatenada con identidad resuelta; no es una identidad civil ni un dato
+      anónimo. Transformación: t.usuario_sk. Fuente y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: estacion_origen_key
+    description: 'Clave de dim_estacion con rol de entrada del trayecto MR. Transformación: eo.estacion_key AS estacion_origen_key.
+      Fuente y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: estacion_destino_key
+    description: 'Clave de dim_estacion con rol de salida del trayecto MR. Transformación: ed.estacion_key AS estacion_destino_key.
+      Fuente y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: zona_origen_key
+    description: 'Territorio conformado de la estación de entrada MR. Transformación: t.zona_origen_key /* dim_zona
+      con dos roles */. Fuente y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: zona_destino_key
+    tests:
+    - not_null
+    - relationships:
+        arguments:
+          to: ref('dim_zona')
+          field: zona_key
+    description: 'Territorio conformado de la estación de salida MR. Transformación: t.zona_destino_key. Fuente
+      y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: ts_entrada_local
+    description: 'Instante local de entrada del trayecto MR. Transformación: t.ts_entrada_local. Fuente y linaje:
+      dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: ts_salida_local
+    description: 'Instante local de salida del trayecto MR. Transformación: t.ts_salida_local. Fuente y linaje:
+      dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: cantidad_trayectos
+    description: 'Valor 1 por trayecto completo MR válido; sumar solo dentro de este hecho. Transformación: 1 AS
+      cantidad_trayectos /* aditiva */. Fuente y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: duracion_min
+    description: 'Duración del trayecto en minutos según Silver; promedio requiere SUM(duracion_min)/SUM(cantidad_trayectos).
+      Transformación: t.duracion_min /* aditiva (el promedio NO lo es) */. Fuente y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: estaciones_recorridas
+    description: 'Número de estaciones del trayecto calculado en Silver a partir del orden MR. Transformación: t.estaciones_recorridas
+      /* aditiva */. Fuente y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
+  - name: monto_q
+    description: 'Importe en quetzales GTQ; TU se convierte de centavos a quetzales en staging. No sumar los mismos
+      importes entre ambos hechos MR. Transformación: t.monto_q /* aditiva */. Fuente y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
+  description: Un viaje completo MR con entrada y salida válidas.
+- name: dim_tiempo
+  columns:
+  - name: tiempo_key
+    tests:
+    - unique
+    - not_null
+    description: 'Clave fecha-hora local YYYYMMDDHH; se relaciona con dim_tiempo. Transformación: f.fecha_key *
+      100 + h.hora AS tiempo_key /* yyyymmddhh */. Fuente y linaje: dbt/models/gold/dim_tiempo.sql'
+  - name: fecha_key
+    description: 'Clave del día YYYYMMDD; se relaciona con dim_fecha. Transformación: f.fecha_key. Fuente y linaje:
+      dbt/models/gold/dim_tiempo.sql'
+  - name: fecha
+    description: 'Día del calendario generado de 2026, en fecha local. Transformación: f.fecha. Fuente y linaje:
+      dbt/models/gold/dim_tiempo.sql'
+  - name: hora
+    description: 'Hora local 0 a 23. Transformación: h.hora. Fuente y linaje: dbt/models/gold/dim_tiempo.sql'
+  - name: franja_horaria
+    description: 'Mañana 05-11; tarde 12-17; noche 18-21; madrugada resto. Transformación: CASE WHEN h.hora BETWEEN
+      5 AND 11 THEN ''mañana'' WHEN h.hora BETWEEN 12 AND 17 THEN ''tarde'' WHEN h.hora BETWEEN 18 AND 21 THEN ''noche''
+      ELSE ''madrugada'' END AS franja_horaria. Fuente y linaje: dbt/models/gold/dim_tiempo.sql'
+  - name: es_dia_habil
+    description: 'Lunes a viernes, excluyendo festivos del seed. Transformación: f.es_dia_habil. Fuente y linaje:
+      dbt/models/gold/dim_tiempo.sql'
+  - name: es_fin_de_semana
+    description: 'Verdadero sábado o domingo según el día ISO. Transformación: f.es_fin_de_semana. Fuente y linaje:
+      dbt/models/gold/dim_tiempo.sql'
+  - name: es_festivo
+    description: 'La fecha coincide con el seed festivos_gt; cobertura limitada al calendario configurado. Transformación:
+      f.es_festivo. Fuente y linaje: dbt/models/gold/dim_tiempo.sql'
+  - name: es_hora_pico
+    description: 'Día hábil y hora 06-08 o 17-19, incluyendo los minutos completos de cada hora. Transformación:
+      f.es_dia_habil AND (h.hora BETWEEN 6 AND 8 OR h.hora BETWEEN 17 AND 19) AS es_hora_pico. Fuente y linaje:
+      dbt/models/gold/dim_tiempo.sql'
+  description: Una fecha y una hora local.
+- name: dim_fecha
+  columns:
+  - name: fecha_key
+    tests:
+    - unique
+    - not_null
+    description: 'Clave del día YYYYMMDD; se relaciona con dim_fecha. Transformación: CAST(STRFTIME(d.fecha, ''%Y%m%d'')
+      AS INT) AS fecha_key. Fuente y linaje: dbt/models/gold/dim_fecha.sql'
+  - name: fecha
+    description: 'Día del calendario generado de 2026, en fecha local. Transformación: d.fecha. Fuente y linaje:
+      dbt/models/gold/dim_fecha.sql'
+  - name: anio
+    description: 'Año de la fecha del calendario. Transformación: YEAR(d.fecha) AS anio. Fuente y linaje: dbt/models/gold/dim_fecha.sql'
+  - name: mes
+    description: 'Mes calendario numérico 1 a 12. Transformación: MONTH(d.fecha) AS mes. Fuente y linaje: dbt/models/gold/dim_fecha.sql'
+  - name: dia
+    description: 'Día del mes calendario. Transformación: DAY(d.fecha) AS dia. Fuente y linaje: dbt/models/gold/dim_fecha.sql'
+  - name: dia_semana_num
+    description: 'Día ISO de la semana: lunes=1 a domingo=7. Transformación: ISODOW(d.fecha) AS dia_semana_num /*
+      1 = lunes */. Fuente y linaje: dbt/models/gold/dim_fecha.sql'
+  - name: nombre_dia
+    description: 'Nombre en español del día de la semana. Transformación: CASE ISODOW(d.fecha) WHEN 1 THEN ''lunes''
+      WHEN 2 THEN ''martes'' WHEN 3 THEN ''miércoles'' WHEN 4 THEN ''jueves'' WHEN 5 THEN ''viernes'' WHEN 6 THEN
+      ''sábado'' ELSE ''domingo'' END AS nombre_dia. Fuente y linaje: dbt/models/gold/dim_fecha.sql'
+  - name: es_fin_de_semana
+    description: 'Verdadero sábado o domingo según el día ISO. Transformación: ISODOW(d.fecha) >= 6 AS es_fin_de_semana.
+      Fuente y linaje: dbt/models/gold/dim_fecha.sql'
+  - name: es_festivo
+    description: 'La fecha coincide con el seed festivos_gt; cobertura limitada al calendario configurado. Transformación:
+      NOT f.fecha IS NULL AS es_festivo. Fuente y linaje: dbt/models/gold/dim_fecha.sql'
+  - name: nombre_festivo
+    description: 'Nombre del feriado en festivos_gt; nulo cuando no coincide. Transformación: f.nombre_festivo.
+      Fuente y linaje: dbt/models/gold/dim_fecha.sql'
+  - name: es_dia_habil
+    description: 'Lunes a viernes, excluyendo festivos del seed. Transformación: ISODOW(d.fecha) <= 5 AND f.fecha
+      IS NULL AS es_dia_habil. Fuente y linaje: dbt/models/gold/dim_fecha.sql'
+  description: Un día del calendario 2026.
+- name: dim_zona
+  columns:
+  - name: zona_key
+    tests:
+    - unique
+    - not_null
+    description: 'Clave territorial conformada, incluye zonas capitalinas y municipios; -1 significa desconocida
+      en el snapshot del padrón. Transformación: z.zona_key. Fuente y linaje: dbt/models/gold/dim_zona.sql'
+  - name: nombre_zona
+    description: 'Nombre oficial del territorio conforme al seed territorios.csv. Transformación: z.nombre_oficial
+      AS nombre_zona. Fuente y linaje: dbt/models/gold/dim_zona.sql'
+  - name: tipo_territorio
+    description: 'Categoría zona o municipio según el catálogo territorial. Transformación: z.tipo_territorio. Fuente
+      y linaje: dbt/models/gold/dim_zona.sql'
+  - name: municipio
+    description: 'Municipio al que pertenece el territorio del catálogo. Transformación: z.municipio. Fuente y linaje:
+      dbt/models/gold/dim_zona.sql'
+  - name: tiene_transmetro
+    description: 'Existe al menos una estación TM en el territorio. Transformación: COALESCE(tiene_transmetro, FALSE)
+      AS tiene_transmetro. Fuente y linaje: dbt/models/gold/dim_zona.sql'
+  - name: tiene_transurbano
+    description: 'Existe al menos una parada TU en el territorio. Transformación: COALESCE(tiene_transurbano, FALSE)
+      AS tiene_transurbano. Fuente y linaje: dbt/models/gold/dim_zona.sql'
+  - name: tiene_metroriel
+    description: 'Existe al menos una estación MR en el territorio. Transformación: COALESCE(tiene_metroriel, FALSE)
+      AS tiene_metroriel. Fuente y linaje: dbt/models/gold/dim_zona.sql'
+  - name: tiene_aerometro
+    description: 'Existe al menos una estación AM en el territorio. Transformación: COALESCE(tiene_aerometro, FALSE)
+      AS tiene_aerometro. Fuente y linaje: dbt/models/gold/dim_zona.sql'
+  - name: modos_con_estacion
+    description: 'Número de sistemas distintos con estaciones en el catálogo del territorio. Transformación: COALESCE(modos_con_estacion,
+      0) AS modos_con_estacion. Fuente y linaje: dbt/models/gold/dim_zona.sql'
+  - name: estaciones
+    description: 'Número de registros del catálogo de estaciones en el territorio. Transformación: COALESCE(estaciones,
+      0) AS estaciones. Fuente y linaje: dbt/models/gold/dim_zona.sql'
+  - name: tiene_servicio
+    description: 'modos_con_estacion mayor que cero; cobertura de catálogo, no acceso peatonal ni frecuencia. Transformación:
+      COALESCE(modos_con_estacion, 0) > 0 AS tiene_servicio. Fuente y linaje: dbt/models/gold/dim_zona.sql'
+  - name: en_trazado_metroriel
+    description: 'Nombre oficial en Zona 12, Zona 8, Zona 1, Zona 6 o Zona 17. Transformación: z.nombre_oficial
+      IN (''Zona 12'', ''Zona 8'', ''Zona 1'', ''Zona 6'', ''Zona 17'') AS en_trazado_metroriel. Fuente y linaje:
+      dbt/models/gold/dim_zona.sql'
+  description: Un territorio del catálogo, incluso sin estaciones.
+- name: dim_estacion
+  columns:
+  - name: estacion_key
+    tests:
+    - unique
+    - not_null
+    description: 'Clave técnica de estación; row_number ordenado por código conformado. Transformación: ROW_NUMBER()
+      OVER (ORDER BY e.estacion_key) AS estacion_key. Fuente y linaje: dbt/models/gold/dim_estacion.sql'
+  - name: estacion_codigo
+    description: 'Clave conformada sistema:identificador de estación. Transformación: e.estacion_key AS estacion_codigo.
+      Fuente y linaje: dbt/models/gold/dim_estacion.sql'
+  - name: sistema_key
+    description: 'Clave técnica del operador; row_number ordenado por código de sistema. Transformación: s.sistema_key.
+      Fuente y linaje: dbt/models/gold/dim_estacion.sql'
+  - name: sistema_codigo
+    description: 'Código de operador: TM, TU, MR o AM. Transformación: e.sistema AS sistema_codigo. Fuente y linaje:
+      dbt/models/gold/dim_estacion.sql'
+  - name: estacion_id_origen
+    description: 'Identificador de estación o parada del catálogo del operador. Transformación: e.estacion_id_origen.
+      Fuente y linaje: dbt/models/gold/dim_estacion.sql'
+  - name: nombre_estacion
+    description: 'Nombre de estación/parada del catálogo. Transformación: e.nombre AS nombre_estacion. Fuente y
+      linaje: dbt/models/gold/dim_estacion.sql'
+  - name: linea_ruta_eje
+    description: 'Agrupador operativo: línea TM, ruta TU o eje AM; conservado del catálogo. Transformación: e.agrupador
+      AS linea_ruta_eje. Fuente y linaje: dbt/models/gold/dim_estacion.sql'
+  - name: orden_metroriel
+    description: 'Orden de estación en el trazado MR; nulo donde no aplica. Transformación: e.orden AS orden_metroriel.
+      Fuente y linaje: dbt/models/gold/dim_estacion.sql'
+  - name: lat
+    description: 'Latitud del catálogo de estaciones, en grados. Transformación: e.lat. Fuente y linaje: dbt/models/gold/dim_estacion.sql'
+  - name: lon
+    description: 'Longitud del catálogo de estaciones, en grados. Transformación: e.lon. Fuente y linaje: dbt/models/gold/dim_estacion.sql'
+  - name: zona_key
+    description: 'Clave territorial conformada, incluye zonas capitalinas y municipios; -1 significa desconocida
+      en el snapshot del padrón. Transformación: e.zona_key. Fuente y linaje: dbt/models/gold/dim_estacion.sql'
+  description: Una estación conformada por sistema y código de origen.
+- name: dim_usuario
+  columns:
+  - name: usuario_sk
+    tests:
+    - unique
+    - not_null
+    description: 'Seudónimo MD5 de sal concatenada con identidad resuelta; no es una identidad civil ni un dato
+      anónimo. Transformación: p.usuario_sk. Fuente y linaje: dbt/models/gold/dim_usuario.sql'
+  - name: sistemas_con_tarjeta
+    description: 'Número de sistemas presentes en el catálogo de identidad; no exige abordajes válidos en cada uno.
+      Transformación: p.sistemas_con_tarjeta. Fuente y linaje: dbt/models/gold/dim_usuario.sql'
+  - name: sistemas
+    description: 'Lista de códigos distintos del catálogo de identidad, ordenados y separados por coma. Transformación:
+      p.sistemas. Fuente y linaje: dbt/models/gold/dim_usuario.sql'
+  - name: es_multisistema
+    description: 'Más de un sistema en el catálogo de identidad. No usar como sustituto de multimodalidad observada
+      del tablero. Transformación: p.sistemas_con_tarjeta > 1 AS es_multisistema. Fuente y linaje: dbt/models/gold/dim_usuario.sql'
+  - name: en_padron
+    description: 'La identidad resuelta aparece en el padrón vigente. Transformación: NOT pd.persona_id IS NULL
+      AS en_padron. Fuente y linaje: dbt/models/gold/dim_usuario.sql'
+  - name: padron_activo
+    description: 'Estado de la última tarjeta del padrón por secuencia para esa persona; nulo si no existe vínculo.
+      Transformación: pd.activa AS padron_activo. Fuente y linaje: dbt/models/gold/dim_usuario.sql'
+  - name: perfil
+    description: 'Perfil del padrón; en snapshots nulos se agrupan como desconocido. Transformación: pd.perfil.
+      Fuente y linaje: dbt/models/gold/dim_usuario.sql'
+  - name: zona_residencia_key
+    description: 'Zona de residencia de la última versión del padrón; no es la zona de abordaje. Transformación:
+      pd.zona_residencia_key. Fuente y linaje: dbt/models/gold/dim_usuario.sql'
+  - name: vinculo_aerometro
+    description: 'no_aplica sin AM; sin_vinculo para identidad separada de AM; vinculado si se activa el supuesto
+      de vinculación. Transformación: CASE WHEN NOT p.tiene_aerometro THEN ''no_aplica'' WHEN p.persona_id LIKE
+      ''AM:%'' THEN ''sin_vinculo'' ELSE ''vinculado'' END AS vinculo_aerometro. Fuente y linaje: dbt/models/gold/dim_usuario.sql'
+  description: Una identidad resuelta y seudonimizada.
+- name: dim_sistema
+  columns:
+  - name: sistema_key
+    tests:
+    - unique
+    - not_null
+    description: 'Clave técnica del operador; row_number ordenado por código de sistema. Transformación: ROW_NUMBER()
+      OVER (ORDER BY sistema_codigo) AS sistema_key. Fuente y linaje: dbt/models/gold/dim_sistema.sql'
+  - name: sistema_codigo
+    description: 'Código de operador: TM, TU, MR o AM. Transformación: sistema_codigo. Fuente y linaje: dbt/models/gold/dim_sistema.sql'
+  - name: sistema_nombre
+    description: 'Nombre legible del operador según sistemas.csv. Transformación: sistema_nombre. Fuente y linaje:
+      dbt/models/gold/dim_sistema.sql'
+  - name: tipo_transporte
+    description: 'Categoría de transporte indicada por el seed de sistemas. Transformación: tipo_transporte. Fuente
+      y linaje: dbt/models/gold/dim_sistema.sql'
+  - name: unidad_registro
+    description: 'Unidad de registro original del operador; no redefine el grano de fct_abordaje. Transformación:
+      unidad_registro. Fuente y linaje: dbt/models/gold/dim_sistema.sql'
+  description: Un operador de transporte.
+- name: fct_padron_diario
+  description: Un cierre de día por zona de residencia, perfil y operador de tarjeta.
+  columns:
+  - name: fecha_key
+    description: 'Clave del día YYYYMMDD; se relaciona con dim_fecha. Transformación: d.fecha_key. Fuente y linaje:
+      dbt/models/gold/fct_padron_diario.sql'
+  - name: zona_key
+    description: 'Clave territorial conformada, incluye zonas capitalinas y municipios; -1 significa desconocida
+      en el snapshot del padrón. Transformación: COALESCE(v.zona_residencia_key, -1) AS zona_key /* -1 = zona desconocida
+      */. Fuente y linaje: dbt/models/gold/fct_padron_diario.sql'
+  - name: perfil
+    description: 'Perfil del padrón; en snapshots nulos se agrupan como desconocido. Transformación: COALESCE(v.perfil,
+      ''desconocido'') AS perfil. Fuente y linaje: dbt/models/gold/fct_padron_diario.sql'
+  - name: operador_tarjeta
+    description: 'Operador identificado por el formato de tarjeta en el padrón CDC. Transformación: v.operador_tarjeta.
+      Fuente y linaje: dbt/models/gold/fct_padron_diario.sql'
+  - name: tarjetas_activas
+    description: 'Tarjetas activas al cierre del día, por zona/perfil/operador. Semiaditiva: nunca sumar entre fechas.
+      Transformación: COUNT(*) FILTER(WHERE v.activa) AS tarjetas_activas /* semi-aditiva */. Fuente y linaje: dbt/models/gold/fct_padron_diario.sql'
+  - name: altas_del_dia
+    description: 'Versiones INSERT que permanecen en el snapshot al cierre del día. No equivale necesariamente a
+      todos los INSERT del log. Transformación: COUNT(*) FILTER(WHERE v.operacion_origen = ''INSERT'' AND CAST(v.valido_desde
+      AS DATE) = d.fecha) AS altas_del_dia /* aditiva */. Fuente y linaje: dbt/models/gold/fct_padron_diario.sql'
+  - name: bajas_del_dia
+    description: 'Versiones DELETE que permanecen en el snapshot al cierre del día. No equivale necesariamente a
+      todos los DELETE del log. Transformación: COUNT(*) FILTER(WHERE v.operacion_origen = ''DELETE'' AND CAST(v.valido_desde
+      AS DATE) = d.fecha) AS bajas_del_dia /* aditiva */. Fuente y linaje: dbt/models/gold/fct_padron_diario.sql'

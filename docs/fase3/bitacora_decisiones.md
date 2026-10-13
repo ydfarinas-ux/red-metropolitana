@@ -1,0 +1,23 @@
+# 3.2 Bitácora de decisiones
+
+Registro de formalización del 12/10/2026. Resume decisiones observables en el código y sus límites; no simula una bitácora previa a la implementación.
+
+| Decisión | Justificación | Límite y evidencia |
+|---|---|---|
+| Abordaje como grano común | TM y AM entregan validaciones; TU transacciones; MR viajes completos. La entrada MR permite comparar los cuatro. | No equivale a viaje puerta a puerta. Modelos `fct_abordaje` y `silver_abordajes`. |
+| Hecho MR separado | Preservar origen, destino y duración sin perder información. | No sumar con abordajes de la red. `fct_trayecto_metroriel`. |
+| Vinculación TM/TU/MR por número | Normalizar formatos de tarjeta, apoyado por el padrón sintético. | Supuesto de numeración compartida; puede unir personas diferentes en producción. `silver_identidad_usuario`. |
+| AM conserva identidad separada | Su hash no aporta vínculo fiable con otros operadores. | Total de usuarios puede estar sobreestimado; multimodalidad con AM queda subestimada. `vincular_aerometro=false`. |
+| Seudonimización en Silver | Gold no requiere la tarjeta original. | MD5 con sal no constituye anonimización ni protección criptográfica recomendada para producción. Macro `seudonimo`. |
+| Zona por catálogo | Unificar zona de estación y preservar territorios sin estaciones. | Zona de abordaje distinta de residencia. Macro `normalizar_territorio`; seed `territorios`. |
+| Cuarentena con primera regla | Conservar registro crudo, motivo y linaje sin descartar silenciosamente. | Un evento puede fallar varias reglas pero solo cuenta bajo la primera. `silver_eventos_evaluados`. |
+| Rechazos TU separados | Estados 7 y 9 son transacciones válidas rechazadas, no abordajes ni errores de calidad. | 41,390 conservados aparte. `silver_transacciones_rechazadas_tu`. |
+| Fecha futura contra ingesta | La regla usa `_ingested_at`, no la fecha de hoy. | Depende de la marca de ingesta registrada. Evita cambiar clasificación al repetir una corrida. |
+| CDC y SCD2 | Conservar historial de perfil, zona y estado por tarjeta. | DELETE abre una versión inactiva; las versiones no se suman como personas. |
+| Deduplicación por archivo/evento | Hash de archivo evita reingesta; ID del evento evita duplicaciones operativas. | En TU el ID es hash de contenido y puede colapsar dos transacciones idénticas genuinas. |
+| Streaming simulado | Es el modo definido en README para esta entrega. | Prueba la vía local, no una infraestructura Kafka de producción. |
+| Separar fuentes del tablero | Distintos granos para demanda, cobertura, usuarios y corredor. | Agregados de usuarios y corredor cubren todo el período; no tratarlos como detalle diario. |
+
+Se ejecutó el README del repositorio restaurado: generación de datos, corrida 1, corrida 2, comparación y DDL. No se reescribió el pipeline para producir el tablero. Las dos corridas reportaron 108 resultados correctos (modelos, seeds y pruebas), y 52 tablas con conteos idénticos.
+
+El diccionario de fase 3 añade descripciones a `dbt/models/gold/gold.yml`; no cambia el SQL ni los tests. `dbt docs generate --static` genera catálogo y grafo a partir del proyecto y el warehouse existente. Las copias de entrega tienen la sal retirada porque dbt puede incorporarla al SQL compilado.

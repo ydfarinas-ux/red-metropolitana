@@ -1,0 +1,306 @@
+[
+  {
+    "origen": "model.red_metropolitana.stg_am_boardings",
+    "destino": "model.red_metropolitana.cat_usuarios_aerometro"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_mr_viajes",
+    "destino": "model.red_metropolitana.cat_usuarios_metroriel"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_tu_transacciones",
+    "destino": "model.red_metropolitana.cat_usuarios_transurbano"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_cdc_padron",
+    "destino": "model.red_metropolitana.cdc_operaciones"
+  },
+  {
+    "origen": "model.red_metropolitana.cdc_operaciones",
+    "destino": "model.red_metropolitana.padron_resumen_cdc"
+  },
+  {
+    "origen": "model.red_metropolitana.padron_vigente",
+    "destino": "model.red_metropolitana.padron_resumen_cdc"
+  },
+  {
+    "origen": "model.red_metropolitana.cdc_operaciones",
+    "destino": "model.red_metropolitana.padron_resumen_por_operador"
+  },
+  {
+    "origen": "model.red_metropolitana.padron_vigente",
+    "destino": "model.red_metropolitana.padron_resumen_por_operador"
+  },
+  {
+    "origen": "model.red_metropolitana.padron_vigente",
+    "destino": "model.red_metropolitana.padron_transmetro_vigente"
+  },
+  {
+    "origen": "model.red_metropolitana.cdc_operaciones",
+    "destino": "model.red_metropolitana.padron_vigente"
+  },
+  {
+    "origen": "seed.red_metropolitana.territorios",
+    "destino": "model.red_metropolitana.padron_vigente"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_tm_validaciones",
+    "destino": "model.red_metropolitana.usuarios_unicos_por_operador"
+  },
+  {
+    "origen": "model.red_metropolitana.cat_usuarios_transurbano",
+    "destino": "model.red_metropolitana.usuarios_unicos_por_operador"
+  },
+  {
+    "origen": "model.red_metropolitana.cat_usuarios_metroriel",
+    "destino": "model.red_metropolitana.usuarios_unicos_por_operador"
+  },
+  {
+    "origen": "model.red_metropolitana.cat_usuarios_aerometro",
+    "destino": "model.red_metropolitana.usuarios_unicos_por_operador"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_padron_scd2",
+    "destino": "model.red_metropolitana.fct_padron_diario"
+  },
+  {
+    "origen": "model.red_metropolitana.dim_fecha",
+    "destino": "model.red_metropolitana.fct_padron_diario"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_eventos_evaluados",
+    "destino": "model.red_metropolitana.silver_abordajes"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_identidad_usuario",
+    "destino": "model.red_metropolitana.silver_abordajes"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_eventos_evaluados",
+    "destino": "model.red_metropolitana.silver_calidad_resumen"
+  },
+  {
+    "origen": "model.red_metropolitana.cdc_operaciones",
+    "destino": "model.red_metropolitana.silver_calidad_resumen"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_cuarentena",
+    "destino": "model.red_metropolitana.silver_calidad_resumen"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_eventos_evaluados",
+    "destino": "model.red_metropolitana.silver_cuarentena"
+  },
+  {
+    "origen": "model.red_metropolitana.cdc_operaciones",
+    "destino": "model.red_metropolitana.silver_cuarentena"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_tm_estaciones",
+    "destino": "model.red_metropolitana.silver_estaciones"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_tu_paradas",
+    "destino": "model.red_metropolitana.silver_estaciones"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_mr_estaciones",
+    "destino": "model.red_metropolitana.silver_estaciones"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_am_estaciones",
+    "destino": "model.red_metropolitana.silver_estaciones"
+  },
+  {
+    "origen": "seed.red_metropolitana.territorios",
+    "destino": "model.red_metropolitana.silver_estaciones"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_tm_validaciones",
+    "destino": "model.red_metropolitana.silver_eventos_evaluados"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_tu_transacciones",
+    "destino": "model.red_metropolitana.silver_eventos_evaluados"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_mr_viajes",
+    "destino": "model.red_metropolitana.silver_eventos_evaluados"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_am_boardings",
+    "destino": "model.red_metropolitana.silver_eventos_evaluados"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_estaciones",
+    "destino": "model.red_metropolitana.silver_eventos_evaluados"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_abordajes",
+    "destino": "model.red_metropolitana.silver_identidad_diagnostico"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_identidad_usuario",
+    "destino": "model.red_metropolitana.silver_identidad_diagnostico"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_eventos_evaluados",
+    "destino": "model.red_metropolitana.silver_identidad_usuario"
+  },
+  {
+    "origen": "model.red_metropolitana.padron_vigente",
+    "destino": "model.red_metropolitana.silver_identidad_usuario"
+  },
+  {
+    "origen": "model.red_metropolitana.cdc_operaciones",
+    "destino": "model.red_metropolitana.silver_padron_scd2"
+  },
+  {
+    "origen": "seed.red_metropolitana.territorios",
+    "destino": "model.red_metropolitana.silver_padron_scd2"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_identidad_usuario",
+    "destino": "model.red_metropolitana.silver_padron_scd2"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_eventos_evaluados",
+    "destino": "model.red_metropolitana.silver_transacciones_rechazadas_tu"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_identidad_usuario",
+    "destino": "model.red_metropolitana.silver_transacciones_rechazadas_tu"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_eventos_evaluados",
+    "destino": "model.red_metropolitana.silver_trayectos_metroriel"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_identidad_usuario",
+    "destino": "model.red_metropolitana.silver_trayectos_metroriel"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_estaciones",
+    "destino": "model.red_metropolitana.silver_trayectos_metroriel"
+  },
+  {
+    "origen": "seed.red_metropolitana.territorios",
+    "destino": "model.red_metropolitana.silver_zona"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_tm_estaciones",
+    "destino": "model.red_metropolitana.silver_zona_mapeo"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_tu_paradas",
+    "destino": "model.red_metropolitana.silver_zona_mapeo"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_mr_estaciones",
+    "destino": "model.red_metropolitana.silver_zona_mapeo"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_am_estaciones",
+    "destino": "model.red_metropolitana.silver_zona_mapeo"
+  },
+  {
+    "origen": "model.red_metropolitana.stg_cdc_padron",
+    "destino": "model.red_metropolitana.silver_zona_mapeo"
+  },
+  {
+    "origen": "seed.red_metropolitana.territorios",
+    "destino": "model.red_metropolitana.silver_zona_mapeo"
+  },
+  {
+    "origen": "source.red_metropolitana.bronze.aerometro_boardings",
+    "destino": "model.red_metropolitana.stg_am_boardings"
+  },
+  {
+    "origen": "source.red_metropolitana.bronze.am_estaciones",
+    "destino": "model.red_metropolitana.stg_am_estaciones"
+  },
+  {
+    "origen": "source.red_metropolitana.bronze.cdc_padron_usuarios",
+    "destino": "model.red_metropolitana.stg_cdc_padron"
+  },
+  {
+    "origen": "source.red_metropolitana.bronze.mr_estaciones",
+    "destino": "model.red_metropolitana.stg_mr_estaciones"
+  },
+  {
+    "origen": "source.red_metropolitana.bronze.metroriel_viajes",
+    "destino": "model.red_metropolitana.stg_mr_viajes"
+  },
+  {
+    "origen": "source.red_metropolitana.bronze.tm_estaciones",
+    "destino": "model.red_metropolitana.stg_tm_estaciones"
+  },
+  {
+    "origen": "source.red_metropolitana.bronze.transmetro_validaciones",
+    "destino": "model.red_metropolitana.stg_tm_validaciones"
+  },
+  {
+    "origen": "source.red_metropolitana.bronze.tu_paradas",
+    "destino": "model.red_metropolitana.stg_tu_paradas"
+  },
+  {
+    "origen": "source.red_metropolitana.bronze.transurbano_transacciones",
+    "destino": "model.red_metropolitana.stg_tu_transacciones"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_estaciones",
+    "destino": "model.red_metropolitana.dim_zona"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_zona",
+    "destino": "model.red_metropolitana.dim_zona"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_abordajes",
+    "destino": "model.red_metropolitana.fct_abordaje"
+  },
+  {
+    "origen": "model.red_metropolitana.dim_sistema",
+    "destino": "model.red_metropolitana.fct_abordaje"
+  },
+  {
+    "origen": "model.red_metropolitana.dim_estacion",
+    "destino": "model.red_metropolitana.fct_abordaje"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_trayectos_metroriel",
+    "destino": "model.red_metropolitana.fct_trayecto_metroriel"
+  },
+  {
+    "origen": "model.red_metropolitana.dim_estacion",
+    "destino": "model.red_metropolitana.fct_trayecto_metroriel"
+  },
+  {
+    "origen": "seed.red_metropolitana.sistemas",
+    "destino": "model.red_metropolitana.dim_sistema"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_identidad_usuario",
+    "destino": "model.red_metropolitana.dim_usuario"
+  },
+  {
+    "origen": "model.red_metropolitana.padron_vigente",
+    "destino": "model.red_metropolitana.dim_usuario"
+  },
+  {
+    "origen": "seed.red_metropolitana.festivos_gt",
+    "destino": "model.red_metropolitana.dim_fecha"
+  },
+  {
+    "origen": "model.red_metropolitana.dim_fecha",
+    "destino": "model.red_metropolitana.dim_tiempo"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_estaciones",
+    "destino": "model.red_metropolitana.dim_estacion"
+  },
+  {
+    "origen": "model.red_metropolitana.dim_sistema",
+    "destino": "model.red_metropolitana.dim_estacion"
+  }
+]

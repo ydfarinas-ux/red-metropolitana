@@ -1,0 +1,14 @@
+58a8092 2026-09-23T19:02:40-06:00 arreglo en el readme
+44bf004 2026-09-23T19:02:11-06:00 arreglo en el readme
+b4bcc04 2026-09-23T19:01:26-06:00 evidencia de las corridas en mi computadora y pasos de instalación
+aceb9ad 2026-09-23T16:00:06-06:00 ddl en utf-8 y corrección en el documento
+7fc4517 2026-09-23T15:52:13-06:00 nuevo diagrama del modelo dimensional (png y pdf)
+15e167f 2026-09-23T15:04:33-06:00 comentarios más simples en el script generador
+3b1ee07 2026-09-23T15:04:33-06:00 documentación de la fase 1 y documento de datos y conclusiones
+f363b06 2026-09-23T15:04:33-06:00 evidencia de las dos corridas y tablas de entregables
+5e027c4 2026-09-23T15:04:33-06:00 1.5 flujo con prefect y comparación de corridas
+c673fe1 2026-09-23T15:04:32-06:00 1.4 capa gold: dimensiones, hechos, ddl y diagrama
+3e44f93 2026-09-23T15:04:32-06:00 1.3 capa silver: formatos, zona, identidad, cuarentena y scd2
+ba81f84 2026-09-23T15:04:32-06:00 1.2 staging y cdc del padrón, catálogos de usuarios por operador
+68d175f 2026-09-23T15:04:32-06:00 1.1 ingesta por vía: batch, cdc y streaming con kafka
+623f907 2026-09-23T15:04:32-06:00 estructura base del proyecto y script generador de datos

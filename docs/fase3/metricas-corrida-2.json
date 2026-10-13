@@ -1,0 +1,17 @@
+{
+  "corrida": 2,
+  "fecha": "2026-10-12T19:11:05",
+  "duracion_segundos": {
+    "bronze_batch": 0.54,
+    "bronze_cdc": 0.07,
+    "bronze_streaming": 0.23,
+    "vaciar_staging": 0.09,
+    "dbt_build": 51.43
+  },
+  "consulta_tablero_ms": 38.5,
+  "tamano_mb": {
+    "datos_crudos": 137.07,
+    "bronze": 31.32,
+    "warehouse_staging_silver_gold": 716.71
+  }
+}

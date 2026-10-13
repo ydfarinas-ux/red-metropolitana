@@ -95,3 +95,11 @@ SELECT * FROM silver.silver_identidad_diagnostico;
 ## Seguridad
 
 No hay credenciales en el repositorio. La sal de seudonimización (`PSEUDO_SALT`) vive en `.env`, que está en `.gitignore`. Gold solo contiene `usuario_sk`, nunca la tarjeta ni el nombre.
+
+## Fases 2 y 3
+
+El tablero de la fase 2 está en `entregables/fase2/Red_Metropolitana_Fase2_Tableau.twbx`: incluye los cuatro CSV agregados, siete hojas y tres dashboards. Abrirlo en Tableau; el primer dashboard permite filtrar por sistema. La recomendación formal y la capa de features son entregables separados del tablero.
+
+La documentación de la fase 3 está en [docs/fase3/README_FASE3.md](docs/fase3/README_FASE3.md): diccionario de los 91 campos Gold, definiciones oficiales y responsables por rol, reglas de calidad, linaje dbt, bitácora de decisiones, reproducibilidad, métricas medidas y seguridad en una página. Abrir `docs/fase3/linaje_dbt/static_index.html` para explorar la documentación y el grafo de dbt sin servidor.
+
+Las copias de documentación dbt de fase 3 tienen la sal retirada del SQL compilado. No compartir directamente `dbt/target`, que puede contenerla. El detalle individual seudonimizado sigue siendo sensible; los roles de acceso y la retención documentados son políticas propuestas, sin automatización en el prototipo.

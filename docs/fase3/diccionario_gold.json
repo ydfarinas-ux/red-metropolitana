@@ -1,0 +1,912 @@
+[
+  {
+    "tabla": "dim_estacion",
+    "campo": "estacion_key",
+    "tipo": "BIGINT",
+    "significado": "Clave técnica de estación; row_number ordenado por código conformado.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "ROW_NUMBER() OVER (ORDER BY e.estacion_key) AS estacion_key",
+    "modelo": "dbt/models/gold/dim_estacion.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_estacion",
+    "campo": "estacion_codigo",
+    "tipo": "VARCHAR",
+    "significado": "Clave conformada sistema:identificador de estación.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "e.estacion_key AS estacion_codigo",
+    "modelo": "dbt/models/gold/dim_estacion.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_estacion",
+    "campo": "sistema_key",
+    "tipo": "BIGINT",
+    "significado": "Clave técnica del operador; row_number ordenado por código de sistema.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "s.sistema_key",
+    "modelo": "dbt/models/gold/dim_estacion.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_estacion",
+    "campo": "sistema_codigo",
+    "tipo": "VARCHAR",
+    "significado": "Código de operador: TM, TU, MR o AM.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "e.sistema AS sistema_codigo",
+    "modelo": "dbt/models/gold/dim_estacion.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_estacion",
+    "campo": "estacion_id_origen",
+    "tipo": "VARCHAR",
+    "significado": "Identificador de estación o parada del catálogo del operador.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "e.estacion_id_origen",
+    "modelo": "dbt/models/gold/dim_estacion.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_estacion",
+    "campo": "nombre_estacion",
+    "tipo": "VARCHAR",
+    "significado": "Nombre de estación/parada del catálogo.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "e.nombre AS nombre_estacion",
+    "modelo": "dbt/models/gold/dim_estacion.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_estacion",
+    "campo": "linea_ruta_eje",
+    "tipo": "VARCHAR",
+    "significado": "Agrupador operativo: línea TM, ruta TU o eje AM; conservado del catálogo.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "e.agrupador AS linea_ruta_eje",
+    "modelo": "dbt/models/gold/dim_estacion.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_estacion",
+    "campo": "orden_metroriel",
+    "tipo": "INTEGER",
+    "significado": "Orden de estación en el trazado MR; nulo donde no aplica.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "e.orden AS orden_metroriel",
+    "modelo": "dbt/models/gold/dim_estacion.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_estacion",
+    "campo": "lat",
+    "tipo": "DOUBLE",
+    "significado": "Latitud del catálogo de estaciones, en grados.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "e.lat",
+    "modelo": "dbt/models/gold/dim_estacion.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_estacion",
+    "campo": "lon",
+    "tipo": "DOUBLE",
+    "significado": "Longitud del catálogo de estaciones, en grados.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "e.lon",
+    "modelo": "dbt/models/gold/dim_estacion.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_estacion",
+    "campo": "zona_key",
+    "tipo": "INTEGER",
+    "significado": "Clave territorial conformada, incluye zonas capitalinas y municipios; -1 significa desconocida en el snapshot del padrón.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "e.zona_key",
+    "modelo": "dbt/models/gold/dim_estacion.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_fecha",
+    "campo": "fecha_key",
+    "tipo": "INTEGER",
+    "significado": "Clave del día YYYYMMDD; se relaciona con dim_fecha.",
+    "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
+    "transformacion": "CAST(STRFTIME(d.fecha, '%Y%m%d') AS INT) AS fecha_key",
+    "modelo": "dbt/models/gold/dim_fecha.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_fecha",
+    "campo": "fecha",
+    "tipo": "DATE",
+    "significado": "Día del calendario generado de 2026, en fecha local.",
+    "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
+    "transformacion": "d.fecha",
+    "modelo": "dbt/models/gold/dim_fecha.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_fecha",
+    "campo": "anio",
+    "tipo": "BIGINT",
+    "significado": "Año de la fecha del calendario.",
+    "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
+    "transformacion": "YEAR(d.fecha) AS anio",
+    "modelo": "dbt/models/gold/dim_fecha.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_fecha",
+    "campo": "mes",
+    "tipo": "BIGINT",
+    "significado": "Mes calendario numérico 1 a 12.",
+    "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
+    "transformacion": "MONTH(d.fecha) AS mes",
+    "modelo": "dbt/models/gold/dim_fecha.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_fecha",
+    "campo": "dia",
+    "tipo": "BIGINT",
+    "significado": "Día del mes calendario.",
+    "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
+    "transformacion": "DAY(d.fecha) AS dia",
+    "modelo": "dbt/models/gold/dim_fecha.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_fecha",
+    "campo": "dia_semana_num",
+    "tipo": "BIGINT",
+    "significado": "Día ISO de la semana: lunes=1 a domingo=7.",
+    "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
+    "transformacion": "ISODOW(d.fecha) AS dia_semana_num /* 1 = lunes */",
+    "modelo": "dbt/models/gold/dim_fecha.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_fecha",
+    "campo": "nombre_dia",
+    "tipo": "VARCHAR",
+    "significado": "Nombre en español del día de la semana.",
+    "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
+    "transformacion": "CASE ISODOW(d.fecha) WHEN 1 THEN 'lunes' WHEN 2 THEN 'martes' WHEN 3 THEN 'miércoles' WHEN 4 THEN 'jueves' WHEN 5 THEN 'viernes' WHEN 6 THEN 'sábado' ELSE 'domingo' END AS nombre_dia",
+    "modelo": "dbt/models/gold/dim_fecha.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_fecha",
+    "campo": "es_fin_de_semana",
+    "tipo": "BOOLEAN",
+    "significado": "Verdadero sábado o domingo según el día ISO.",
+    "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
+    "transformacion": "ISODOW(d.fecha) >= 6 AS es_fin_de_semana",
+    "modelo": "dbt/models/gold/dim_fecha.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_fecha",
+    "campo": "es_festivo",
+    "tipo": "BOOLEAN",
+    "significado": "La fecha coincide con el seed festivos_gt; cobertura limitada al calendario configurado.",
+    "fuentes": "Calendario generado y dbt/seeds/festivos_gt.csv",
+    "transformacion": "NOT f.fecha IS NULL AS es_festivo",
+    "modelo": "dbt/models/gold/dim_fecha.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_fecha",
+    "campo": "nombre_festivo",
+    "tipo": "VARCHAR",
+    "significado": "Nombre del feriado en festivos_gt; nulo cuando no coincide.",
+    "fuentes": "Calendario generado y dbt/seeds/festivos_gt.csv",
+    "transformacion": "f.nombre_festivo",
+    "modelo": "dbt/models/gold/dim_fecha.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_fecha",
+    "campo": "es_dia_habil",
+    "tipo": "BOOLEAN",
+    "significado": "Lunes a viernes, excluyendo festivos del seed.",
+    "fuentes": "Calendario generado y dbt/seeds/festivos_gt.csv",
+    "transformacion": "ISODOW(d.fecha) <= 5 AND f.fecha IS NULL AS es_dia_habil",
+    "modelo": "dbt/models/gold/dim_fecha.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_sistema",
+    "campo": "sistema_key",
+    "tipo": "BIGINT",
+    "significado": "Clave técnica del operador; row_number ordenado por código de sistema.",
+    "fuentes": "seeds\\sistemas.csv",
+    "transformacion": "ROW_NUMBER() OVER (ORDER BY sistema_codigo) AS sistema_key",
+    "modelo": "dbt/models/gold/dim_sistema.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "dim_sistema",
+    "campo": "sistema_codigo",
+    "tipo": "VARCHAR",
+    "significado": "Código de operador: TM, TU, MR o AM.",
+    "fuentes": "seeds\\sistemas.csv",
+    "transformacion": "sistema_codigo",
+    "modelo": "dbt/models/gold/dim_sistema.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "dim_sistema",
+    "campo": "sistema_nombre",
+    "tipo": "VARCHAR",
+    "significado": "Nombre legible del operador según sistemas.csv.",
+    "fuentes": "seeds\\sistemas.csv",
+    "transformacion": "sistema_nombre",
+    "modelo": "dbt/models/gold/dim_sistema.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "dim_sistema",
+    "campo": "tipo_transporte",
+    "tipo": "VARCHAR",
+    "significado": "Categoría de transporte indicada por el seed de sistemas.",
+    "fuentes": "seeds\\sistemas.csv",
+    "transformacion": "tipo_transporte",
+    "modelo": "dbt/models/gold/dim_sistema.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "dim_sistema",
+    "campo": "unidad_registro",
+    "tipo": "VARCHAR",
+    "significado": "Unidad de registro original del operador; no redefine el grano de fct_abordaje.",
+    "fuentes": "seeds\\sistemas.csv",
+    "transformacion": "unidad_registro",
+    "modelo": "dbt/models/gold/dim_sistema.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "dim_tiempo",
+    "campo": "tiempo_key",
+    "tipo": "BIGINT",
+    "significado": "Clave fecha-hora local YYYYMMDDHH; se relaciona con dim_tiempo.",
+    "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
+    "transformacion": "f.fecha_key * 100 + h.hora AS tiempo_key /* yyyymmddhh */",
+    "modelo": "dbt/models/gold/dim_tiempo.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_tiempo",
+    "campo": "fecha_key",
+    "tipo": "INTEGER",
+    "significado": "Clave del día YYYYMMDD; se relaciona con dim_fecha.",
+    "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
+    "transformacion": "f.fecha_key",
+    "modelo": "dbt/models/gold/dim_tiempo.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_tiempo",
+    "campo": "fecha",
+    "tipo": "DATE",
+    "significado": "Día del calendario generado de 2026, en fecha local.",
+    "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
+    "transformacion": "f.fecha",
+    "modelo": "dbt/models/gold/dim_tiempo.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_tiempo",
+    "campo": "hora",
+    "tipo": "BIGINT",
+    "significado": "Hora local 0 a 23.",
+    "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
+    "transformacion": "h.hora",
+    "modelo": "dbt/models/gold/dim_tiempo.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_tiempo",
+    "campo": "franja_horaria",
+    "tipo": "VARCHAR",
+    "significado": "Mañana 05-11; tarde 12-17; noche 18-21; madrugada resto.",
+    "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
+    "transformacion": "CASE WHEN h.hora BETWEEN 5 AND 11 THEN 'mañana' WHEN h.hora BETWEEN 12 AND 17 THEN 'tarde' WHEN h.hora BETWEEN 18 AND 21 THEN 'noche' ELSE 'madrugada' END AS franja_horaria",
+    "modelo": "dbt/models/gold/dim_tiempo.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_tiempo",
+    "campo": "es_dia_habil",
+    "tipo": "BOOLEAN",
+    "significado": "Lunes a viernes, excluyendo festivos del seed.",
+    "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
+    "transformacion": "f.es_dia_habil",
+    "modelo": "dbt/models/gold/dim_tiempo.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_tiempo",
+    "campo": "es_fin_de_semana",
+    "tipo": "BOOLEAN",
+    "significado": "Verdadero sábado o domingo según el día ISO.",
+    "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
+    "transformacion": "f.es_fin_de_semana",
+    "modelo": "dbt/models/gold/dim_tiempo.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_tiempo",
+    "campo": "es_festivo",
+    "tipo": "BOOLEAN",
+    "significado": "La fecha coincide con el seed festivos_gt; cobertura limitada al calendario configurado.",
+    "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
+    "transformacion": "f.es_festivo",
+    "modelo": "dbt/models/gold/dim_tiempo.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_tiempo",
+    "campo": "es_hora_pico",
+    "tipo": "BOOLEAN",
+    "significado": "Día hábil y hora 06-08 o 17-19, incluyendo los minutos completos de cada hora.",
+    "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
+    "transformacion": "f.es_dia_habil AND (h.hora BETWEEN 6 AND 8 OR h.hora BETWEEN 17 AND 19) AS es_hora_pico",
+    "modelo": "dbt/models/gold/dim_tiempo.sql",
+    "responsable": "Responsable AMT de calendario y métricas"
+  },
+  {
+    "tabla": "dim_usuario",
+    "campo": "usuario_sk",
+    "tipo": "VARCHAR",
+    "significado": "Seudónimo MD5 de sal concatenada con identidad resuelta; no es una identidad civil ni un dato anónimo.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "p.usuario_sk",
+    "modelo": "dbt/models/gold/dim_usuario.sql",
+    "responsable": "Responsable AMT de identidad y privacidad"
+  },
+  {
+    "tabla": "dim_usuario",
+    "campo": "sistemas_con_tarjeta",
+    "tipo": "BIGINT",
+    "significado": "Número de sistemas presentes en el catálogo de identidad; no exige abordajes válidos en cada uno.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "p.sistemas_con_tarjeta",
+    "modelo": "dbt/models/gold/dim_usuario.sql",
+    "responsable": "Responsable AMT de identidad y privacidad"
+  },
+  {
+    "tabla": "dim_usuario",
+    "campo": "sistemas",
+    "tipo": "VARCHAR",
+    "significado": "Lista de códigos distintos del catálogo de identidad, ordenados y separados por coma.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "p.sistemas",
+    "modelo": "dbt/models/gold/dim_usuario.sql",
+    "responsable": "Responsable AMT de identidad y privacidad"
+  },
+  {
+    "tabla": "dim_usuario",
+    "campo": "es_multisistema",
+    "tipo": "BOOLEAN",
+    "significado": "Más de un sistema en el catálogo de identidad. No usar como sustituto de multimodalidad observada del tablero.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "p.sistemas_con_tarjeta > 1 AS es_multisistema",
+    "modelo": "dbt/models/gold/dim_usuario.sql",
+    "responsable": "Responsable AMT de identidad y privacidad"
+  },
+  {
+    "tabla": "dim_usuario",
+    "campo": "en_padron",
+    "tipo": "BOOLEAN",
+    "significado": "La identidad resuelta aparece en el padrón vigente.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "NOT pd.persona_id IS NULL AS en_padron",
+    "modelo": "dbt/models/gold/dim_usuario.sql",
+    "responsable": "Responsable AMT de identidad y privacidad"
+  },
+  {
+    "tabla": "dim_usuario",
+    "campo": "padron_activo",
+    "tipo": "BOOLEAN",
+    "significado": "Estado de la última tarjeta del padrón por secuencia para esa persona; nulo si no existe vínculo.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "pd.activa AS padron_activo",
+    "modelo": "dbt/models/gold/dim_usuario.sql",
+    "responsable": "Responsable AMT de identidad y privacidad"
+  },
+  {
+    "tabla": "dim_usuario",
+    "campo": "perfil",
+    "tipo": "VARCHAR",
+    "significado": "Perfil del padrón; en snapshots nulos se agrupan como desconocido.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "pd.perfil",
+    "modelo": "dbt/models/gold/dim_usuario.sql",
+    "responsable": "Responsable AMT de identidad y privacidad"
+  },
+  {
+    "tabla": "dim_usuario",
+    "campo": "zona_residencia_key",
+    "tipo": "INTEGER",
+    "significado": "Zona de residencia de la última versión del padrón; no es la zona de abordaje.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "pd.zona_residencia_key",
+    "modelo": "dbt/models/gold/dim_usuario.sql",
+    "responsable": "Responsable AMT de identidad y privacidad"
+  },
+  {
+    "tabla": "dim_usuario",
+    "campo": "vinculo_aerometro",
+    "tipo": "VARCHAR",
+    "significado": "no_aplica sin AM; sin_vinculo para identidad separada de AM; vinculado si se activa el supuesto de vinculación.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "CASE WHEN NOT p.tiene_aerometro THEN 'no_aplica' WHEN p.persona_id LIKE 'AM:%' THEN 'sin_vinculo' ELSE 'vinculado' END AS vinculo_aerometro",
+    "modelo": "dbt/models/gold/dim_usuario.sql",
+    "responsable": "Responsable AMT de identidad y privacidad"
+  },
+  {
+    "tabla": "dim_zona",
+    "campo": "zona_key",
+    "tipo": "INTEGER",
+    "significado": "Clave territorial conformada, incluye zonas capitalinas y municipios; -1 significa desconocida en el snapshot del padrón.",
+    "fuentes": "dbt/seeds/territorios.csv -> silver_zona",
+    "transformacion": "z.zona_key",
+    "modelo": "dbt/models/gold/dim_zona.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_zona",
+    "campo": "nombre_zona",
+    "tipo": "VARCHAR",
+    "significado": "Nombre oficial del territorio conforme al seed territorios.csv.",
+    "fuentes": "dbt/seeds/territorios.csv -> silver_zona",
+    "transformacion": "z.nombre_oficial AS nombre_zona",
+    "modelo": "dbt/models/gold/dim_zona.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_zona",
+    "campo": "tipo_territorio",
+    "tipo": "VARCHAR",
+    "significado": "Categoría zona o municipio según el catálogo territorial.",
+    "fuentes": "dbt/seeds/territorios.csv -> silver_zona",
+    "transformacion": "z.tipo_territorio",
+    "modelo": "dbt/models/gold/dim_zona.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_zona",
+    "campo": "municipio",
+    "tipo": "VARCHAR",
+    "significado": "Municipio al que pertenece el territorio del catálogo.",
+    "fuentes": "dbt/seeds/territorios.csv -> silver_zona",
+    "transformacion": "z.municipio",
+    "modelo": "dbt/models/gold/dim_zona.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_zona",
+    "campo": "tiene_transmetro",
+    "tipo": "BOOLEAN",
+    "significado": "Existe al menos una estación TM en el territorio.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "COALESCE(tiene_transmetro, FALSE) AS tiene_transmetro",
+    "modelo": "dbt/models/gold/dim_zona.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_zona",
+    "campo": "tiene_transurbano",
+    "tipo": "BOOLEAN",
+    "significado": "Existe al menos una parada TU en el territorio.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "COALESCE(tiene_transurbano, FALSE) AS tiene_transurbano",
+    "modelo": "dbt/models/gold/dim_zona.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_zona",
+    "campo": "tiene_metroriel",
+    "tipo": "BOOLEAN",
+    "significado": "Existe al menos una estación MR en el territorio.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "COALESCE(tiene_metroriel, FALSE) AS tiene_metroriel",
+    "modelo": "dbt/models/gold/dim_zona.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_zona",
+    "campo": "tiene_aerometro",
+    "tipo": "BOOLEAN",
+    "significado": "Existe al menos una estación AM en el territorio.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "COALESCE(tiene_aerometro, FALSE) AS tiene_aerometro",
+    "modelo": "dbt/models/gold/dim_zona.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_zona",
+    "campo": "modos_con_estacion",
+    "tipo": "BIGINT",
+    "significado": "Número de sistemas distintos con estaciones en el catálogo del territorio.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "COALESCE(modos_con_estacion, 0) AS modos_con_estacion",
+    "modelo": "dbt/models/gold/dim_zona.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_zona",
+    "campo": "estaciones",
+    "tipo": "BIGINT",
+    "significado": "Número de registros del catálogo de estaciones en el territorio.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "COALESCE(estaciones, 0) AS estaciones",
+    "modelo": "dbt/models/gold/dim_zona.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_zona",
+    "campo": "tiene_servicio",
+    "tipo": "BOOLEAN",
+    "significado": "modos_con_estacion mayor que cero; cobertura de catálogo, no acceso peatonal ni frecuencia.",
+    "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
+    "transformacion": "COALESCE(modos_con_estacion, 0) > 0 AS tiene_servicio",
+    "modelo": "dbt/models/gold/dim_zona.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "dim_zona",
+    "campo": "en_trazado_metroriel",
+    "tipo": "BOOLEAN",
+    "significado": "Nombre oficial en Zona 12, Zona 8, Zona 1, Zona 6 o Zona 17.",
+    "fuentes": "dbt/seeds/territorios.csv -> silver_zona",
+    "transformacion": "z.nombre_oficial IN ('Zona 12', 'Zona 8', 'Zona 1', 'Zona 6', 'Zona 17') AS en_trazado_metroriel",
+    "modelo": "dbt/models/gold/dim_zona.sql",
+    "responsable": "Responsable AMT de catálogos territoriales"
+  },
+  {
+    "tabla": "fct_abordaje",
+    "campo": "abordaje_key",
+    "tipo": "BIGINT",
+    "significado": "Clave técnica del abordaje; row_number determinístico para esta reconstrucción, no identificador persistente ante nuevos eventos.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "ROW_NUMBER() OVER (ORDER BY a.abordaje_id) AS abordaje_key",
+    "modelo": "dbt/models/gold/fct_abordaje.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_abordaje",
+    "campo": "abordaje_id_origen",
+    "tipo": "VARCHAR",
+    "significado": "Identificador unificado del evento de origen, incluye el operador. TU usa hash del contenido al no traer ID.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "a.abordaje_id AS abordaje_id_origen /* dimensión degenerada */",
+    "modelo": "dbt/models/gold/fct_abordaje.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_abordaje",
+    "campo": "tipo_validacion",
+    "tipo": "VARCHAR",
+    "significado": "Detalle operativo: tipo TM, código de estado TU o cabina AM; puede ser nulo en MR.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "a.tipo_validacion /* degenerada: ENTRADA/TRANSBORDO (TM), cabina (AM), estado (TU) */",
+    "modelo": "dbt/models/gold/fct_abordaje.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_abordaje",
+    "campo": "tiempo_key",
+    "tipo": "BIGINT",
+    "significado": "Clave fecha-hora local YYYYMMDDHH; se relaciona con dim_tiempo.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "CAST(STRFTIME(a.fecha, '%Y%m%d') AS INT) * 100 + a.hora AS tiempo_key",
+    "modelo": "dbt/models/gold/fct_abordaje.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_abordaje",
+    "campo": "fecha_key",
+    "tipo": "INTEGER",
+    "significado": "Clave del día YYYYMMDD; se relaciona con dim_fecha.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "CAST(STRFTIME(a.fecha, '%Y%m%d') AS INT) AS fecha_key",
+    "modelo": "dbt/models/gold/fct_abordaje.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_abordaje",
+    "campo": "usuario_sk",
+    "tipo": "VARCHAR",
+    "significado": "Seudónimo MD5 de sal concatenada con identidad resuelta; no es una identidad civil ni un dato anónimo.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "a.usuario_sk",
+    "modelo": "dbt/models/gold/fct_abordaje.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_abordaje",
+    "campo": "sistema_key",
+    "tipo": "BIGINT",
+    "significado": "Clave técnica del operador; row_number ordenado por código de sistema.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "s.sistema_key",
+    "modelo": "dbt/models/gold/fct_abordaje.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_abordaje",
+    "campo": "estacion_key",
+    "tipo": "BIGINT",
+    "significado": "Clave técnica de estación; row_number ordenado por código conformado.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "e.estacion_key",
+    "modelo": "dbt/models/gold/fct_abordaje.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_abordaje",
+    "campo": "zona_key",
+    "tipo": "INTEGER",
+    "significado": "Clave territorial conformada, incluye zonas capitalinas y municipios; -1 significa desconocida en el snapshot del padrón.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "a.zona_key",
+    "modelo": "dbt/models/gold/fct_abordaje.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_abordaje",
+    "campo": "fecha_hora_local",
+    "tipo": "TIMESTAMP",
+    "significado": "Instante del abordaje en America/Guatemala; MR utiliza la entrada.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "a.ts_local AS fecha_hora_local",
+    "modelo": "dbt/models/gold/fct_abordaje.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_abordaje",
+    "campo": "cantidad_abordajes",
+    "tipo": "INTEGER",
+    "significado": "Valor 1 por validación limpia de entrada. Suma aditiva; no representa un viaje puerta a puerta.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "1 AS cantidad_abordajes /* aditiva */",
+    "modelo": "dbt/models/gold/fct_abordaje.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_abordaje",
+    "campo": "monto_q",
+    "tipo": "DOUBLE",
+    "significado": "Importe en quetzales GTQ; TU se convierte de centavos a quetzales en staging. No sumar los mismos importes entre ambos hechos MR.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "a.monto_q /* aditiva */",
+    "modelo": "dbt/models/gold/fct_abordaje.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_padron_diario",
+    "campo": "fecha_key",
+    "tipo": "INTEGER",
+    "significado": "Clave del día YYYYMMDD; se relaciona con dim_fecha.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
+    "transformacion": "d.fecha_key",
+    "modelo": "dbt/models/gold/fct_padron_diario.sql",
+    "responsable": "Responsable AMT de padrón CDC"
+  },
+  {
+    "tabla": "fct_padron_diario",
+    "campo": "zona_key",
+    "tipo": "INTEGER",
+    "significado": "Clave territorial conformada, incluye zonas capitalinas y municipios; -1 significa desconocida en el snapshot del padrón.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
+    "transformacion": "COALESCE(v.zona_residencia_key, -1) AS zona_key /* -1 = zona desconocida */",
+    "modelo": "dbt/models/gold/fct_padron_diario.sql",
+    "responsable": "Responsable AMT de padrón CDC"
+  },
+  {
+    "tabla": "fct_padron_diario",
+    "campo": "perfil",
+    "tipo": "VARCHAR",
+    "significado": "Perfil del padrón; en snapshots nulos se agrupan como desconocido.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
+    "transformacion": "COALESCE(v.perfil, 'desconocido') AS perfil",
+    "modelo": "dbt/models/gold/fct_padron_diario.sql",
+    "responsable": "Responsable AMT de padrón CDC"
+  },
+  {
+    "tabla": "fct_padron_diario",
+    "campo": "operador_tarjeta",
+    "tipo": "VARCHAR",
+    "significado": "Operador identificado por el formato de tarjeta en el padrón CDC.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
+    "transformacion": "v.operador_tarjeta",
+    "modelo": "dbt/models/gold/fct_padron_diario.sql",
+    "responsable": "Responsable AMT de padrón CDC"
+  },
+  {
+    "tabla": "fct_padron_diario",
+    "campo": "tarjetas_activas",
+    "tipo": "BIGINT",
+    "significado": "Tarjetas activas al cierre del día, por zona/perfil/operador. Semiaditiva: nunca sumar entre fechas.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
+    "transformacion": "COUNT(*) FILTER(WHERE v.activa) AS tarjetas_activas /* semi-aditiva */",
+    "modelo": "dbt/models/gold/fct_padron_diario.sql",
+    "responsable": "Responsable AMT de padrón CDC"
+  },
+  {
+    "tabla": "fct_padron_diario",
+    "campo": "altas_del_dia",
+    "tipo": "BIGINT",
+    "significado": "Versiones INSERT que permanecen en el snapshot al cierre del día. No equivale necesariamente a todos los INSERT del log.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
+    "transformacion": "COUNT(*) FILTER(WHERE v.operacion_origen = 'INSERT' AND CAST(v.valido_desde AS DATE) = d.fecha) AS altas_del_dia /* aditiva */",
+    "modelo": "dbt/models/gold/fct_padron_diario.sql",
+    "responsable": "Responsable AMT de padrón CDC"
+  },
+  {
+    "tabla": "fct_padron_diario",
+    "campo": "bajas_del_dia",
+    "tipo": "BIGINT",
+    "significado": "Versiones DELETE que permanecen en el snapshot al cierre del día. No equivale necesariamente a todos los DELETE del log.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
+    "transformacion": "COUNT(*) FILTER(WHERE v.operacion_origen = 'DELETE' AND CAST(v.valido_desde AS DATE) = d.fecha) AS bajas_del_dia /* aditiva */",
+    "modelo": "dbt/models/gold/fct_padron_diario.sql",
+    "responsable": "Responsable AMT de padrón CDC"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "trayecto_key",
+    "tipo": "BIGINT",
+    "significado": "Clave técnica row_number por trayecto; puede cambiar al agregar nuevos eventos.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "ROW_NUMBER() OVER (ORDER BY t.trayecto_id) AS trayecto_key",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "trayecto_id_origen",
+    "tipo": "VARCHAR",
+    "significado": "Identificador conformado del viaje completo MetroRiel.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "t.trayecto_id AS trayecto_id_origen",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "tiempo_key",
+    "tipo": "BIGINT",
+    "significado": "Clave fecha-hora local YYYYMMDDHH; se relaciona con dim_tiempo.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "CAST(STRFTIME(t.ts_entrada_local, '%Y%m%d') AS INT) * 100 + HOUR(t.ts_entrada_local) AS tiempo_key",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "fecha_key",
+    "tipo": "INTEGER",
+    "significado": "Clave del día YYYYMMDD; se relaciona con dim_fecha.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "CAST(STRFTIME(t.ts_entrada_local, '%Y%m%d') AS INT) AS fecha_key",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "usuario_sk",
+    "tipo": "VARCHAR",
+    "significado": "Seudónimo MD5 de sal concatenada con identidad resuelta; no es una identidad civil ni un dato anónimo.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "t.usuario_sk",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "estacion_origen_key",
+    "tipo": "BIGINT",
+    "significado": "Clave de dim_estacion con rol de entrada del trayecto MR.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "eo.estacion_key AS estacion_origen_key",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "estacion_destino_key",
+    "tipo": "BIGINT",
+    "significado": "Clave de dim_estacion con rol de salida del trayecto MR.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "ed.estacion_key AS estacion_destino_key",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "zona_origen_key",
+    "tipo": "INTEGER",
+    "significado": "Territorio conformado de la estación de entrada MR.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "t.zona_origen_key /* dim_zona con dos roles */",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "zona_destino_key",
+    "tipo": "INTEGER",
+    "significado": "Territorio conformado de la estación de salida MR.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "t.zona_destino_key",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "ts_entrada_local",
+    "tipo": "TIMESTAMP",
+    "significado": "Instante local de entrada del trayecto MR.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "t.ts_entrada_local",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "ts_salida_local",
+    "tipo": "TIMESTAMP",
+    "significado": "Instante local de salida del trayecto MR.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "t.ts_salida_local",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "cantidad_trayectos",
+    "tipo": "INTEGER",
+    "significado": "Valor 1 por trayecto completo MR válido; sumar solo dentro de este hecho.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "1 AS cantidad_trayectos /* aditiva */",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "duracion_min",
+    "tipo": "DOUBLE",
+    "significado": "Duración del trayecto en minutos según Silver; promedio requiere SUM(duracion_min)/SUM(cantidad_trayectos).",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "t.duracion_min /* aditiva (el promedio NO lo es) */",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "estaciones_recorridas",
+    "tipo": "INTEGER",
+    "significado": "Diferencia absoluta de orden entre estaciones MR en Silver; mide separación por tramos, no cuenta ambas estaciones extremas.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "t.estaciones_recorridas /* aditiva */",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  },
+  {
+    "tabla": "fct_trayecto_metroriel",
+    "campo": "monto_q",
+    "tipo": "DOUBLE",
+    "significado": "Importe en quetzales GTQ; TU se convierte de centavos a quetzales en staging. No sumar los mismos importes entre ambos hechos MR.",
+    "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
+    "transformacion": "t.monto_q /* aditiva */",
+    "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
+    "responsable": "Responsable AMT de operación y demanda"
+  }
+]

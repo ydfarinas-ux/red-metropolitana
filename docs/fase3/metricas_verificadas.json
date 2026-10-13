@@ -1,0 +1,159 @@
+{
+  "volumen_gold": [
+    {
+      "table_name": "dim_estacion"
+    },
+    {
+      "table_name": "dim_fecha"
+    },
+    {
+      "table_name": "dim_sistema"
+    },
+    {
+      "table_name": "dim_tiempo"
+    },
+    {
+      "table_name": "dim_usuario"
+    },
+    {
+      "table_name": "dim_zona"
+    },
+    {
+      "table_name": "fct_abordaje"
+    },
+    {
+      "table_name": "fct_padron_diario"
+    },
+    {
+      "table_name": "fct_trayecto_metroriel"
+    }
+  ],
+  "calidad": [
+    {
+      "sistema": "CDC",
+      "motivo_rechazo": "CDC_SIN_TARJETA",
+      "registros": 2206,
+      "pct_de_la_fuente": 7.105,
+      "total_fuente": 31050
+    },
+    {
+      "sistema": "CDC",
+      "motivo_rechazo": "CDC_UPDATE_SOBRE_BAJA",
+      "registros": 423,
+      "pct_de_la_fuente": 1.362,
+      "total_fuente": 31050
+    },
+    {
+      "sistema": "MR",
+      "motivo_rechazo": "VIAJE_SIN_SALIDA",
+      "registros": 3589,
+      "pct_de_la_fuente": 1.2,
+      "total_fuente": 299100
+    },
+    {
+      "sistema": "TM",
+      "motivo_rechazo": "DUPLICADO_TORNIQUETE",
+      "registros": 1115,
+      "pct_de_la_fuente": 0.307,
+      "total_fuente": 363221
+    },
+    {
+      "sistema": "TU",
+      "motivo_rechazo": "PARADA_NULA",
+      "registros": 4189,
+      "pct_de_la_fuente": 0.503,
+      "total_fuente": 832791
+    },
+    {
+      "sistema": "TU",
+      "motivo_rechazo": "FECHA_FUTURA",
+      "registros": 814,
+      "pct_de_la_fuente": 0.098,
+      "total_fuente": 832791
+    }
+  ],
+  "cdc": [
+    {
+      "eventos_en_log": 31050,
+      "eventos_en_cuarentena": 2629,
+      "eventos_aplicados": 28421,
+      "altas_aplicadas": 10003,
+      "cambios_aplicados": 14646,
+      "bajas_aplicadas": 3772,
+      "tarjetas_activas_antes_de_borrados": 20148,
+      "tarjetas_activas_despues": 19110,
+      "tarjetas_dadas_de_baja": 3352,
+      "tarjetas_en_padron": 22462,
+      "reactivaciones": 281,
+      "updates_de_tarjetas_previas_al_log": 11740,
+      "bajas_de_tarjetas_previas_al_log": 2877
+    }
+  ],
+  "usuarios_observados": [
+    {
+      "usuarios": 70380,
+      "multisistema": 36827
+    }
+  ],
+  "cobertura": [
+    {
+      "territorios": 26,
+      "con_estaciones": 15,
+      "sin_estaciones": 11
+    }
+  ],
+  "periodo": [
+    {
+      "inicio": "2026-06-01 04:00:00",
+      "fin": "2026-07-15 22:59:56",
+      "abordajes": 1647569
+    }
+  ],
+  "conteos_gold": {
+    "dim_estacion": 468,
+    "dim_fecha": 365,
+    "dim_sistema": 4,
+    "dim_tiempo": 8760,
+    "dim_usuario": 70380,
+    "dim_zona": 26,
+    "fct_abordaje": 1647569,
+    "fct_padron_diario": 8612,
+    "fct_trayecto_metroriel": 295511
+  },
+  "corridas": [
+    {
+      "corrida": 1,
+      "fecha": "2026-10-12T19:09:38",
+      "duracion_segundos": {
+        "bronze_batch": 1.85,
+        "bronze_cdc": 0.24,
+        "bronze_streaming": 12.45,
+        "vaciar_staging": 0.03,
+        "dbt_build": 91.72
+      },
+      "consulta_tablero_ms": 58.3,
+      "tamano_mb": {
+        "datos_crudos": 137.07,
+        "bronze": 31.32,
+        "warehouse_staging_silver_gold": 490.22
+      }
+    },
+    {
+      "corrida": 2,
+      "fecha": "2026-10-12T19:11:05",
+      "duracion_segundos": {
+        "bronze_batch": 0.54,
+        "bronze_cdc": 0.07,
+        "bronze_streaming": 0.23,
+        "vaciar_staging": 0.09,
+        "dbt_build": 51.43
+      },
+      "consulta_tablero_ms": 38.5,
+      "tamano_mb": {
+        "datos_crudos": 137.07,
+        "bronze": 31.32,
+        "warehouse_staging_silver_gold": 716.71
+      }
+    }
+  ]
+}
