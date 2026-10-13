@@ -1,0 +1,27 @@
+﻿zona_key,nombre_zona,tipo_territorio,municipio,tiene_transmetro,tiene_transurbano,tiene_metroriel,tiene_aerometro,modos_con_estacion,estaciones,tiene_servicio,en_trazado_metroriel
+1,Zona 1,zona,Guatemala,True,True,True,True,4,31,True,True
+2,Zona 2,zona,Guatemala,False,False,False,False,0,0,False,False
+3,Zona 3,zona,Guatemala,False,False,False,False,0,0,False,False
+4,Zona 4,zona,Guatemala,True,True,False,False,2,29,True,False
+5,Zona 5,zona,Guatemala,False,False,False,False,0,0,False,False
+6,Zona 6,zona,Guatemala,True,True,True,False,3,32,True,True
+7,Zona 7,zona,Guatemala,True,True,False,True,3,31,True,False
+8,Zona 8,zona,Guatemala,True,True,True,False,3,35,True,True
+9,Zona 9,zona,Guatemala,True,True,False,False,2,29,True,False
+10,Zona 10,zona,Guatemala,True,True,False,False,2,29,True,False
+11,Zona 11,zona,Guatemala,True,True,False,False,2,32,True,False
+12,Zona 12,zona,Guatemala,True,True,True,True,4,35,True,True
+13,Zona 13,zona,Guatemala,True,True,False,True,3,31,True,False
+14,Zona 14,zona,Guatemala,False,False,False,False,0,0,False,False
+15,Zona 15,zona,Guatemala,False,False,False,False,0,0,False,False
+16,Zona 16,zona,Guatemala,False,False,False,False,0,0,False,False
+17,Zona 17,zona,Guatemala,True,True,True,True,4,35,True,True
+18,Zona 18,zona,Guatemala,True,True,False,True,3,30,True,False
+19,Zona 19,zona,Guatemala,False,False,False,False,0,0,False,False
+21,Zona 21,zona,Guatemala,False,False,False,False,0,0,False,False
+24,Zona 24,zona,Guatemala,False,False,False,False,0,0,False,False
+25,Zona 25,zona,Guatemala,False,False,False,False,0,0,False,False
+101,Mixco,municipio,Mixco,True,True,False,True,3,32,True,False
+102,Villa Nueva,municipio,Villa Nueva,True,True,False,True,3,30,True,False
+103,San Miguel Petapa,municipio,San Miguel Petapa,True,True,False,True,3,27,True,False
+104,Santa Catarina Pinula,municipio,Santa Catarina Pinula,False,False,False,False,0,0,False,False

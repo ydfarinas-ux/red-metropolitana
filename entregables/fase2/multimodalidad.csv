@@ -1,0 +1,9 @@
+﻿modos_usados,combinacion_modos,usuarios
+1,AM,14496
+1,MR,2463
+1,TM,10335
+1,TU,6259
+2,"MR,TM",6519
+2,"MR,TU",3907
+2,"TM,TU",16405
+3,"MR,TM,TU",9996

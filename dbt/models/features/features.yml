@@ -1,0 +1,39 @@
+version: 2
+models:
+  - name: features_usuario
+    description: "Una fila por identidad seudonimizada con abordajes limpios en los 90 días anteriores al corte exclusivo; fuente Silver. Las ventanas son incompletas si no existen 90 días de historia."
+    columns:
+      - name: usuario_sk
+        description: "Seudónimo de Silver; no tarjeta ni identidad civil."
+        tests: [unique, not_null]
+      - name: fecha_corte
+        description: "Corte exclusivo en hora local; valor predeterminado 2026-07-16."
+        tests: [not_null]
+      - name: viajes_7d
+        description: "Abordajes en [corte-7 días, corte)."
+      - name: viajes_30d
+        description: "Abordajes en [corte-30 días, corte)."
+      - name: viajes_90d
+        description: "Abordajes en [corte-90 días, corte); no viajes puerta a puerta."
+      - name: modos_distintos_90d
+        description: "Cantidad de sistemas observados en la ventana."
+      - name: dias_desde_ultimo_viaje
+        description: "Diferencia de fechas entre el último abordaje y el corte."
+      - name: proporcion_hora_pico_90d
+        description: "Fracción de abordajes en día hábil, excluyendo festivos, de 06 a 08 o de 17 a 19 horas."
+      - name: gasto_q_90d
+        description: "Importes registrados, en GTQ, sumados por usuario en 90 días."
+      - name: gasto_promedio_q_90d
+        description: "Promedio de importe registrado por abordaje; GTQ."
+      - name: dias_historial_disponible_90d
+        description: "Días de historia de la fuente antes del corte, limitados a 90; no antigüedad individual."
+      - name: ventana_90d_completa
+        description: "True si hay al menos 90 días de historia de fuente antes del corte."
+      - name: modo_mas_usado_90d
+        description: "Sistema más frecuente; empate resuelto por código ascendente."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['TM', 'TU', 'MR', 'AM']
+      - name: zona_origen_frecuente_90d
+        description: "Zona de estación más frecuente; empate por zona_key ascendente. No residencia."

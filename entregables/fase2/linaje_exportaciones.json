@@ -1,0 +1,23 @@
+{
+  "warehouse": "C:\\Users\\walte\\Desktop\\uni\\10m-ciclo\\Ciencia de datos\\labs\\red-metropolitana\\warehouse\\red-metropolitana.duckdb",
+  "periodo_gold": [
+    "2026-06-01 04:00:00",
+    "2026-07-15 22:59:56"
+  ],
+  "fecha_corte_features": [
+    "2026-07-16"
+  ],
+  "consultas": {
+    "demanda.csv": "\n        select d.fecha, s.sistema_codigo, s.sistema_nombre,\n               z.zona_key, z.nombre_zona, z.tipo_territorio,\n               z.en_trazado_metroriel, t.hora, t.es_dia_habil, t.es_hora_pico,\n               sum(f.cantidad_abordajes) as abordajes, sum(f.monto_q) as ingreso_q\n        from gold.fct_abordaje f\n        join gold.dim_fecha d on d.fecha_key = f.fecha_key\n        join gold.dim_sistema s on s.sistema_key = f.sistema_key\n        join gold.dim_zona z on z.zona_key = f.zona_key\n        join gold.dim_tiempo t on t.tiempo_key = f.tiempo_key\n        group by all order by d.fecha, s.sistema_codigo, z.zona_key, t.hora\n    ",
+    "cobertura.csv": "\n        select zona_key, nombre_zona, tipo_territorio, municipio,\n               tiene_transmetro, tiene_transurbano, tiene_metroriel,\n               tiene_aerometro, modos_con_estacion, estaciones,\n               tiene_servicio, en_trazado_metroriel\n        from gold.dim_zona order by zona_key\n    ",
+    "multimodalidad.csv": "\n        with usuarios as (\n            select f.usuario_sk, count(distinct f.sistema_key) as modos_usados,\n                   string_agg(distinct s.sistema_codigo, ',' order by s.sistema_codigo) as combinacion_modos\n            from gold.fct_abordaje f\n            join gold.dim_sistema s on s.sistema_key = f.sistema_key\n            group by f.usuario_sk\n        )\n        select modos_usados, combinacion_modos, count(*) as usuarios\n        from usuarios group by all order by modos_usados, combinacion_modos\n    ",
+    "metroriel.csv": "\n        select z.zona_key, z.nombre_zona, z.tipo_territorio, z.en_trazado_metroriel,\n               coalesce(sum(case when s.sistema_codigo in ('TM','TU')\n                            then f.cantidad_abordajes else 0 end), 0) as abordajes_tm_tu,\n               coalesce(sum(f.cantidad_abordajes), 0) as abordajes_todos_modos,\n               coalesce(sum(case when s.sistema_codigo = 'MR'\n                            then f.cantidad_abordajes else 0 end), 0) as abordajes_mr\n        from gold.dim_zona z\n        left join gold.fct_abordaje f on f.zona_key = z.zona_key\n        left join gold.dim_sistema s on s.sistema_key = f.sistema_key\n        group by all order by abordajes_tm_tu desc, z.zona_key\n    ",
+    "features_usuario.csv": "select * from features.features_usuario order by usuario_sk"
+  },
+  "notas": [
+    "demanda, multimodalidad y metroriel usan todo el periodo de Gold.",
+    "multimodalidad cuenta usuarios que abordaron varios sistemas; no prueba transbordos encadenados.",
+    "cobertura mide presencia de estaciones del catalogo; no acceso peatonal ni frecuencia.",
+    "features deriva de Silver; no se incorpora al tablero."
+  ]
+}

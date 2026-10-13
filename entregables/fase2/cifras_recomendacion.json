@@ -1,0 +1,132 @@
+{
+  "total_abordajes": 1647569,
+  "abordajes_por_modo": {
+    "Aerómetro": 203554,
+    "MetroRiel": 295511,
+    "Transmetro": 362106,
+    "Transurbano": 786398
+  },
+  "zonas_top": [
+    [
+      "Zona 17",
+      148554
+    ],
+    [
+      "Zona 12",
+      147903
+    ],
+    [
+      "Zona 8",
+      147081
+    ],
+    [
+      "Zona 6",
+      138899
+    ],
+    [
+      "Zona 1",
+      137170
+    ],
+    [
+      "Mixco",
+      132768
+    ]
+  ],
+  "horas_top": [
+    [
+      "7",
+      197491
+    ],
+    [
+      "17",
+      167251
+    ],
+    [
+      "18",
+      139136
+    ],
+    [
+      "6",
+      132023
+    ]
+  ],
+  "abordajes_hora_pico": 640219,
+  "porcentaje_hora_pico": 38.86,
+  "usuarios": 70380,
+  "usuarios_multimodales": 36827,
+  "porcentaje_multimodal": 52.33,
+  "tm_tu": 1148504,
+  "tm_tu_corredor": 380675,
+  "porcentaje_corredor": 33.15,
+  "tm_tu_fuera": 767829,
+  "sin_estaciones": [
+    "Zona 2",
+    "Zona 3",
+    "Zona 5",
+    "Zona 14",
+    "Zona 15",
+    "Zona 16",
+    "Zona 19",
+    "Zona 21",
+    "Zona 24",
+    "Zona 25",
+    "Santa Catarina Pinula"
+  ],
+  "con_estaciones": 15,
+  "ranking_tm_tu": [
+    {
+      "zona_key": "11",
+      "nombre_zona": "Zona 11",
+      "tipo_territorio": "zona",
+      "en_trazado_metroriel": "False",
+      "abordajes_tm_tu": "85943",
+      "abordajes_todos_modos": "85943",
+      "abordajes_mr": "0"
+    },
+    {
+      "zona_key": "17",
+      "nombre_zona": "Zona 17",
+      "tipo_territorio": "zona",
+      "en_trazado_metroriel": "True",
+      "abordajes_tm_tu": "80487",
+      "abordajes_todos_modos": "148554",
+      "abordajes_mr": "53755"
+    },
+    {
+      "zona_key": "8",
+      "nombre_zona": "Zona 8",
+      "tipo_territorio": "zona",
+      "en_trazado_metroriel": "True",
+      "abordajes_tm_tu": "80157",
+      "abordajes_todos_modos": "147081",
+      "abordajes_mr": "66924"
+    },
+    {
+      "zona_key": "13",
+      "nombre_zona": "Zona 13",
+      "tipo_territorio": "zona",
+      "en_trazado_metroriel": "False",
+      "abordajes_tm_tu": "79359",
+      "abordajes_todos_modos": "94131",
+      "abordajes_mr": "0"
+    },
+    {
+      "zona_key": "12",
+      "nombre_zona": "Zona 12",
+      "tipo_territorio": "zona",
+      "en_trazado_metroriel": "True",
+      "abordajes_tm_tu": "79334",
+      "abordajes_todos_modos": "147903",
+      "abordajes_mr": "53970"
+    },
+    {
+      "zona_key": "102",
+      "nombre_zona": "Villa Nueva",
+      "tipo_territorio": "municipio",
+      "en_trazado_metroriel": "False",
+      "abordajes_tm_tu": "78342",
+      "abordajes_todos_modos": "93005",
+      "abordajes_mr": "0"
+    }
+  ]
+}

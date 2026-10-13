@@ -1,0 +1,100 @@
+[
+  {
+    "campo": "usuario_sk",
+    "tipo": "VARCHAR",
+    "significado": "Identidad seudonimizada de Silver; llave de la fila. No identidad civil.",
+    "transformacion": "silver_abordajes.usuario_sk",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  },
+  {
+    "campo": "fecha_corte",
+    "tipo": "DATE",
+    "significado": "2026-07-16 a las 00:00, hora local; corte exclusivo.",
+    "transformacion": "Variable fecha_corte_features",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  },
+  {
+    "campo": "viajes_7d",
+    "tipo": "BIGINT",
+    "significado": "Número de abordajes limpios en [corte-7 días, corte).",
+    "transformacion": "COUNT de Silver",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  },
+  {
+    "campo": "viajes_30d",
+    "tipo": "BIGINT",
+    "significado": "Número de abordajes limpios en [corte-30 días, corte).",
+    "transformacion": "COUNT de Silver",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  },
+  {
+    "campo": "viajes_90d",
+    "tipo": "BIGINT",
+    "significado": "Número de abordajes limpios en [corte-90 días, corte). No viaje puerta a puerta.",
+    "transformacion": "COUNT de Silver",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  },
+  {
+    "campo": "modos_distintos_90d",
+    "tipo": "BIGINT",
+    "significado": "Cantidad de sistemas utilizados en 90 días; entre 1 y 4.",
+    "transformacion": "COUNT DISTINCT sistema",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  },
+  {
+    "campo": "dias_desde_ultimo_viaje",
+    "tipo": "BIGINT",
+    "significado": "Días calendario desde la última fecha de abordaje hasta el corte.",
+    "transformacion": "DATE_DIFF desde MAX fecha",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  },
+  {
+    "campo": "proporcion_hora_pico_90d",
+    "tipo": "DOUBLE",
+    "significado": "Fracción [0,1] de abordajes en días hábiles, excluyendo festivos, horas 06-08 o 17-19.",
+    "transformacion": "Silver.fecha/hora y seed festivos_gt",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  },
+  {
+    "campo": "gasto_q_90d",
+    "tipo": "DECIMAL(38,2)",
+    "significado": "Importe registrado acumulado, en GTQ; suma decimal de dos posiciones.",
+    "transformacion": "SUM de Silver.monto_q DECIMAL(18,2)",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  },
+  {
+    "campo": "gasto_promedio_q_90d",
+    "tipo": "DOUBLE",
+    "significado": "Importe registrado medio por abordaje en GTQ.",
+    "transformacion": "gasto_q_90d / viajes_90d",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  },
+  {
+    "campo": "dias_historial_disponible_90d",
+    "tipo": "BIGINT",
+    "significado": "Días desde el inicio observado de la fuente hasta el corte, máximo 90. Es cobertura de fuente, no antigüedad del usuario.",
+    "transformacion": "MIN fecha de Silver anterior al corte",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  },
+  {
+    "campo": "ventana_90d_completa",
+    "tipo": "BOOLEAN",
+    "significado": "Indica si existe al menos 90 días de historia de fuente anterior al corte.",
+    "transformacion": "dias_historial_disponible_90d = 90",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  },
+  {
+    "campo": "modo_mas_usado_90d",
+    "tipo": "VARCHAR",
+    "significado": "Sistema con más abordajes en la ventana; empate por código ascendente.",
+    "transformacion": "COUNT por usuario/sistema y ROW_NUMBER",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  },
+  {
+    "campo": "zona_origen_frecuente_90d",
+    "tipo": "INTEGER",
+    "significado": "Zona de la estación de abordaje más frecuente; empate por zona_key ascendente. No domicilio ni origen puerta a puerta.",
+    "transformacion": "COUNT por usuario/zona y ROW_NUMBER",
+    "modelo": "dbt/models/features/features_usuario.sql"
+  }
+]

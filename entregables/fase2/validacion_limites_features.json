@@ -1,0 +1,12 @@
+{
+  "resultado": "PASS",
+  "verificaciones": [
+    "Ventanas 7/30/90 incluyen límite inferior",
+    "Corte y eventos futuros excluidos",
+    "Eventos anteriores a 90 días excluidos",
+    "Festivo excluido de hora pico",
+    "Empates de modo y zona determinísticos",
+    "Usuarios solo futuros excluidos",
+    "Suma de importes y recencia correctas"
+  ]
+}
