@@ -1,6 +1,6 @@
 # 3.1 Definiciones oficiales y responsables
 
-Fecha de formalización: 12 de octubre de 2026. Versión 1.0. Aplicable a datos sintéticos del curso, período observado 1 de junio a 15 de julio de 2026. Las reglas describen el código existente; su formalización es posterior a la implementación. No se atribuye una aprobación institucional real.
+Fecha de formalización: 12 de octubre de 2026. Versión 1.1. Aplicable a datos sintéticos del curso, período observado 1 de junio a 15 de julio de 2026. Las reglas describen el código existente; su formalización es posterior a la implementación. No se atribuye una aprobación institucional real.
 
 ## Contrato de métricas
 
@@ -22,19 +22,26 @@ Fecha de formalización: 12 de octubre de 2026. Versión 1.0. Aplicable a datos 
 
 ## Dueños por dominio
 
-Los responsables se asignan por rol para la propuesta de la Agencia. El grupo debe mapear cada rol a un integrante real antes de la defensa; no se inventan nombres.
+Asignación del equipo confirmada por el usuario para esta entrega. Los nombres identifican responsables académicos; los roles institucionales describen la propuesta de Agencia. Cada dueño valida y autoriza cambios de su dominio, con revisión de otro integrante.
 
-| Dominio | Dueño responsable | Custodio técnico | Quién autoriza cambios |
+| Dominio | Dueño académico | Rol propuesto | Quién autoriza cambios |
 |---|---|---|---|
-| Zona y estación | Coordinación territorial AMT | Ingeniería de datos | Coordinación territorial, con validación del operador afectado |
-| Sistema y catálogo operativo | Coordinación de operadores AMT | Ingeniería de datos | Mesa de operadores |
-| Fecha, horario y métricas | Responsable de analítica AMT | Ingeniería de datos | Comité de métricas AMT |
-| Identidad del usuario | Responsable de privacidad AMT | Custodio de identidades | Privacidad y operadores; no unir personas solo por similitud |
-| Padrón CDC | Responsable de tarjetas de operadores | Ingeniería de datos | Dueño del padrón con validación de privacidad |
-| Calidad y cuarentena | Dueño de la fuente que produjo el error | Ingeniería de datos | Dueño de fuente; comité de métricas si altera conteos oficiales |
+| Zona y estación | Yasmely Dubraska Fariñas Aldana (1329223) | Coordinación territorial | Yasmely, con revisión de Jose Rodrigo |
+| Sistema y catálogo operativo | Jose Rodrigo Herrera Muralles (1042619) | Coordinación de operadores | Jose Rodrigo, con revisión de Yasmely |
+| Fecha, horario y métricas | Jose Rodrigo Herrera Muralles (1042619) | Analítica y comité de métricas | Jose Rodrigo, con revisión de Walter |
+| Identidad del usuario | Walter José Herrera Salvatierra (1109722) | Privacidad y custodia de identidades | Walter, con revisión de Jose Rodrigo; justificar vínculos |
+| Padrón CDC | Walter José Herrera Salvatierra (1109722) | Custodia de tarjetas | Walter, con revisión de Yasmely |
+| Calidad y cuarentena | Walter José Herrera Salvatierra (1109722) | Ingeniería y calidad | Walter; Jose Rodrigo revisa impactos en métricas |
+| Features de usuario | Jose Rodrigo Herrera Muralles (1042619) | Ciencia de datos | Jose Rodrigo define corte y predictores; Walter valida privacidad |
+
 
 Cambios: registrar motivo, versión, impacto en series históricas y aprobador por rol; validar calidad y doble corrida; publicar nuevas definiciones junto a los resultados. Las claves `row_number` pueden cambiar al incorporar datos: no usarlas como identificadores persistentes fuera de una reconstrucción.
 
 ## Prueba de fuego
 
 Dos integrantes deben calcular el total con `SUM(cantidad_abordajes)` y, por separado, contar filas limpias del hecho, para idéntico período y filtros. Resultado de referencia para 1 junio-15 julio: 1,647,569. Deben coincidir; diferencias de ventana, fuente, identidad o doble conteo MR invalidan la comparación.
+
+
+## Extensión de fase 2
+
+La tabla `features.features_usuario` sale directamente de `silver_abordajes` y `festivos_gt`; no lee Gold. Corte exclusivo 16/07/2026. El responsable de métricas mantiene la definición de abordaje y las ventanas; el custodio de privacidad restringe el detalle individual.

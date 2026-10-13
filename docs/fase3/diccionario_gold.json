@@ -7,7 +7,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "ROW_NUMBER() OVER (ORDER BY e.estacion_key) AS estacion_key",
     "modelo": "dbt/models/gold/dim_estacion.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_estacion",
@@ -17,7 +17,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "e.estacion_key AS estacion_codigo",
     "modelo": "dbt/models/gold/dim_estacion.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_estacion",
@@ -27,7 +27,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "s.sistema_key",
     "modelo": "dbt/models/gold/dim_estacion.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_estacion",
@@ -37,7 +37,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "e.sistema AS sistema_codigo",
     "modelo": "dbt/models/gold/dim_estacion.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_estacion",
@@ -47,7 +47,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "e.estacion_id_origen",
     "modelo": "dbt/models/gold/dim_estacion.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_estacion",
@@ -57,7 +57,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "e.nombre AS nombre_estacion",
     "modelo": "dbt/models/gold/dim_estacion.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_estacion",
@@ -67,7 +67,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "e.agrupador AS linea_ruta_eje",
     "modelo": "dbt/models/gold/dim_estacion.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_estacion",
@@ -77,7 +77,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "e.orden AS orden_metroriel",
     "modelo": "dbt/models/gold/dim_estacion.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_estacion",
@@ -87,7 +87,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "e.lat",
     "modelo": "dbt/models/gold/dim_estacion.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_estacion",
@@ -97,7 +97,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "e.lon",
     "modelo": "dbt/models/gold/dim_estacion.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_estacion",
@@ -107,7 +107,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "e.zona_key",
     "modelo": "dbt/models/gold/dim_estacion.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_fecha",
@@ -117,7 +117,7 @@
     "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
     "transformacion": "CAST(STRFTIME(d.fecha, '%Y%m%d') AS INT) AS fecha_key",
     "modelo": "dbt/models/gold/dim_fecha.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_fecha",
@@ -127,7 +127,7 @@
     "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
     "transformacion": "d.fecha",
     "modelo": "dbt/models/gold/dim_fecha.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_fecha",
@@ -137,7 +137,7 @@
     "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
     "transformacion": "YEAR(d.fecha) AS anio",
     "modelo": "dbt/models/gold/dim_fecha.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_fecha",
@@ -147,7 +147,7 @@
     "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
     "transformacion": "MONTH(d.fecha) AS mes",
     "modelo": "dbt/models/gold/dim_fecha.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_fecha",
@@ -157,7 +157,7 @@
     "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
     "transformacion": "DAY(d.fecha) AS dia",
     "modelo": "dbt/models/gold/dim_fecha.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_fecha",
@@ -167,7 +167,7 @@
     "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
     "transformacion": "ISODOW(d.fecha) AS dia_semana_num /* 1 = lunes */",
     "modelo": "dbt/models/gold/dim_fecha.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_fecha",
@@ -177,7 +177,7 @@
     "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
     "transformacion": "CASE ISODOW(d.fecha) WHEN 1 THEN 'lunes' WHEN 2 THEN 'martes' WHEN 3 THEN 'miércoles' WHEN 4 THEN 'jueves' WHEN 5 THEN 'viernes' WHEN 6 THEN 'sábado' ELSE 'domingo' END AS nombre_dia",
     "modelo": "dbt/models/gold/dim_fecha.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_fecha",
@@ -187,7 +187,7 @@
     "fuentes": "Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31)",
     "transformacion": "ISODOW(d.fecha) >= 6 AS es_fin_de_semana",
     "modelo": "dbt/models/gold/dim_fecha.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_fecha",
@@ -197,7 +197,7 @@
     "fuentes": "Calendario generado y dbt/seeds/festivos_gt.csv",
     "transformacion": "NOT f.fecha IS NULL AS es_festivo",
     "modelo": "dbt/models/gold/dim_fecha.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_fecha",
@@ -207,7 +207,7 @@
     "fuentes": "Calendario generado y dbt/seeds/festivos_gt.csv",
     "transformacion": "f.nombre_festivo",
     "modelo": "dbt/models/gold/dim_fecha.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_fecha",
@@ -217,7 +217,7 @@
     "fuentes": "Calendario generado y dbt/seeds/festivos_gt.csv",
     "transformacion": "ISODOW(d.fecha) <= 5 AND f.fecha IS NULL AS es_dia_habil",
     "modelo": "dbt/models/gold/dim_fecha.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_sistema",
@@ -227,7 +227,7 @@
     "fuentes": "seeds\\sistemas.csv",
     "transformacion": "ROW_NUMBER() OVER (ORDER BY sistema_codigo) AS sistema_key",
     "modelo": "dbt/models/gold/dim_sistema.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_sistema",
@@ -237,7 +237,7 @@
     "fuentes": "seeds\\sistemas.csv",
     "transformacion": "sistema_codigo",
     "modelo": "dbt/models/gold/dim_sistema.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_sistema",
@@ -247,7 +247,7 @@
     "fuentes": "seeds\\sistemas.csv",
     "transformacion": "sistema_nombre",
     "modelo": "dbt/models/gold/dim_sistema.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_sistema",
@@ -257,7 +257,7 @@
     "fuentes": "seeds\\sistemas.csv",
     "transformacion": "tipo_transporte",
     "modelo": "dbt/models/gold/dim_sistema.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_sistema",
@@ -267,7 +267,7 @@
     "fuentes": "seeds\\sistemas.csv",
     "transformacion": "unidad_registro",
     "modelo": "dbt/models/gold/dim_sistema.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_tiempo",
@@ -277,7 +277,7 @@
     "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
     "transformacion": "f.fecha_key * 100 + h.hora AS tiempo_key /* yyyymmddhh */",
     "modelo": "dbt/models/gold/dim_tiempo.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_tiempo",
@@ -287,7 +287,7 @@
     "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
     "transformacion": "f.fecha_key",
     "modelo": "dbt/models/gold/dim_tiempo.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_tiempo",
@@ -297,7 +297,7 @@
     "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
     "transformacion": "f.fecha",
     "modelo": "dbt/models/gold/dim_tiempo.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_tiempo",
@@ -307,7 +307,7 @@
     "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
     "transformacion": "h.hora",
     "modelo": "dbt/models/gold/dim_tiempo.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_tiempo",
@@ -317,7 +317,7 @@
     "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
     "transformacion": "CASE WHEN h.hora BETWEEN 5 AND 11 THEN 'mañana' WHEN h.hora BETWEEN 12 AND 17 THEN 'tarde' WHEN h.hora BETWEEN 18 AND 21 THEN 'noche' ELSE 'madrugada' END AS franja_horaria",
     "modelo": "dbt/models/gold/dim_tiempo.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_tiempo",
@@ -327,7 +327,7 @@
     "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
     "transformacion": "f.es_dia_habil",
     "modelo": "dbt/models/gold/dim_tiempo.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_tiempo",
@@ -337,7 +337,7 @@
     "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
     "transformacion": "f.es_fin_de_semana",
     "modelo": "dbt/models/gold/dim_tiempo.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_tiempo",
@@ -347,7 +347,7 @@
     "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
     "transformacion": "f.es_festivo",
     "modelo": "dbt/models/gold/dim_tiempo.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_tiempo",
@@ -357,7 +357,7 @@
     "fuentes": "dim_fecha (calendario generado y festivos_gt.csv) + horas generadas 0 a 23",
     "transformacion": "f.es_dia_habil AND (h.hora BETWEEN 6 AND 8 OR h.hora BETWEEN 17 AND 19) AS es_hora_pico",
     "modelo": "dbt/models/gold/dim_tiempo.sql",
-    "responsable": "Responsable AMT de calendario y métricas"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "dim_usuario",
@@ -367,7 +367,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "p.usuario_sk",
     "modelo": "dbt/models/gold/dim_usuario.sql",
-    "responsable": "Responsable AMT de identidad y privacidad"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "dim_usuario",
@@ -377,7 +377,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "p.sistemas_con_tarjeta",
     "modelo": "dbt/models/gold/dim_usuario.sql",
-    "responsable": "Responsable AMT de identidad y privacidad"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "dim_usuario",
@@ -387,7 +387,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "p.sistemas",
     "modelo": "dbt/models/gold/dim_usuario.sql",
-    "responsable": "Responsable AMT de identidad y privacidad"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "dim_usuario",
@@ -397,7 +397,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "p.sistemas_con_tarjeta > 1 AS es_multisistema",
     "modelo": "dbt/models/gold/dim_usuario.sql",
-    "responsable": "Responsable AMT de identidad y privacidad"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "dim_usuario",
@@ -407,7 +407,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "NOT pd.persona_id IS NULL AS en_padron",
     "modelo": "dbt/models/gold/dim_usuario.sql",
-    "responsable": "Responsable AMT de identidad y privacidad"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "dim_usuario",
@@ -417,7 +417,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "pd.activa AS padron_activo",
     "modelo": "dbt/models/gold/dim_usuario.sql",
-    "responsable": "Responsable AMT de identidad y privacidad"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "dim_usuario",
@@ -427,7 +427,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "pd.perfil",
     "modelo": "dbt/models/gold/dim_usuario.sql",
-    "responsable": "Responsable AMT de identidad y privacidad"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "dim_usuario",
@@ -437,7 +437,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "pd.zona_residencia_key",
     "modelo": "dbt/models/gold/dim_usuario.sql",
-    "responsable": "Responsable AMT de identidad y privacidad"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "dim_usuario",
@@ -447,7 +447,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "CASE WHEN NOT p.tiene_aerometro THEN 'no_aplica' WHEN p.persona_id LIKE 'AM:%' THEN 'sin_vinculo' ELSE 'vinculado' END AS vinculo_aerometro",
     "modelo": "dbt/models/gold/dim_usuario.sql",
-    "responsable": "Responsable AMT de identidad y privacidad"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "dim_zona",
@@ -457,7 +457,7 @@
     "fuentes": "dbt/seeds/territorios.csv -> silver_zona",
     "transformacion": "z.zona_key",
     "modelo": "dbt/models/gold/dim_zona.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_zona",
@@ -467,7 +467,7 @@
     "fuentes": "dbt/seeds/territorios.csv -> silver_zona",
     "transformacion": "z.nombre_oficial AS nombre_zona",
     "modelo": "dbt/models/gold/dim_zona.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_zona",
@@ -477,7 +477,7 @@
     "fuentes": "dbt/seeds/territorios.csv -> silver_zona",
     "transformacion": "z.tipo_territorio",
     "modelo": "dbt/models/gold/dim_zona.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_zona",
@@ -487,7 +487,7 @@
     "fuentes": "dbt/seeds/territorios.csv -> silver_zona",
     "transformacion": "z.municipio",
     "modelo": "dbt/models/gold/dim_zona.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_zona",
@@ -497,7 +497,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "COALESCE(tiene_transmetro, FALSE) AS tiene_transmetro",
     "modelo": "dbt/models/gold/dim_zona.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_zona",
@@ -507,7 +507,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "COALESCE(tiene_transurbano, FALSE) AS tiene_transurbano",
     "modelo": "dbt/models/gold/dim_zona.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_zona",
@@ -517,7 +517,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "COALESCE(tiene_metroriel, FALSE) AS tiene_metroriel",
     "modelo": "dbt/models/gold/dim_zona.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_zona",
@@ -527,7 +527,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "COALESCE(tiene_aerometro, FALSE) AS tiene_aerometro",
     "modelo": "dbt/models/gold/dim_zona.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_zona",
@@ -537,7 +537,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "COALESCE(modos_con_estacion, 0) AS modos_con_estacion",
     "modelo": "dbt/models/gold/dim_zona.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_zona",
@@ -547,7 +547,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "COALESCE(estaciones, 0) AS estaciones",
     "modelo": "dbt/models/gold/dim_zona.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_zona",
@@ -557,7 +557,7 @@
     "fuentes": "datos_red/am_estaciones.csv; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/tu_paradas.csv; seeds\\territorios.csv",
     "transformacion": "COALESCE(modos_con_estacion, 0) > 0 AS tiene_servicio",
     "modelo": "dbt/models/gold/dim_zona.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "dim_zona",
@@ -567,7 +567,7 @@
     "fuentes": "dbt/seeds/territorios.csv -> silver_zona",
     "transformacion": "z.nombre_oficial IN ('Zona 12', 'Zona 8', 'Zona 1', 'Zona 6', 'Zona 17') AS en_trazado_metroriel",
     "modelo": "dbt/models/gold/dim_zona.sql",
-    "responsable": "Responsable AMT de catálogos territoriales"
+    "responsable": "Yasmely Dubraska Fariñas Aldana (1329223)"
   },
   {
     "tabla": "fct_abordaje",
@@ -577,7 +577,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "ROW_NUMBER() OVER (ORDER BY a.abordaje_id) AS abordaje_key",
     "modelo": "dbt/models/gold/fct_abordaje.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_abordaje",
@@ -587,7 +587,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "a.abordaje_id AS abordaje_id_origen /* dimensión degenerada */",
     "modelo": "dbt/models/gold/fct_abordaje.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_abordaje",
@@ -597,7 +597,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "a.tipo_validacion /* degenerada: ENTRADA/TRANSBORDO (TM), cabina (AM), estado (TU) */",
     "modelo": "dbt/models/gold/fct_abordaje.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_abordaje",
@@ -607,7 +607,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "CAST(STRFTIME(a.fecha, '%Y%m%d') AS INT) * 100 + a.hora AS tiempo_key",
     "modelo": "dbt/models/gold/fct_abordaje.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_abordaje",
@@ -617,7 +617,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "CAST(STRFTIME(a.fecha, '%Y%m%d') AS INT) AS fecha_key",
     "modelo": "dbt/models/gold/fct_abordaje.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_abordaje",
@@ -627,7 +627,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "a.usuario_sk",
     "modelo": "dbt/models/gold/fct_abordaje.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_abordaje",
@@ -637,7 +637,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "s.sistema_key",
     "modelo": "dbt/models/gold/fct_abordaje.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_abordaje",
@@ -647,7 +647,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "e.estacion_key",
     "modelo": "dbt/models/gold/fct_abordaje.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_abordaje",
@@ -657,7 +657,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "a.zona_key",
     "modelo": "dbt/models/gold/fct_abordaje.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_abordaje",
@@ -667,7 +667,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "a.ts_local AS fecha_hora_local",
     "modelo": "dbt/models/gold/fct_abordaje.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_abordaje",
@@ -677,7 +677,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "1 AS cantidad_abordajes /* aditiva */",
     "modelo": "dbt/models/gold/fct_abordaje.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_abordaje",
@@ -687,7 +687,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "a.monto_q /* aditiva */",
     "modelo": "dbt/models/gold/fct_abordaje.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_padron_diario",
@@ -697,7 +697,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
     "transformacion": "d.fecha_key",
     "modelo": "dbt/models/gold/fct_padron_diario.sql",
-    "responsable": "Responsable AMT de padrón CDC"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "fct_padron_diario",
@@ -707,7 +707,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
     "transformacion": "COALESCE(v.zona_residencia_key, -1) AS zona_key /* -1 = zona desconocida */",
     "modelo": "dbt/models/gold/fct_padron_diario.sql",
-    "responsable": "Responsable AMT de padrón CDC"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "fct_padron_diario",
@@ -717,7 +717,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
     "transformacion": "COALESCE(v.perfil, 'desconocido') AS perfil",
     "modelo": "dbt/models/gold/fct_padron_diario.sql",
-    "responsable": "Responsable AMT de padrón CDC"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "fct_padron_diario",
@@ -727,7 +727,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
     "transformacion": "v.operador_tarjeta",
     "modelo": "dbt/models/gold/fct_padron_diario.sql",
-    "responsable": "Responsable AMT de padrón CDC"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "fct_padron_diario",
@@ -737,7 +737,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
     "transformacion": "COUNT(*) FILTER(WHERE v.activa) AS tarjetas_activas /* semi-aditiva */",
     "modelo": "dbt/models/gold/fct_padron_diario.sql",
-    "responsable": "Responsable AMT de padrón CDC"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "fct_padron_diario",
@@ -747,7 +747,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
     "transformacion": "COUNT(*) FILTER(WHERE v.operacion_origen = 'INSERT' AND CAST(v.valido_desde AS DATE) = d.fecha) AS altas_del_dia /* aditiva */",
     "modelo": "dbt/models/gold/fct_padron_diario.sql",
-    "responsable": "Responsable AMT de padrón CDC"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "fct_padron_diario",
@@ -757,7 +757,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\festivos_gt.csv; seeds\\territorios.csv",
     "transformacion": "COUNT(*) FILTER(WHERE v.operacion_origen = 'DELETE' AND CAST(v.valido_desde AS DATE) = d.fecha) AS bajas_del_dia /* aditiva */",
     "modelo": "dbt/models/gold/fct_padron_diario.sql",
-    "responsable": "Responsable AMT de padrón CDC"
+    "responsable": "Walter José Herrera Salvatierra (1109722)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -767,7 +767,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "ROW_NUMBER() OVER (ORDER BY t.trayecto_id) AS trayecto_key",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -777,7 +777,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "t.trayecto_id AS trayecto_id_origen",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -787,7 +787,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "CAST(STRFTIME(t.ts_entrada_local, '%Y%m%d') AS INT) * 100 + HOUR(t.ts_entrada_local) AS tiempo_key",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -797,7 +797,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "CAST(STRFTIME(t.ts_entrada_local, '%Y%m%d') AS INT) AS fecha_key",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -807,7 +807,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "t.usuario_sk",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -817,7 +817,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "eo.estacion_key AS estacion_origen_key",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -827,7 +827,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "ed.estacion_key AS estacion_destino_key",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -837,7 +837,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "t.zona_origen_key /* dim_zona con dos roles */",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -847,7 +847,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "t.zona_destino_key",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -857,7 +857,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "t.ts_entrada_local",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -867,7 +867,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "t.ts_salida_local",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -877,7 +877,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "1 AS cantidad_trayectos /* aditiva */",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -887,7 +887,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "t.duracion_min /* aditiva (el promedio NO lo es) */",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -897,7 +897,7 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "t.estaciones_recorridas /* aditiva */",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   },
   {
     "tabla": "fct_trayecto_metroriel",
@@ -907,6 +907,6 @@
     "fuentes": "datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\\sistemas.csv; seeds\\territorios.csv",
     "transformacion": "t.monto_q /* aditiva */",
     "modelo": "dbt/models/gold/fct_trayecto_metroriel.sql",
-    "responsable": "Responsable AMT de operación y demanda"
+    "responsable": "Jose Rodrigo Herrera Muralles (1042619)"
   }
 ]

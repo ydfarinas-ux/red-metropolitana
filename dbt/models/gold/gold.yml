@@ -74,6 +74,9 @@ models:
   - name: monto_q
     description: 'Importe en quetzales GTQ; TU se convierte de centavos a quetzales en staging. No sumar los mismos
       importes entre ambos hechos MR. Transformación: a.monto_q /* aditiva */. Fuente y linaje: dbt/models/gold/fct_abordaje.sql'
+  config:
+    meta:
+      responsable_academico: Jose Rodrigo Herrera Muralles (1042619)
 - name: fct_trayecto_metroriel
   columns:
   - name: trayecto_key
@@ -131,6 +134,9 @@ models:
     description: 'Importe en quetzales GTQ; TU se convierte de centavos a quetzales en staging. No sumar los mismos
       importes entre ambos hechos MR. Transformación: t.monto_q /* aditiva */. Fuente y linaje: dbt/models/gold/fct_trayecto_metroriel.sql'
   description: Un viaje completo MR con entrada y salida válidas.
+  config:
+    meta:
+      responsable_academico: Jose Rodrigo Herrera Muralles (1042619)
 - name: dim_tiempo
   columns:
   - name: tiempo_key
@@ -165,6 +171,9 @@ models:
       f.es_dia_habil AND (h.hora BETWEEN 6 AND 8 OR h.hora BETWEEN 17 AND 19) AS es_hora_pico. Fuente y linaje:
       dbt/models/gold/dim_tiempo.sql'
   description: Una fecha y una hora local.
+  config:
+    meta:
+      responsable_academico: Jose Rodrigo Herrera Muralles (1042619)
 - name: dim_fecha
   columns:
   - name: fecha_key
@@ -202,6 +211,9 @@ models:
     description: 'Lunes a viernes, excluyendo festivos del seed. Transformación: ISODOW(d.fecha) <= 5 AND f.fecha
       IS NULL AS es_dia_habil. Fuente y linaje: dbt/models/gold/dim_fecha.sql'
   description: Un día del calendario 2026.
+  config:
+    meta:
+      responsable_academico: Jose Rodrigo Herrera Muralles (1042619)
 - name: dim_zona
   columns:
   - name: zona_key
@@ -245,6 +257,9 @@ models:
       IN (''Zona 12'', ''Zona 8'', ''Zona 1'', ''Zona 6'', ''Zona 17'') AS en_trazado_metroriel. Fuente y linaje:
       dbt/models/gold/dim_zona.sql'
   description: Un territorio del catálogo, incluso sin estaciones.
+  config:
+    meta:
+      responsable_academico: Yasmely Dubraska Fariñas Aldana (1329223)
 - name: dim_estacion
   columns:
   - name: estacion_key
@@ -282,6 +297,9 @@ models:
     description: 'Clave territorial conformada, incluye zonas capitalinas y municipios; -1 significa desconocida
       en el snapshot del padrón. Transformación: e.zona_key. Fuente y linaje: dbt/models/gold/dim_estacion.sql'
   description: Una estación conformada por sistema y código de origen.
+  config:
+    meta:
+      responsable_academico: Yasmely Dubraska Fariñas Aldana (1329223)
 - name: dim_usuario
   columns:
   - name: usuario_sk
@@ -316,6 +334,9 @@ models:
       de vinculación. Transformación: CASE WHEN NOT p.tiene_aerometro THEN ''no_aplica'' WHEN p.persona_id LIKE
       ''AM:%'' THEN ''sin_vinculo'' ELSE ''vinculado'' END AS vinculo_aerometro. Fuente y linaje: dbt/models/gold/dim_usuario.sql'
   description: Una identidad resuelta y seudonimizada.
+  config:
+    meta:
+      responsable_academico: Walter José Herrera Salvatierra (1109722)
 - name: dim_sistema
   columns:
   - name: sistema_key
@@ -336,6 +357,9 @@ models:
     description: 'Unidad de registro original del operador; no redefine el grano de fct_abordaje. Transformación:
       unidad_registro. Fuente y linaje: dbt/models/gold/dim_sistema.sql'
   description: Un operador de transporte.
+  config:
+    meta:
+      responsable_academico: Jose Rodrigo Herrera Muralles (1042619)
 - name: fct_padron_diario
   description: Un cierre de día por zona de residencia, perfil y operador de tarjeta.
   columns:
@@ -363,3 +387,6 @@ models:
     description: 'Versiones DELETE que permanecen en el snapshot al cierre del día. No equivale necesariamente a
       todos los DELETE del log. Transformación: COUNT(*) FILTER(WHERE v.operacion_origen = ''DELETE'' AND CAST(v.valido_desde
       AS DATE) = d.fecha) AS bajas_del_dia /* aditiva */. Fuente y linaje: dbt/models/gold/fct_padron_diario.sql'
+  config:
+    meta:
+      responsable_academico: Walter José Herrera Salvatierra (1109722)

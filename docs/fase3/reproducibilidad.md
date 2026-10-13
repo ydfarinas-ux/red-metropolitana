@@ -41,3 +41,16 @@ Mismos archivos, catálogo, variables y sal producen las mismas identidades y co
 ## Historial
 
 Existe historial real previo. `historial_git.txt` registra commits existentes con fecha, sin fabricar una evolución retrospectiva. Esta formalización se añade como un cambio documental actual.
+
+
+## Completar fase 2 sin reconstruir fase 1
+
+Desde la raíz del proyecto:
+
+```powershell
+.venv\Scripts\python.exe herramientas/preparar_fase2.py --fecha-corte 2026-07-16
+```
+
+Construye `features.features_usuario`, ejecuta seis controles dbt y exporta las cuatro fuentes de Tableau y `features_usuario.csv`. El modelo tiene un corte predeterminado compatible con `dbt build` completo. Dos reconstrucciones de features produjeron el mismo SHA-256 de contenido: 70,380 usuarios, 14 campos. Los controles originales de fase 1 se conservan; el proyecto actual contiene 40 modelos, 3 seeds y 72 tests. Las 108 salidas documentadas arriba pertenecen a las corridas originales de fase 1; la extensión se validó por separado (1 modelo + 6 tests).
+
+Documentación de features y evidencia en `entregables/fase2`; la recomendación conserva los números del Tableau entregado. 45 días observados no completan la ventana de 90 días.

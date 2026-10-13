@@ -145,3 +145,8 @@ Dependencias trazables:
 | transmetro_validaciones | datos_red/transmetro_validaciones.csv |
 | transurbano_transacciones | datos_red/transurbano_transacciones.csv |
 | tu_paradas | datos_red/tu_paradas.csv |
+
+
+## Consumidor adicional: features
+
+`features_usuario` depende de `silver_abordajes` y del seed `festivos_gt`; su rama no usa Gold. Continúa por `silver_eventos_evaluados`, identidad y staging hasta las cuatro fuentes operativas de Bronze y sus archivos crudos. El usuario_sk se crea en Silver; el modelo de features no exporta llaves originales.

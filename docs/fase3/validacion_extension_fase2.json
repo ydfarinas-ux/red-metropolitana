@@ -1,0 +1,106 @@
+{
+  "features": [
+    {
+      "corrida": 1,
+      "segundos": 8.4,
+      "resultados": [
+        {
+          "unique_id": "model.red_metropolitana.features_usuario",
+          "status": "success",
+          "execution_time": 1.1995325088500977
+        },
+        {
+          "unique_id": "test.red_metropolitana.accepted_values_features_usuario_modo_mas_usado_90d__TM__TU__MR__AM.9aa3022693",
+          "status": "pass",
+          "execution_time": 0.035517215728759766
+        },
+        {
+          "unique_id": "test.red_metropolitana.assert_features_reconciliacion_silver",
+          "status": "pass",
+          "execution_time": 0.056322574615478516
+        },
+        {
+          "unique_id": "test.red_metropolitana.assert_features_ventanas",
+          "status": "pass",
+          "execution_time": 0.014514446258544922
+        },
+        {
+          "unique_id": "test.red_metropolitana.not_null_features_usuario_fecha_corte.68e87e6f1c",
+          "status": "pass",
+          "execution_time": 0.017000436782836914
+        },
+        {
+          "unique_id": "test.red_metropolitana.not_null_features_usuario_usuario_sk.aa9efdee87",
+          "status": "pass",
+          "execution_time": 0.01700115203857422
+        },
+        {
+          "unique_id": "test.red_metropolitana.unique_features_usuario_usuario_sk.51c0dfd4c2",
+          "status": "pass",
+          "execution_time": 0.09361600875854492
+        }
+      ],
+      "filas": 70380,
+      "sha256_contenido": "cb47bb1e700319083b88ff7c0b49b896ba48905d71ebf97e8ad4f83ff687802c"
+    },
+    {
+      "corrida": 2,
+      "segundos": 2.36,
+      "resultados": [
+        {
+          "unique_id": "model.red_metropolitana.features_usuario",
+          "status": "success",
+          "execution_time": 1.7139513492584229
+        },
+        {
+          "unique_id": "test.red_metropolitana.accepted_values_features_usuario_modo_mas_usado_90d__TM__TU__MR__AM.9aa3022693",
+          "status": "pass",
+          "execution_time": 0.01950216293334961
+        },
+        {
+          "unique_id": "test.red_metropolitana.assert_features_reconciliacion_silver",
+          "status": "pass",
+          "execution_time": 0.07252860069274902
+        },
+        {
+          "unique_id": "test.red_metropolitana.assert_features_ventanas",
+          "status": "pass",
+          "execution_time": 0.03200078010559082
+        },
+        {
+          "unique_id": "test.red_metropolitana.not_null_features_usuario_fecha_corte.68e87e6f1c",
+          "status": "pass",
+          "execution_time": 0.01400303840637207
+        },
+        {
+          "unique_id": "test.red_metropolitana.not_null_features_usuario_usuario_sk.aa9efdee87",
+          "status": "pass",
+          "execution_time": 0.01499032974243164
+        },
+        {
+          "unique_id": "test.red_metropolitana.unique_features_usuario_usuario_sk.51c0dfd4c2",
+          "status": "pass",
+          "execution_time": 0.031520843505859375
+        }
+      ],
+      "filas": 70380,
+      "sha256_contenido": "cb47bb1e700319083b88ff7c0b49b896ba48905d71ebf97e8ad4f83ff687802c"
+    }
+  ],
+  "limites": {
+    "resultado": "PASS",
+    "verificaciones": [
+      "Ventanas 7/30/90 incluyen límite inferior",
+      "Corte y eventos futuros excluidos",
+      "Eventos anteriores a 90 días excluidos",
+      "Festivo excluido de hora pico",
+      "Empates de modo y zona determinísticos",
+      "Usuarios solo futuros excluidos",
+      "Suma de importes y recencia correctas"
+    ]
+  },
+  "modelos_actuales": 40,
+  "seeds_actuales": 3,
+  "tests_actuales": 72,
+  "nota": "La fase 1 se conserva; cifras de 108 resultados y 52 tablas pertenecen a las corridas originales. Extensión: 1 modelo y 6 tests validados."
+}

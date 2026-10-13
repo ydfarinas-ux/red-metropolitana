@@ -1,6 +1,6 @@
 # Fase 3 - Red Metropolitana
 
-Entrega basada en el repositorio existente y las corridas del 12/10/2026. No modifica el pipeline de fase 1 ni la lógica de Gold.
+Entrega basada en el repositorio existente y las corridas del 12/10/2026. Añade la documentación de la capa de features de fase 2; preserva la lógica de la fase 1 y de Gold.
 
 | Componente | Archivos |
 |---|---|
@@ -11,8 +11,8 @@ Entrega basada en el repositorio existente y las corridas del 12/10/2026. No mod
 | 3.2 Reproducción y decisiones | `reproducibilidad.md`, `bitacora_decisiones.md`, `historial_git.txt` y README principal |
 | 3.3 Seguridad, una página | `Seguridad_datos_personales.pdf` y fuente Markdown |
 | Resumen para defensa | `Gobernanza_y_reproducibilidad.pdf` |
-| Métricas y evidencia | `metricas_medidas.md`, `metricas_verificadas.json` y comparación de corridas |
+| Métricas y evidencia | `metricas_medidas.md`, `metricas_verificadas.json`, comparación de corridas y `metricas_extension_fase2.md` |
 
-Abrir la documentación dbt autocontenida `linaje_dbt/static_index.html` y explorar el grafo. Los nombres de roles son asignaciones institucionales propuestas, pendientes de asociar a integrantes del grupo. Los controles de acceso y retención son política declarada: el prototipo no los automatiza.
+Abrir la documentación dbt autocontenida `linaje_dbt/static_index.html` y explorar el grafo. Los responsables académicos están asignados a Yasmely, Jose Rodrigo y Walter en `definiciones_y_responsables.md`, el diccionario y la documentación dbt. Los controles de acceso y retención son política declarada: el prototipo no los automatiza.
 
-Fase 2 existente: el libro Tableau está en `entregables/fase2/Red_Metropolitana_Fase2_Tableau.twbx`. La entrega actual documenta el tablero; no afirma que exista una recomendación formal independiente ni una tabla de features integrada a dbt.
+Fase 2 completa: `entregables/fase2/README_FASE2.md` reúne el tablero, la recomendación de dos páginas y las features con diccionario, corte y validaciones. El grafo dbt incorpora `features_usuario` conectado a Silver.

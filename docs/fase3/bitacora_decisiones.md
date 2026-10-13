@@ -21,3 +21,13 @@ Registro de formalización del 12/10/2026. Resume decisiones observables en el c
 Se ejecutó el README del repositorio restaurado: generación de datos, corrida 1, corrida 2, comparación y DDL. No se reescribió el pipeline para producir el tablero. Las dos corridas reportaron 108 resultados correctos (modelos, seeds y pruebas), y 52 tablas con conteos idénticos.
 
 El diccionario de fase 3 añade descripciones a `dbt/models/gold/gold.yml`; no cambia el SQL ni los tests. `dbt docs generate --static` genera catálogo y grafo a partir del proyecto y el warehouse existente. Las copias de entrega tienen la sal retirada porque dbt puede incorporarla al SQL compilado.
+
+
+## Extensión actual de fases 2 y 3
+
+- Se añadió `features_usuario` desde Silver con corte exclusivo 16/07/2026, ventanas 7/30/90 días y empates determinísticos. Se declara cobertura de 45 días.
+- Se detectó variación de punto flotante al repetir importes y se resolvió usando sumas DECIMAL de dos posiciones y proporciones por conteos. Dos builds producen contenido idéntico.
+- Se verificaron seis controles dbt y una prueba de límites con datos controlados; no se entrenó ningún modelo ni se generaron etiquetas ficticias.
+- La recomendación formal de dos páginas propone estudiar una conexión alimentadora Zona 11-Zona 12, basada en las fuentes del tablero. No decide una estación exacta sin evidencia de accesibilidad.
+- El usuario confirmó la distribución de dominios: Yasmely, territorio/estaciones; Jose Rodrigo, sistemas/calendario/métricas; Walter, identidad/CDC/calidad.
+- La seguridad incluye explícitamente las features como detalle sensible con acceso restringido y retención de 180 días. Se actualizó el grafo dbt, los diccionarios, README y entrega PDF.

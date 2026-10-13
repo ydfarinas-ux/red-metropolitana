@@ -1,8 +1,10 @@
 # Diccionario Gold - 91 campos
 
-Campos verificados contra el warehouse. Responsable por rol institucional propuesto; asociar a integrante antes de la defensa. Fuentes transaccionales por linaje del modelo; la expresión SQL y el modelo identifican el origen inmediato de cada campo.
+Responsables académicos asignados por dominio y confirmados para la entrega. Cada campo conserva fuentes, expresión SQL y modelo.
 
 ## dim_estacion
+
+Responsable: Yasmely Dubraska Fariñas Aldana (1329223)
 
 | Campo | Tipo | Significado | Fuente | Transformación SQL |
 |---|---|---|---|---|
@@ -22,6 +24,8 @@ Modelo: dbt/models/gold/dim_estacion.sql
 
 ## dim_fecha
 
+Responsable: Jose Rodrigo Herrera Muralles (1042619)
+
 | Campo | Tipo | Significado | Fuente | Transformación SQL |
 |---|---|---|---|---|
 | fecha_key | INTEGER | Clave del día YYYYMMDD; se relaciona con dim_fecha. | Calendario generado en dim_fecha.sql (2026-01-01 a 2026-12-31) | CAST(STRFTIME(d.fecha, '%Y%m%d') AS INT) AS fecha_key |
@@ -40,6 +44,8 @@ Modelo: dbt/models/gold/dim_fecha.sql
 
 ## dim_sistema
 
+Responsable: Jose Rodrigo Herrera Muralles (1042619)
+
 | Campo | Tipo | Significado | Fuente | Transformación SQL |
 |---|---|---|---|---|
 | sistema_key | BIGINT | Clave técnica del operador; row_number ordenado por código de sistema. | seeds\sistemas.csv | ROW_NUMBER() OVER (ORDER BY sistema_codigo) AS sistema_key |
@@ -51,6 +57,8 @@ Modelo: dbt/models/gold/dim_fecha.sql
 Modelo: dbt/models/gold/dim_sistema.sql
 
 ## dim_tiempo
+
+Responsable: Jose Rodrigo Herrera Muralles (1042619)
 
 | Campo | Tipo | Significado | Fuente | Transformación SQL |
 |---|---|---|---|---|
@@ -68,6 +76,8 @@ Modelo: dbt/models/gold/dim_tiempo.sql
 
 ## dim_usuario
 
+Responsable: Walter José Herrera Salvatierra (1109722)
+
 | Campo | Tipo | Significado | Fuente | Transformación SQL |
 |---|---|---|---|---|
 | usuario_sk | VARCHAR | Seudónimo MD5 de sal concatenada con identidad resuelta; no es una identidad civil ni un dato anónimo. | datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\territorios.csv | p.usuario_sk |
@@ -83,6 +93,8 @@ Modelo: dbt/models/gold/dim_tiempo.sql
 Modelo: dbt/models/gold/dim_usuario.sql
 
 ## dim_zona
+
+Responsable: Yasmely Dubraska Fariñas Aldana (1329223)
 
 | Campo | Tipo | Significado | Fuente | Transformación SQL |
 |---|---|---|---|---|
@@ -103,6 +115,8 @@ Modelo: dbt/models/gold/dim_zona.sql
 
 ## fct_abordaje
 
+Responsable: Jose Rodrigo Herrera Muralles (1042619)
+
 | Campo | Tipo | Significado | Fuente | Transformación SQL |
 |---|---|---|---|---|
 | abordaje_key | BIGINT | Clave técnica del abordaje; row_number determinístico para esta reconstrucción, no identificador persistente ante nuevos eventos. | datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\sistemas.csv; seeds\territorios.csv | ROW_NUMBER() OVER (ORDER BY a.abordaje_id) AS abordaje_key |
@@ -122,6 +136,8 @@ Modelo: dbt/models/gold/fct_abordaje.sql
 
 ## fct_padron_diario
 
+Responsable: Walter José Herrera Salvatierra (1109722)
+
 | Campo | Tipo | Significado | Fuente | Transformación SQL |
 |---|---|---|---|---|
 | fecha_key | INTEGER | Clave del día YYYYMMDD; se relaciona con dim_fecha. | datos_red/aerometro_boardings.csv; datos_red/am_estaciones.csv; datos_red/cdc_padron_usuarios.csv; datos_red/metroriel_viajes.jsonl; datos_red/mr_estaciones.csv; datos_red/tm_estaciones.csv; datos_red/transmetro_validaciones.csv; datos_red/transurbano_transacciones.csv; datos_red/tu_paradas.csv; seeds\festivos_gt.csv; seeds\territorios.csv | d.fecha_key |
@@ -135,6 +151,8 @@ Modelo: dbt/models/gold/fct_abordaje.sql
 Modelo: dbt/models/gold/fct_padron_diario.sql
 
 ## fct_trayecto_metroriel
+
+Responsable: Jose Rodrigo Herrera Muralles (1042619)
 
 | Campo | Tipo | Significado | Fuente | Transformación SQL |
 |---|---|---|---|---|

@@ -60,12 +60,76 @@
     "destino": "model.red_metropolitana.usuarios_unicos_por_operador"
   },
   {
+    "origen": "model.red_metropolitana.silver_abordajes",
+    "destino": "model.red_metropolitana.features_usuario"
+  },
+  {
+    "origen": "seed.red_metropolitana.festivos_gt",
+    "destino": "model.red_metropolitana.features_usuario"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_estaciones",
+    "destino": "model.red_metropolitana.dim_estacion"
+  },
+  {
+    "origen": "model.red_metropolitana.dim_sistema",
+    "destino": "model.red_metropolitana.dim_estacion"
+  },
+  {
+    "origen": "seed.red_metropolitana.festivos_gt",
+    "destino": "model.red_metropolitana.dim_fecha"
+  },
+  {
+    "origen": "seed.red_metropolitana.sistemas",
+    "destino": "model.red_metropolitana.dim_sistema"
+  },
+  {
+    "origen": "model.red_metropolitana.dim_fecha",
+    "destino": "model.red_metropolitana.dim_tiempo"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_identidad_usuario",
+    "destino": "model.red_metropolitana.dim_usuario"
+  },
+  {
+    "origen": "model.red_metropolitana.padron_vigente",
+    "destino": "model.red_metropolitana.dim_usuario"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_estaciones",
+    "destino": "model.red_metropolitana.dim_zona"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_zona",
+    "destino": "model.red_metropolitana.dim_zona"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_abordajes",
+    "destino": "model.red_metropolitana.fct_abordaje"
+  },
+  {
+    "origen": "model.red_metropolitana.dim_sistema",
+    "destino": "model.red_metropolitana.fct_abordaje"
+  },
+  {
+    "origen": "model.red_metropolitana.dim_estacion",
+    "destino": "model.red_metropolitana.fct_abordaje"
+  },
+  {
     "origen": "model.red_metropolitana.silver_padron_scd2",
     "destino": "model.red_metropolitana.fct_padron_diario"
   },
   {
     "origen": "model.red_metropolitana.dim_fecha",
     "destino": "model.red_metropolitana.fct_padron_diario"
+  },
+  {
+    "origen": "model.red_metropolitana.silver_trayectos_metroriel",
+    "destino": "model.red_metropolitana.fct_trayecto_metroriel"
+  },
+  {
+    "origen": "model.red_metropolitana.dim_estacion",
+    "destino": "model.red_metropolitana.fct_trayecto_metroriel"
   },
   {
     "origen": "model.red_metropolitana.silver_eventos_evaluados",
@@ -246,61 +310,5 @@
   {
     "origen": "source.red_metropolitana.bronze.transurbano_transacciones",
     "destino": "model.red_metropolitana.stg_tu_transacciones"
-  },
-  {
-    "origen": "model.red_metropolitana.silver_estaciones",
-    "destino": "model.red_metropolitana.dim_zona"
-  },
-  {
-    "origen": "model.red_metropolitana.silver_zona",
-    "destino": "model.red_metropolitana.dim_zona"
-  },
-  {
-    "origen": "model.red_metropolitana.silver_abordajes",
-    "destino": "model.red_metropolitana.fct_abordaje"
-  },
-  {
-    "origen": "model.red_metropolitana.dim_sistema",
-    "destino": "model.red_metropolitana.fct_abordaje"
-  },
-  {
-    "origen": "model.red_metropolitana.dim_estacion",
-    "destino": "model.red_metropolitana.fct_abordaje"
-  },
-  {
-    "origen": "model.red_metropolitana.silver_trayectos_metroriel",
-    "destino": "model.red_metropolitana.fct_trayecto_metroriel"
-  },
-  {
-    "origen": "model.red_metropolitana.dim_estacion",
-    "destino": "model.red_metropolitana.fct_trayecto_metroriel"
-  },
-  {
-    "origen": "seed.red_metropolitana.sistemas",
-    "destino": "model.red_metropolitana.dim_sistema"
-  },
-  {
-    "origen": "model.red_metropolitana.silver_identidad_usuario",
-    "destino": "model.red_metropolitana.dim_usuario"
-  },
-  {
-    "origen": "model.red_metropolitana.padron_vigente",
-    "destino": "model.red_metropolitana.dim_usuario"
-  },
-  {
-    "origen": "seed.red_metropolitana.festivos_gt",
-    "destino": "model.red_metropolitana.dim_fecha"
-  },
-  {
-    "origen": "model.red_metropolitana.dim_fecha",
-    "destino": "model.red_metropolitana.dim_tiempo"
-  },
-  {
-    "origen": "model.red_metropolitana.silver_estaciones",
-    "destino": "model.red_metropolitana.dim_estacion"
-  },
-  {
-    "origen": "model.red_metropolitana.dim_sistema",
-    "destino": "model.red_metropolitana.dim_estacion"
   }
 ]
