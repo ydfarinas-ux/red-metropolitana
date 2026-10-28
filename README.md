@@ -103,3 +103,23 @@ El tablero de la fase 2 está en `entregables/fase2/Red_Metropolitana_Fase2_Tabl
 La documentación de la fase 3 está en [docs/fase3/README_FASE3.md](docs/fase3/README_FASE3.md): diccionario de los 91 campos Gold, definiciones oficiales y responsables asignados a integrantes, reglas de calidad, linaje dbt, bitácora de decisiones, reproducibilidad, métricas medidas y seguridad en una página. Abrir `docs/fase3/linaje_dbt/static_index.html` para explorar la documentación y el grafo de dbt sin servidor.
 
 Las copias de documentación dbt de fase 3 tienen la sal retirada del SQL compilado. No compartir directamente `dbt/target`, que puede contenerla. El detalle individual seudonimizado sigue siendo sensible; los roles de acceso y la retención documentados son políticas propuestas, sin automatización en el prototipo.
+
+## Proyecto 2: ¿quién deja de usar la red?
+
+Los datos del Proyecto 2 (90 días, del 1 de junio al 29 de agosto de 2026) reemplazan a los del Proyecto 1: se ponen los 9 archivos en `datos_red/` y se corre **todo desde un entorno vacío con un solo comando**:
+
+```bash
+.venv\Scripts\python.exe flows\pipeline.py --desde-cero
+```
+
+`--desde-cero` borra el lake, el warehouse y lo compilado por dbt (no hay snapshots ni tablas incrementales). Después carga Bronze, corre dbt (Silver y Gold con sus pruebas) y agrega las tareas nuevas del Proyecto 2.
+
+| Pieza | Archivo |
+|---|---|
+| Parámetros (cortes, ventanas, semilla) | `proyecto2/config.py` |
+| 1.1 Conteos esperados y tiempos por etapa | `proyecto2/conteos-esperados.csv`, `proyecto2/conteos.py` |
+| 1.2 Población, etiqueta y costo de la unidad | `proyecto2/poblacion.py` |
+| Bitácora de corridas | `proyecto2/bitacora.md` |
+| Resultados | `entregables/proyecto2/` |
+
+Cortes: A = 2026-07-01 (entrenamiento), B = 2026-07-31 (test, su etiqueta no se usa en la Fase 1), C = 2026-08-30 (uso real, sin etiqueta).

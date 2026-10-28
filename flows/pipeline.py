@@ -11,6 +11,7 @@ Idempotencia:
   * Kafka: cada mensaje lleva llave <hash>:<línea>; el consumidor deduplica re-entregas.
 
 Uso:
+    python flows/pipeline.py --desde-cero       # Proyecto 2: vacía lake y warehouse y corre todo con un solo comando
     python flows/pipeline.py --corrida 1
     python flows/pipeline.py --corrida 2        # debe dar conteos idénticos
     STREAMING_MODO=kafka python flows/pipeline.py --corrida 1   (con docker compose up -d)
@@ -39,7 +40,7 @@ from prefect import flow, task, get_run_logger   # noqa: E402
 import duckdb                                    # noqa: E402
 import batch, cdc, comun, streaming              # noqa: E402
 
-EVIDENCIA = RAIZ / "evidencia"
+EVIDENCIA = Path(os.environ.get("EVIDENCIA_PATH", RAIZ / "evidencia"))
 EVIDENCIA.mkdir(exist_ok=True)
 DURACIONES = {}
 
@@ -54,6 +55,20 @@ def cronometrar(nombre):
         envuelta.__name__ = fn.__name__
         return envuelta
     return deco
+
+
+@task
+@cronometrar("vaciar_entorno")
+def vaciar_entorno():
+    """Proyecto 2: los datos nuevos reemplazan a los anteriores. Se borra el lake, el warehouse y lo compilado por dbt.
+    No hay snapshots ni modelos incrementales en el proyecto, así que no queda nada más que vaciar."""
+    import shutil
+    bronze, wh = Path(os.environ["BRONZE_PATH"]), Path(os.environ["WAREHOUSE_PATH"])
+    shutil.rmtree(bronze, ignore_errors=True)
+    for f in (wh, Path(str(wh) + ".wal")):
+        f.unlink(missing_ok=True)
+    shutil.rmtree(RAIZ / "dbt" / "target", ignore_errors=True)
+    get_run_logger().info(f"entorno vacío: se borró {bronze} y {wh}")
 
 
 @task(retries=2, retry_delay_seconds=5)
@@ -109,6 +124,7 @@ def dbt_build():
 
 
 @task
+@cronometrar("verificar_linaje")
 def verificar_linaje():
     """Regla dura del proyecto: ningún modelo de Gold puede depender de una fuente (Bronze)."""
     manifest = json.loads((RAIZ / "dbt" / "target" / "manifest.json").read_text(encoding="utf-8"))
@@ -131,6 +147,7 @@ def tamano_mb(ruta):
 
 
 @task
+@cronometrar("contar")
 def contar(corrida: int):
     con = duckdb.connect(os.environ["WAREHOUSE_PATH"], read_only=True)
     filas = []
@@ -164,6 +181,7 @@ def contar(corrida: int):
 
 
 @task
+@cronometrar("exportar_entregables")
 def exportar_entregables():
     """Exporta a entregables/ las tablas de conclusiones (conteos, cuarentena, CDC) como CSV."""
     sys.path.insert(0, str(RAIZ / "herramientas"))
@@ -171,19 +189,45 @@ def exportar_entregables():
     ex.main()
 
 
-@flow(name="red-metropolitana-fase1", log_prints=True)
-def pipeline(corrida: int = 1):
+@task
+@cronometrar("poblacion_cortes")
+def poblacion_cortes():
+    """Proyecto 2 (1.2): población y etiqueta de los cortes A, B y C, y costo de la unidad, desde Silver."""
+    sys.path.insert(0, str(RAIZ / "proyecto2"))
+    import poblacion
+    poblacion.main()
+
+
+@task
+def tiempos_y_conteos():
+    """Proyecto 2 (1.1): conteos esperados contra cargados y tiempo de cada etapa."""
+    sys.path.insert(0, str(RAIZ / "proyecto2"))
+    import conteos
+    conteos.main(DURACIONES)
+
+
+@flow(name="red-metropolitana", log_prints=True)
+def pipeline(corrida: int = 1, desde_cero: bool = False, solo_carga: bool = False):
+    if desde_cero:
+        vaciar_entorno()
     ingesta_batch()
     ingesta_cdc()
     ingesta_streaming()
     vaciar_staging()
     dbt_build()
     verificar_linaje()
+    if solo_carga:          # solo deja listo Silver, sin tocar entregables (sirve para correr el flujo en otro warehouse)
+        return
     contar(corrida)
     exportar_entregables()
+    poblacion_cortes()
+    tiempos_y_conteos()
 
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("--corrida", type=int, default=1)
-    pipeline(corrida=p.parse_args().corrida)
+    p.add_argument("--desde-cero", action="store_true", help="vacía lake, warehouse y dbt/target antes de correr")
+    p.add_argument("--solo-carga", action="store_true", help="solo Bronze y dbt (para la prueba de recorte)")
+    a = p.parse_args()
+    pipeline(corrida=a.corrida, desde_cero=a.desde_cero, solo_carga=a.solo_carga)
