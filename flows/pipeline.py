@@ -199,6 +199,24 @@ def poblacion_cortes():
 
 
 @task
+@cronometrar("features_cortes")
+def features_cortes():
+    """Proyecto 2 (1.3): las mismas 23 features para A, B y C."""
+    sys.path.insert(0, str(RAIZ / "proyecto2"))
+    import features
+    features.main()
+
+
+@task
+@cronometrar("prueba_recorte")
+def prueba_recorte():
+    """Reconstruye otro warehouse desde los archivos crudos recortados."""
+    sys.path.insert(0, str(RAIZ / "proyecto2"))
+    import auditoria
+    auditoria.main()
+
+
+@task
 def tiempos_y_conteos():
     """Proyecto 2 (1.1): conteos esperados contra cargados y tiempo de cada etapa."""
     sys.path.insert(0, str(RAIZ / "proyecto2"))
@@ -207,7 +225,7 @@ def tiempos_y_conteos():
 
 
 @flow(name="red-metropolitana", log_prints=True)
-def pipeline(corrida: int = 1, desde_cero: bool = False, solo_carga: bool = False):
+def pipeline(corrida: int = 1, desde_cero: bool = False, solo_carga: bool = False, con_auditoria: bool = False):
     if desde_cero:
         vaciar_entorno()
     ingesta_batch()
@@ -221,6 +239,9 @@ def pipeline(corrida: int = 1, desde_cero: bool = False, solo_carga: bool = Fals
     contar(corrida)
     exportar_entregables()
     poblacion_cortes()
+    features_cortes()
+    if con_auditoria:
+        prueba_recorte()
     tiempos_y_conteos()
 
 
@@ -229,5 +250,6 @@ if __name__ == "__main__":
     p.add_argument("--corrida", type=int, default=1)
     p.add_argument("--desde-cero", action="store_true", help="vacía lake, warehouse y dbt/target antes de correr")
     p.add_argument("--solo-carga", action="store_true", help="solo Bronze y dbt (para la prueba de recorte)")
+    p.add_argument("--auditoria", action="store_true", help="ejecuta la prueba de recorte desde los archivos crudos")
     a = p.parse_args()
-    pipeline(corrida=a.corrida, desde_cero=a.desde_cero, solo_carga=a.solo_carga)
+    pipeline(corrida=a.corrida, desde_cero=a.desde_cero, solo_carga=a.solo_carga, con_auditoria=a.auditoria)

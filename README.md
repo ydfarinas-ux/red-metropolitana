@@ -119,7 +119,22 @@ Los datos del Proyecto 2 (90 días, del 1 de junio al 29 de agosto de 2026) reem
 | Parámetros (cortes, ventanas, semilla) | `proyecto2/config.py` |
 | 1.1 Conteos esperados y tiempos por etapa | `proyecto2/conteos-esperados.csv`, `proyecto2/conteos.py` |
 | 1.2 Población, etiqueta y costo de la unidad | `proyecto2/poblacion.py` |
+| 1.3 Features por corte (la fecha de corte es un parámetro) y diccionario | `proyecto2/features.py` |
+| 1.3 Prueba de recorte | `proyecto2/auditoria.py` (`python proyecto2/auditoria.py` o `pipeline.py --auditoria`) |
 | Bitácora de corridas | `proyecto2/bitacora.md` |
 | Resultados | `entregables/proyecto2/` |
 
 Cortes: A = 2026-07-01 (entrenamiento), B = 2026-07-31 (test, su etiqueta no se usa en la Fase 1), C = 2026-08-30 (uso real, sin etiqueta).
+
+Las 23 features usan exclusivamente Silver y ventanas `[t - N días, t)` con N ≤ 28.
+El padrón se consulta con sus versiones SCD2 vigentes justo antes del corte.
+`python proyecto2/features.py --fecha-corte AAAA-MM-DD` permite calcular otro corte.
+
+Para reproducir la auditoría desde los archivos crudos, ejecutar primero
+`python proyecto2/auditoria.py --version-anterior` y luego
+`python proyecto2/auditoria.py`. La primera conserva las fórmulas flotantes
+anteriores de gasto y tarifa media para documentar las diferencias observadas;
+su conteo puede variar según el paralelismo y la plataforma. La versión final
+usa centavos enteros y exige cero diferencias. Ambas reconstruyen Bronze y
+Silver en `.recorte/`, excluyen la etiqueta de la comparación y prueban que el
+perfil al final de los datos sí cambia (control negativo).
