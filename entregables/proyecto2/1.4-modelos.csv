@@ -1,0 +1,7 @@
+modelo,ap_entrenamiento,ap_media,ap_desv,roc_auc_media,roc_auc_desv,lambda
+Base 1: constante (tasa del corte A),0.1193,0.1193,0.0,0.5,0.0,
+Base 2: días desde el último viaje,0.3889,0.3892,0.0078,0.8229,0.0042,
+Base 3: menos viajes en 28 días,0.254,0.2541,0.0063,0.7426,0.0064,
+Logística L2 (lambda=100),0.4137,0.4129,0.0112,0.8312,0.0041,100.0
+Logística L1 (lambda=10),0.4133,0.4124,0.0114,0.8315,0.0039,10.0
+Logística Elastic Net 0.5 (lambda=31.62),0.4134,0.4126,0.0113,0.8316,0.0039,31.6228

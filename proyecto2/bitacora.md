@@ -22,3 +22,9 @@ Cada corrida que se reporta en el informe queda anotada aquí, con su fecha y su
 - 2026-10-27T23:43:18-06:00 · commit d121aca · prueba de recorte (fórmulas flotantes anteriores): 59,491 filas, 46 diferencias, 0 filas en un solo lado; features: tarifa_promedio_q. Control negativo perfil final: 13,913 diferencias, detectado=True. La suma y el promedio en punto flotante pueden variar por el orden de agregación en paralelo; los valores a mitad de redondeo pueden cambiar en el cuarto decimal. Esto no demuestra por sí solo una fuga temporal.
 
 - 2026-10-27T23:45:33-06:00 · commit d121aca · prueba de recorte (centavos enteros): 59,491 filas, 0 diferencias, 0 filas en un solo lado; features: ninguna. Control negativo perfil final: 13,913 diferencias, detectado=True.
+
+- 2026-10-28T15:58:38-06:00 · commit d3ea4b0 · 1.4 modelos en el corte A: 59,491 filas, tasa positiva 0.1193, 5 folds estratificados (semilla 2026). Mejor logística: Logística L2 (lambda=100), precisión promedio 0.4129 ± 0.0112 (ROC-AUC 0.8312).
+
+- 2026-10-28T16:00:41-06:00 · commit d3ea4b0 · prueba de recorte (centavos enteros): 59,491 filas, 0 diferencias, 0 filas en un solo lado; features: ninguna. Control negativo perfil final: 13,913 diferencias, detectado=True.
+
+- 2026-10-28 · commit d3ea4b0 · corrida final del informe con las cuatro partes juntas (`flows/pipeline.py --desde-cero --auditoria`): Completed(), 0 diferencias en los conteos, 115 pruebas de dbt, A 7,095 / 59,491 = 0.1193, B 6,387 / 58,113 = 0.1099, C 57,701 sin etiqueta, prueba de recorte con 0 diferencias y mejor logística L2 (λ = 100) con precisión promedio 0.4129. Total 582.85 s (la máquina estaba ocupada; el streaming simulado tardó 101 s).

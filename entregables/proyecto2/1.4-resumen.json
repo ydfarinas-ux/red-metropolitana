@@ -1,0 +1,22 @@
+{
+  "fecha": "2026-10-28T15:58:38-06:00",
+  "commit": "d3ea4b0",
+  "filas_corte_a": 59491,
+  "positivos": 7095,
+  "tasa_positiva": 0.1193,
+  "folds": 5,
+  "semilla": 2026,
+  "mejor_logistica": {
+    "modelo": "Logística L2 (lambda=100)",
+    "castigo": "L2",
+    "lambda": 100.0,
+    "ap_media": 0.4129,
+    "roc_auc_media": 0.8312
+  },
+  "lambda_elegido": {
+    "L2": 100.0,
+    "L1": 10.0,
+    "Elastic Net 0.5": 31.6228
+  },
+  "duracion_segundos": 128.0
+}

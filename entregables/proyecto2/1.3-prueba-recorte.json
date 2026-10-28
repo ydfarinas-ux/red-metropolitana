@@ -29,7 +29,7 @@
     "perfil",
     "cambios_padron_28d"
   ],
-  "fecha": "2026-10-27T23:45:33-06:00",
+  "fecha": "2026-10-28T16:00:41-06:00",
   "corte": "2026-07-01",
   "datos_recortados_hasta": "2026-06-30",
   "registros_por_archivo_recortado": {
@@ -47,5 +47,5 @@
     "diferencias": 13913,
     "detectado": true
   },
-  "segundos": 70.21
+  "segundos": 122.66
 }

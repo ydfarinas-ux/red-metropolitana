@@ -4,3 +4,4 @@
 2026-10-12T19:11:05 corrida=2 duraciones={'bronze_batch': 0.54, 'bronze_cdc': 0.07, 'bronze_streaming': 0.23, 'vaciar_staging': 0.09, 'dbt_build': 51.43} consulta_ms=38.5
 2026-10-26T18:49:19 corrida=1 duraciones={'vaciar_entorno': 0.15, 'bronze_batch': 5.94, 'bronze_cdc': 0.36, 'bronze_streaming': 47.98, 'vaciar_staging': 0.06, 'dbt_build': 126.52, 'verificar_linaje': 0.04} consulta_ms=65.0
 2026-10-27T20:54:31 corrida=1 duraciones={'vaciar_entorno': 0.58, 'bronze_batch': 24.2, 'bronze_cdc': 0.85, 'bronze_streaming': 1420.09, 'vaciar_staging': 0.1, 'dbt_build': 304.03, 'verificar_linaje': 0.04} consulta_ms=114.4
+2026-10-28T15:55:39 corrida=1 duraciones={'vaciar_entorno': 0.48, 'bronze_batch': 26.42, 'bronze_cdc': 0.89, 'bronze_streaming': 100.97, 'vaciar_staging': 0.1, 'dbt_build': 151.55, 'verificar_linaje': 0.03} consulta_ms=74.0
