@@ -1,0 +1,12 @@
+etapa,segundos
+vaciar_entorno,0.58
+bronze_batch,24.2
+bronze_cdc,0.85
+bronze_streaming,1420.09
+vaciar_staging,0.1
+dbt_build,304.03
+verificar_linaje,0.04
+contar,0.29
+exportar_entregables,1.55
+poblacion_cortes,6.89
+total,1758.62

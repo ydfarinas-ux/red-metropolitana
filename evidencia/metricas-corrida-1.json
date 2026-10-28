@@ -1,17 +1,19 @@
 {
   "corrida": 1,
-  "fecha": "2026-10-12T19:09:38",
+  "fecha": "2026-10-27T20:54:31",
   "duracion_segundos": {
-    "bronze_batch": 1.85,
-    "bronze_cdc": 0.24,
-    "bronze_streaming": 12.45,
-    "vaciar_staging": 0.03,
-    "dbt_build": 91.72
+    "vaciar_entorno": 0.58,
+    "bronze_batch": 24.2,
+    "bronze_cdc": 0.85,
+    "bronze_streaming": 1420.09,
+    "vaciar_staging": 0.1,
+    "dbt_build": 304.03,
+    "verificar_linaje": 0.04
   },
-  "consulta_tablero_ms": 58.3,
+  "consulta_tablero_ms": 114.4,
   "tamano_mb": {
-    "datos_crudos": 137.07,
-    "bronze": 31.32,
-    "warehouse_staging_silver_gold": 490.22
+    "datos_crudos": 270.01,
+    "bronze": 55.66,
+    "warehouse_staging_silver_gold": 1012.41
   }
 }

@@ -1,0 +1,20 @@
+{
+  "A": {
+    "positivos_persona": 7095,
+    "positivos_solo_aerometro": 1460,
+    "aerometro_que_siguio_viajando": 414,
+    "tarjetas_aerometro_sin_enlazar": 16930,
+    "aerometro_sin_numero_conocido": 1456,
+    "positivos_si_unidad_tarjeta": 11423,
+    "tarjeta_positiva_pero_persona_siguio": 2404
+  },
+  "B": {
+    "positivos_persona": 6387,
+    "positivos_solo_aerometro": 1360,
+    "aerometro_que_siguio_viajando": 449,
+    "tarjetas_aerometro_sin_enlazar": 16930,
+    "aerometro_sin_numero_conocido": 1456,
+    "positivos_si_unidad_tarjeta": 10523,
+    "tarjeta_positiva_pero_persona_siguio": 2400
+  }
+}

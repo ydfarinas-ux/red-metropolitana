@@ -1,5 +1,5 @@
 operador,archivo,usuarios_unicos
-Transmetro,transmetro_validaciones.csv,43255
-Transurbano,transurbano_transacciones.csv,36567
-MetroRiel,metroriel_viajes.jsonl,22885
-Aerómetro,aerometro_boardings.csv,14496
+Transmetro,transmetro_validaciones.csv,41344
+Transurbano,transurbano_transacciones.csv,45685
+MetroRiel,metroriel_viajes.jsonl,26414
+Aerómetro,aerometro_boardings.csv,16930

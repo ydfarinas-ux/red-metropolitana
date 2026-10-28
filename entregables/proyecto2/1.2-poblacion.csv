@@ -1,0 +1,4 @@
+corte,fecha_corte,poblacion,positivos,tasa_positiva,cuenta
+A,2026-07-01,59491,7095,0.1193,"7,095 / 59,491 = 0.1193"
+B,2026-07-31,58113,6387,0.1099,"6,387 / 58,113 = 0.1099"
+C,2026-08-30,57701,,,etiqueta oculta (sin datos posteriores)

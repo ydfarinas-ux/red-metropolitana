@@ -3,8 +3,8 @@ dim_estacion,468
 dim_fecha,365
 dim_sistema,4
 dim_tiempo,8760
-dim_usuario,70380
+dim_usuario,94773
 dim_zona,26
-fct_abordaje,1647569
-fct_padron_diario,8612
-fct_trayecto_metroriel,295511
+fct_abordaje,3232200
+fct_padron_diario,17406
+fct_trayecto_metroriel,583745
