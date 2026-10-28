@@ -124,6 +124,7 @@ Los datos del Proyecto 2 (90 días, del 1 de junio al 29 de agosto de 2026) reem
 | 1.4 Líneas base y logística regularizada (L1, L2 y Elastic Net) | `proyecto2/modelos.py` |
 | Bitácora de corridas | `proyecto2/bitacora.md` |
 | Resultados | `entregables/proyecto2/` |
+| Informe de la Fase 1 (datos y conclusiones) | `Datos y conclusiones Proyecto 2 Fase 1.docx` (y `.pdf`) |
 
 Cortes: A = 2026-07-01 (entrenamiento), B = 2026-07-31 (test, su etiqueta no se usa en la Fase 1), C = 2026-08-30 (uso real, sin etiqueta).
 
