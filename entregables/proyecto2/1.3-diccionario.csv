@@ -1,0 +1,24 @@
+feature,que_mide,ventana,tabla_silver
+viajes_28d,Cantidad de abordajes válidos,28 días,silver.silver_abordajes
+viajes_14d,Cantidad de abordajes válidos recientes,14 días,silver.silver_abordajes
+viajes_7d,Cantidad de abordajes válidos de la última semana,7 días,silver.silver_abordajes
+tendencia_14d,Viajes de los últimos 14 días menos los de los 14 anteriores,28 días,silver.silver_abordajes
+dias_activos_28d,Días distintos con al menos un viaje,28 días,silver.silver_abordajes
+semanas_activas_28d,Semanas de siete días hacia atrás con al menos un viaje,28 días,silver.silver_abordajes
+dias_desde_ultimo_viaje,Días entre el último viaje de la ventana y el corte,28 días,silver.silver_abordajes
+dias_desde_primer_viaje_28d,Días entre el primer viaje de la ventana y el corte,28 días,silver.silver_abordajes
+modos_distintos_28d,Operadores distintos utilizados,28 días,silver.silver_abordajes
+prop_transmetro,Proporción de viajes en Transmetro,28 días,silver.silver_abordajes
+prop_transurbano,Proporción de viajes en Transurbano,28 días,silver.silver_abordajes
+prop_metroriel,Proporción de viajes en MetroRiel,28 días,silver.silver_abordajes
+prop_aerometro,Proporción de viajes en Aerómetro,28 días,silver.silver_abordajes
+prop_hora_pico_28d,Proporción en días laborales no festivos de 6 a 8 o de 17 a 19 horas,28 días,silver.silver_abordajes; silver.festivos_gt
+prop_fin_semana_28d,Proporción de viajes en sábado o domingo,28 días,silver.silver_abordajes
+gasto_q_28d,Suma de tarifas en quetzales usando centavos enteros,28 días,silver.silver_abordajes
+tarifa_promedio_q,Tarifa media en quetzales redondeada a cuatro decimales,28 días,silver.silver_abordajes
+estaciones_distintas_28d,Estaciones o paradas distintas utilizadas,28 días,silver.silver_abordajes
+zonas_distintas_28d,Zonas distintas de abordaje,28 días,silver.silver_abordajes
+pagos_rechazados_28d,Intentos de pago rechazados por Transurbano,28 días,silver.silver_transacciones_rechazadas_tu
+en_padron,Existe una versión del padrón vigente justo antes del corte,estado al corte,silver.silver_padron_scd2
+perfil,Perfil de la versión vigente más reciente o sin_padron,estado al corte,silver.silver_padron_scd2
+cambios_padron_28d,Actualizaciones aplicadas al padrón en la ventana,28 días,silver.silver_padron_scd2
