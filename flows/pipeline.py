@@ -208,6 +208,15 @@ def features_cortes():
 
 
 @task
+@cronometrar("modelos_base")
+def modelos_base():
+    """Proyecto 2 (1.4): líneas base y logística regularizada (L2, L1 y Elastic Net) con 5 folds en el corte A."""
+    sys.path.insert(0, str(RAIZ / "proyecto2"))
+    import modelos
+    modelos.main()
+
+
+@task
 @cronometrar("prueba_recorte")
 def prueba_recorte():
     """Reconstruye otro warehouse desde los archivos crudos recortados."""
@@ -240,6 +249,7 @@ def pipeline(corrida: int = 1, desde_cero: bool = False, solo_carga: bool = Fals
     exportar_entregables()
     poblacion_cortes()
     features_cortes()
+    modelos_base()
     if con_auditoria:
         prueba_recorte()
     tiempos_y_conteos()

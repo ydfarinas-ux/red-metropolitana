@@ -121,6 +121,7 @@ Los datos del Proyecto 2 (90 días, del 1 de junio al 29 de agosto de 2026) reem
 | 1.2 Población, etiqueta y costo de la unidad | `proyecto2/poblacion.py` |
 | 1.3 Features por corte (la fecha de corte es un parámetro) y diccionario | `proyecto2/features.py` |
 | 1.3 Prueba de recorte | `proyecto2/auditoria.py` (`python proyecto2/auditoria.py` o `pipeline.py --auditoria`) |
+| 1.4 Líneas base y logística regularizada (L1, L2 y Elastic Net) | `proyecto2/modelos.py` |
 | Bitácora de corridas | `proyecto2/bitacora.md` |
 | Resultados | `entregables/proyecto2/` |
 
