@@ -69,7 +69,8 @@ class FeaturesTest(unittest.TestCase):
 
     def test_recorte_invariante_y_control_negativo(self):
         completo = auditoria.calcular(self.con)
-        neg_completo = auditoria.perfil_final(self.con, completo)
+        unidades_control = pd.concat([completo[['unidad_id']], pd.DataFrame({'unidad_id': ['sin_perfil']})], ignore_index=True)
+        neg_completo = auditoria.perfil_final(self.con, unidades_control)
         self.con.execute("""
             delete from silver.silver_abordajes where ts_local >= timestamp '2026-07-01';
             delete from silver.silver_transacciones_rechazadas_tu where ts_local >= timestamp '2026-07-01';
@@ -81,8 +82,9 @@ class FeaturesTest(unittest.TestCase):
         resultado = auditoria.comparar(completo, recortado, ['fecha_corte'] + features.FEATURES)
         self.assertEqual(resultado['diferencias'], 0)
         self.assertEqual(resultado['filas_en_un_solo_lado'], 0)
-        negativo = auditoria.comparar(neg_completo, auditoria.perfil_final(self.con, recortado), ['perfil_final'])
+        negativo = auditoria.comparar(neg_completo, auditoria.perfil_final(self.con, unidades_control), ['perfil_final'])
         self.assertEqual(negativo['diferencias'], 1)
+        self.assertEqual(negativo['filas_comparadas'], 2)  # Sin perfil en ambos lados no es una diferencia.
 
     def test_tarifa_redondea_mitad_con_enteros(self):
         self.con.execute("delete from silver.silver_abordajes")

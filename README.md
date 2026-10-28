@@ -138,3 +138,25 @@ su conteo puede variar según el paralelismo y la plataforma. La versión final
 usa centavos enteros y exige cero diferencias. Ambas reconstruyen Bronze y
 Silver en `.recorte/`, excluyen la etiqueta de la comparación y prueban que el
 perfil al final de los datos sí cambia (control negativo).
+
+Resultados medidos con `P2_datos_red.zip` el 27 de octubre de 2026:
+
+| Verificación de 1.3 | Resultado |
+|---|---|
+| Filas de features por corte | A: 59,491; B: 58,113; C: 57,701 |
+| Duplicados por unidad y corte; nulos en features | 0; 0 |
+| Prueba de recorte con fórmulas anteriores | 46 diferencias, todas en `tarifa_promedio_q` |
+| Prueba de recorte con centavos enteros | 59,491 filas comparadas; 0 diferencias; 0 filas en un solo lado |
+| Control negativo de perfil final | 13,913 cambios reales; detectado |
+| Cálculo de features de los tres cortes | 5.84 segundos |
+
+El prompt de trabajo indicaba 51 diferencias flotantes: el conteo observado fue
+46 y puede variar por el orden de agregación en paralelo. También indicaba
+49,115 diferencias en el control negativo: esa cifra se obtiene sumando los
+13,913 cambios reales y las 35,202 personas sin perfil en ambos lados.
+Dos ausencias de perfil se comparan como iguales, por lo que el control
+negativo reporta únicamente los cambios reales. La bitácora y los dos JSON
+conservan los resultados medidos, sin sustituirlos por los valores esperados.
+
+Pruebas de límites temporales, redondeo, control negativo, comparación y
+preservación de bytes: `python -m unittest discover -s proyecto2 -p "test_*.py"`.

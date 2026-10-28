@@ -1,0 +1,51 @@
+{
+  "filas_comparadas": 59491,
+  "filas_en_un_solo_lado": 0,
+  "diferencias": 0,
+  "features_con_diferencias": {},
+  "features_comparadas": [
+    "fecha_corte",
+    "viajes_28d",
+    "viajes_14d",
+    "viajes_7d",
+    "tendencia_14d",
+    "dias_activos_28d",
+    "semanas_activas_28d",
+    "dias_desde_ultimo_viaje",
+    "dias_desde_primer_viaje_28d",
+    "modos_distintos_28d",
+    "prop_transmetro",
+    "prop_transurbano",
+    "prop_metroriel",
+    "prop_aerometro",
+    "prop_hora_pico_28d",
+    "prop_fin_semana_28d",
+    "gasto_q_28d",
+    "tarifa_promedio_q",
+    "estaciones_distintas_28d",
+    "zonas_distintas_28d",
+    "pagos_rechazados_28d",
+    "en_padron",
+    "perfil",
+    "cambios_padron_28d"
+  ],
+  "fecha": "2026-10-27T23:45:33-06:00",
+  "corte": "2026-07-01",
+  "datos_recortados_hasta": "2026-06-30",
+  "registros_por_archivo_recortado": {
+    "transmetro_validaciones.csv": 231541,
+    "transurbano_transacciones.csv": 536251,
+    "aerometro_boardings.csv": 126376,
+    "cdc_padron_usuarios.csv": 26141,
+    "metroriel_viajes.jsonl": 192154,
+    "tm_estaciones.csv": 104,
+    "tu_paradas.csv": 328,
+    "mr_estaciones.csv": 22,
+    "am_estaciones.csv": 14
+  },
+  "control_negativo_perfil_final": {
+    "diferencias": 13913,
+    "detectado": true
+  },
+  "segundos": 70.21
+}
