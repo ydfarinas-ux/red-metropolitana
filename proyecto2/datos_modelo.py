@@ -107,10 +107,18 @@ def ganancia(y, contactar):
     return BENEFICIO_POSITIVO * vp - COSTO_NEGATIVO * fp, vp, fp
 
 
+def cambios_de_codigo():
+    """Archivos con cambios sin commit, sin contar las salidas que los propios scripts escriben
+    (la bitácora, entregables/, predicciones/ y modelos/)."""
+    salida = subprocess.run(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=RAIZ,
+                            capture_output=True, text=True).stdout.splitlines()
+    ignorar = ('proyecto2/bitacora.md', 'entregables/', 'predicciones/', 'modelos/', 'evidencia/')
+    return [l for l in salida if not l[3:].strip('"').startswith(ignorar)]
+
+
 def commit_y_fecha():
     r = subprocess.run(['git', 'rev-parse', '--short', 'HEAD'], cwd=RAIZ, capture_output=True, text=True)
-    sucio = subprocess.run(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=RAIZ,
-                           capture_output=True, text=True).stdout.strip()
+    sucio = cambios_de_codigo()
     commit = r.stdout.strip() if r.returncode == 0 else 'sin commit disponible'
     return commit + (' (con cambios sin commit)' if sucio else ''), datetime.now().astimezone().isoformat(timespec='seconds')
 

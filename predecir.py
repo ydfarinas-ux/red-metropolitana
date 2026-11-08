@@ -30,7 +30,6 @@ sys.path.insert(0, str(RAIZ / 'proyecto2'))
 
 import duckdb   # noqa: E402
 import joblib   # noqa: E402
-import pandas as pd   # noqa: E402
 
 import features   # noqa: E402
 from config import VENTANA_DIAS, ruta_warehouse   # noqa: E402

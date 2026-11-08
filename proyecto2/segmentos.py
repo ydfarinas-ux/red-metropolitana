@@ -64,7 +64,6 @@ def nombrar(medianas):
 def main():
     df = cargar_corte('A')
     X = StandardScaler().fit_transform(df[NUMERICAS])
-    y = df['etiqueta'].to_numpy().astype(int)
     muestra = np.random.RandomState(SEMILLA).choice(len(X), MUESTRA_SILUETA, replace=False)
 
     filas = []

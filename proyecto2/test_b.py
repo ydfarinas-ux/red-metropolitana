@@ -9,7 +9,6 @@ Reglas que este script hace cumplir:
 Uso: python proyecto2/test_b.py
 """
 import json
-import subprocess
 import sys
 
 import joblib
@@ -17,12 +16,12 @@ import numpy as np
 from sklearn.metrics import average_precision_score, confusion_matrix, roc_auc_score
 
 if __package__:
-    from .config import CORTES, RAIZ, SALIDA
-    from .datos_modelo import DIR_MODELOS, anotar_bitacora, cargar_corte, commit_y_fecha, ganancia
+    from .config import CORTES, SALIDA
+    from .datos_modelo import DIR_MODELOS, anotar_bitacora, cambios_de_codigo, cargar_corte, commit_y_fecha, ganancia
     from .entrenar_final import VERSION
 else:
-    from config import CORTES, RAIZ, SALIDA
-    from datos_modelo import DIR_MODELOS, anotar_bitacora, cargar_corte, commit_y_fecha, ganancia
+    from config import CORTES, SALIDA
+    from datos_modelo import DIR_MODELOS, anotar_bitacora, cambios_de_codigo, cargar_corte, commit_y_fecha, ganancia
     from entrenar_final import VERSION
 
 REGISTRO = SALIDA / '2.2-test-b.json'
@@ -31,9 +30,7 @@ REGISTRO = SALIDA / '2.2-test-b.json'
 def main():
     if REGISTRO.exists():
         sys.exit(f'El corte B ya se evaluó (ver {REGISTRO.name}). La etiqueta de B se usa una sola vez.')
-    sucio = subprocess.run(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=RAIZ,
-                           capture_output=True, text=True).stdout.strip()
-    if sucio:
+    if cambios_de_codigo():
         sys.exit('Hay cambios sin commit: haz commit antes de la evaluación única para poder anotar su commit.')
 
     paquete = joblib.load(DIR_MODELOS / f'modelo_abandono_v{VERSION}.joblib')

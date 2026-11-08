@@ -20,11 +20,11 @@ from sklearn.metrics import average_precision_score
 
 if __package__:
     from .config import SALIDA
-    from .datos_modelo import (BENEFICIO_POSITIVO, COSTO_CONTACTO, COSTO_NEGATIVO, TASA_RETENCION, UMBRAL_TEORICO,
+    from .datos_modelo import (COSTO_CONTACTO, TASA_RETENCION, UMBRAL_TEORICO,
                                VALOR_RETENIDO, anotar_bitacora, commit_y_fecha, ganancia)
 else:
     from config import SALIDA
-    from datos_modelo import (BENEFICIO_POSITIVO, COSTO_CONTACTO, COSTO_NEGATIVO, TASA_RETENCION, UMBRAL_TEORICO,
+    from datos_modelo import (COSTO_CONTACTO, TASA_RETENCION, UMBRAL_TEORICO,
                               VALOR_RETENIDO, anotar_bitacora, commit_y_fecha, ganancia)
 
 MODELO_PRODUCCION = 'hgb'            # decisión de 2.1 (columna de oof-fase2-corte-a.csv)
