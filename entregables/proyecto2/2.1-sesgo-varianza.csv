@@ -1,0 +1,7 @@
+modelo,ap_entrenamiento,ap_validacion,brecha,diagnostico,por_que
+Logística L2 (lambda=100),0.4137,0.4129,0.0008,sesgo alto,entrenamiento y validación casi iguales (0.414 / 0.413) pero por debajo del mejor ensemble (0.439): el modelo es demasiado simple
+Logística L1 (lambda=10),0.4133,0.4124,0.0009,sesgo alto,entrenamiento y validación casi iguales (0.413 / 0.412) pero por debajo del mejor ensemble (0.439): el modelo es demasiado simple
+Logística Elastic Net 0.5 (lambda=31.62),0.4134,0.4126,0.0008,sesgo alto,entrenamiento y validación casi iguales (0.413 / 0.413) pero por debajo del mejor ensemble (0.439): el modelo es demasiado simple
+"HGB lr=0.1, hojas=15",0.4884,0.4388,0.0495,equilibrado,brecha pequeña (0.050) y validación alta (0.439)
+Random Forest (mínimo 50 por hoja),0.4669,0.4226,0.0442,equilibrado,brecha pequeña (0.044) y validación alta (0.423)
+"Random Forest (hojas de 1, sin podar)",0.997,0.3705,0.6265,varianza alta,memoriza el entrenamiento: 0.997 contra 0.371 en validación (brecha 0.626)

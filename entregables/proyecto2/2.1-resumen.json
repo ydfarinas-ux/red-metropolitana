@@ -1,0 +1,39 @@
+{
+  "fecha": "2026-11-08T12:20:06-06:00",
+  "commit": "148ab4d",
+  "folds": 5,
+  "semilla": 2026,
+  "mejor_hgb": {
+    "modelo": "HGB lr=0.1, hojas=15",
+    "learning_rate": 0.1,
+    "max_leaf_nodes": 15,
+    "ap_media": 0.4388,
+    "ap_desv": 0.0113
+  },
+  "mejor_rf": {
+    "modelo": "Random Forest (mínimo 50 por hoja)",
+    "ap_media": 0.4226
+  },
+  "logistica_l2": {
+    "lambda": 100.0,
+    "ap_media": 0.4129,
+    "ap_desv": 0.0112,
+    "segundos_5_folds": 0.7
+  },
+  "mejora_ap_ensemble_sobre_logistica": 0.0259,
+  "mejora_en_desviaciones": 2.3,
+  "folds_donde_gana_ensemble": 5,
+  "top10_permutacion": [
+    "dias_desde_ultimo_viaje",
+    "pagos_rechazados_28d",
+    "perfil",
+    "viajes_14d",
+    "tendencia_14d",
+    "gasto_q_28d",
+    "viajes_7d",
+    "viajes_28d",
+    "dias_activos_28d",
+    "tarifa_promedio_q"
+  ],
+  "duracion_segundos": 136.6
+}

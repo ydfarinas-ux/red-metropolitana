@@ -1,0 +1,42 @@
+{
+  "fecha": "2026-11-08T12:20:31-06:00",
+  "commit": "148ab4d",
+  "k": 4,
+  "filas": 59491,
+  "silueta_k_elegido": 0.1634,
+  "silueta_maxima": {
+    "k": 2,
+    "valor": 0.2573
+  },
+  "pca_varianza_explicada": [
+    0.2947,
+    0.1209
+  ],
+  "pca_varianza_total": 0.4155,
+  "segmentos": [
+    {
+      "segmento": "Ocasionales que se enfrían",
+      "tamano": 21725,
+      "tasa_abandono": 0.2134,
+      "cuenta": "4,636 / 21,725 = 0.2134"
+    },
+    {
+      "segmento": "Usuarios de Aerómetro",
+      "tamano": 10140,
+      "tasa_abandono": 0.1439,
+      "cuenta": "1,459 / 10,140 = 0.1439"
+    },
+    {
+      "segmento": "Regulares",
+      "tamano": 23912,
+      "tasa_abandono": 0.039,
+      "cuenta": "933 / 23,912 = 0.0390"
+    },
+    {
+      "segmento": "Intensivos multimodales",
+      "tamano": 3714,
+      "tasa_abandono": 0.018,
+      "cuenta": "67 / 3,714 = 0.0180"
+    }
+  ]
+}

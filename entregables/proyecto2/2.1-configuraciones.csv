@@ -1,0 +1,7 @@
+modelo,ap_entrenamiento,ap_media,ap_desv,roc_auc_media,roc_auc_desv,iteraciones,segundos
+"HGB lr=0.05, hojas=15",0.4827,0.438,0.0102,0.8452,0.0046,125-251,5.8
+"HGB lr=0.05, hojas=31",0.5049,0.4367,0.0113,0.8445,0.0048,107-163,5.7
+"HGB lr=0.1, hojas=15",0.4884,0.4388,0.0113,0.8446,0.0045,78-152,3.4
+"HGB lr=0.1, hojas=31",0.5203,0.4345,0.0105,0.8438,0.005,69-124,4.0
+"Random Forest (hojas de 1, sin podar)",0.997,0.3705,0.0137,0.8133,0.0048,,53.7
+Random Forest (mínimo 50 por hoja),0.4669,0.4226,0.0113,0.8421,0.0046,,35.7

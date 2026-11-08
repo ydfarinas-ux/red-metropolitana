@@ -28,3 +28,11 @@ Cada corrida que se reporta en el informe queda anotada aquí, con su fecha y su
 - 2026-10-28T16:00:41-06:00 · commit d3ea4b0 · prueba de recorte (centavos enteros): 59,491 filas, 0 diferencias, 0 filas en un solo lado; features: ninguna. Control negativo perfil final: 13,913 diferencias, detectado=True.
 
 - 2026-10-28 · commit d3ea4b0 · corrida final del informe con las cuatro partes juntas (`flows/pipeline.py --desde-cero --auditoria`): Completed(), 0 diferencias en los conteos, 115 pruebas de dbt, A 7,095 / 59,491 = 0.1193, B 6,387 / 58,113 = 0.1099, C 57,701 sin etiqueta, prueba de recorte con 0 diferencias y mejor logística L2 (λ = 100) con precisión promedio 0.4129. Total 582.85 s (la máquina estaba ocupada; el streaming simulado tardó 101 s).
+
+- 2026-11-08T12:20:06-06:00 · commit 148ab4d · 2.1 ensembles en el corte A con los folds de la Fase 1: mejor HGB HGB lr=0.1, hojas=15 AP 0.4388 ± 0.0113; mejor RF Random Forest (mínimo 50 por hoja) AP 0.4226; logística L2 AP 0.4129. Mejora del ensemble: +0.0259.
+
+- 2026-11-08T12:20:08-06:00 · commit 148ab4d · 2.2 umbral con predicciones fuera de fold del corte A: 0.33 (G = 10 · 2,815 − 5 · 3,199 = 28,150 − 15,995 = Q12,155; 6,014 contactados, precisión 0.468, recall 0.397). Umbral teórico 1/3.
+
+- 2026-11-08T12:20:31-06:00 · commit 148ab4d · 2.3 KMeans k=4 en el corte A escalado (silueta 0.1634); PCA 2 componentes explica 41.6%. Segmentos: Ocasionales que se enfrían 21,725 (21.3% abandono); Usuarios de Aerómetro 10,140 (14.4% abandono); Regulares 23,912 (3.9% abandono); Intensivos multimodales 3,714 (1.8% abandono).
+
+- 2026-11-08T12:20:34-06:00 · commit 148ab4d · modelo de producción modelo_abandono_v1.0.0.joblib: HGB lr=0.1, hojas=15 entrenado con todo el corte A (59,491 filas, 103 iteraciones, 1.01 s), umbral 0.33, sha256 ae626d0e0263.

@@ -1,0 +1,48 @@
+{
+  "fecha": "2026-11-08T12:20:08-06:00",
+  "commit": "148ab4d",
+  "datos": "corte A, predicciones fuera de fold (5 folds de la Fase 1)",
+  "modelo": "hgb",
+  "escenario": {
+    "costo_contacto_q": 5.0,
+    "tasa_retencion": 0.25,
+    "valor_retenido_q": 60.0
+  },
+  "formula": "G = VP·(0.25·60 − 5) − FP·5 = 10·VP − 5·FP",
+  "umbral_teorico": 0.3333,
+  "umbral_elegido": 0.33,
+  "en_umbral_elegido": {
+    "contactados": 6014,
+    "vp": 2815,
+    "fp": 3199,
+    "fn": 4280,
+    "precision": 0.4681,
+    "recall": 0.3968,
+    "ganancia_q": 12155.0
+  },
+  "cuenta": "G = 10 · 2,815 − 5 · 3,199 = 28,150 − 15,995 = Q12,155",
+  "en_umbral_1_3": {
+    "umbral": 0.33,
+    "ganancia_q": 12155.0,
+    "contactados": 6014
+  },
+  "contactar_a_todos": {
+    "ganancia_q": -191030.0,
+    "cuenta": "10 · 7,095 − 5 · 52,396 = Q-191,030"
+  },
+  "logistica_l2_mejor": {
+    "umbral": 0.32,
+    "ganancia_q": 10875.0
+  },
+  "ap_oof": {
+    "logistica_l2": 0.412,
+    "hgb": 0.4375
+  },
+  "umbral_optimo_por_fold": [
+    0.36,
+    0.33,
+    0.38,
+    0.34,
+    0.33
+  ]
+}
