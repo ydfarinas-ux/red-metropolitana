@@ -1,0 +1,28 @@
+{
+  "fecha": "2026-11-08T12:24:22-06:00",
+  "commit": "11dbd4f (con cambios sin commit)",
+  "ensayo_corte_b": {
+    "fecha_corte": "2026-07-31",
+    "datos_completos_hasta": "2026-08-29",
+    "datos_recortados_hasta": "2026-07-30",
+    "lineas_conservadas": {
+      "aerometro_boardings.csv": 256271,
+      "am_estaciones.csv": null,
+      "cdc_padron_usuarios.csv": 52320,
+      "metroriel_viajes.jsonl": 390134,
+      "mr_estaciones.csv": null,
+      "tm_estaciones.csv": null,
+      "transmetro_validaciones.csv": 469284,
+      "transurbano_transacciones.csv": 1083158,
+      "tu_paradas.csv": null
+    },
+    "sha256_con_30_dias_mas": "09c662cb5d3eedb753f97b3562c1898581ee9c5de121799c93a5290fc7610ba8",
+    "sha256_solo_hasta_el_corte": "09c662cb5d3eedb753f97b3562c1898581ee9c5de121799c93a5290fc7610ba8",
+    "identicos": true
+  },
+  "corte_c": {
+    "sha256_entregado": "952923b12e0609c6e660402959c943dfa95011a9bd133881bbb59c18d30c7545",
+    "sha256_repeticion": "952923b12e0609c6e660402959c943dfa95011a9bd133881bbb59c18d30c7545",
+    "identicos": true
+  }
+}

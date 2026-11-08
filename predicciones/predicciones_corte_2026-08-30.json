@@ -1,0 +1,15 @@
+{
+  "fecha_corte": "2026-08-30",
+  "modelo": "1.0.0",
+  "umbral": 0.33,
+  "poblacion": 57701,
+  "contactar": 7268,
+  "puntaje_medio": 0.1345,
+  "sha256_csv": "952923b12e0609c6e660402959c943dfa95011a9bd133881bbb59c18d30c7545",
+  "segundos": {
+    "silver": 1.81,
+    "features": 2.41,
+    "prediccion": 0.151,
+    "total": 4.65
+  }
+}
