@@ -36,3 +36,5 @@ Cada corrida que se reporta en el informe queda anotada aquí, con su fecha y su
 - 2026-11-08T12:20:31-06:00 · commit 148ab4d · 2.3 KMeans k=4 en el corte A escalado (silueta 0.1634); PCA 2 componentes explica 41.6%. Segmentos: Ocasionales que se enfrían 21,725 (21.3% abandono); Usuarios de Aerómetro 10,140 (14.4% abandono); Regulares 23,912 (3.9% abandono); Intensivos multimodales 3,714 (1.8% abandono).
 
 - 2026-11-08T12:20:34-06:00 · commit 148ab4d · modelo de producción modelo_abandono_v1.0.0.joblib: HGB lr=0.1, hojas=15 entrenado con todo el corte A (59,491 filas, 103 iteraciones, 1.01 s), umbral 0.33, sha256 ae626d0e0263.
+
+- 2026-11-08T12:21:45-06:00 · commit 556830f · **TEST B (evaluación única)** con modelo_abandono_v1.0.0.joblib (HGB lr=0.1, hojas=15), umbral 0.33: precisión promedio 0.3905 (base 2: 0.3482; validación en A: 0.4388), ROC-AUC 0.8429; VP 2,653, FP 3,652, FN 3,734, VN 48,074; precisión 0.4208, recall 0.4154; G = 10 · 2,653 − 5 · 3,652 = 26,530 − 18,260 = Q8,270.

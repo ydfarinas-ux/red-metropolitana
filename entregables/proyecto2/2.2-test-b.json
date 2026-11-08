@@ -1,0 +1,39 @@
+{
+  "fecha": "2026-11-08T12:21:45-06:00",
+  "commit": "556830f",
+  "evaluacion_unica": true,
+  "modelo": "modelo_abandono_v1.0.0.joblib (HGB lr=0.1, hojas=15)",
+  "umbral": 0.33,
+  "corte_b": "2026-07-31",
+  "poblacion": 58113,
+  "positivos": 6387,
+  "tasa_positiva": 0.1099,
+  "metrica": {
+    "precision_promedio": 0.3905,
+    "roc_auc": 0.8429,
+    "base1_constante_precision_promedio": 0.1099,
+    "base2_dias_desde_ultimo_viaje_precision_promedio": 0.3482,
+    "base2_roc_auc": 0.8173,
+    "validacion_a_precision_promedio": 0.4388
+  },
+  "matriz_confusion": {
+    "vp": 2653,
+    "fp": 3652,
+    "fn": 3734,
+    "vn": 48074
+  },
+  "contactados": 6305,
+  "precision": 0.4208,
+  "recall": 0.4154,
+  "ganancia_q": 8270.0,
+  "cuenta_ganancia": "G = 10 · 2,653 − 5 · 3,652 = 26,530 − 18,260 = Q8,270",
+  "ganancia_por_1000_usuarios_q": 142.3,
+  "validacion_a": {
+    "precision": 0.4681,
+    "recall": 0.3968,
+    "ganancia_q": 12155.0,
+    "ganancia_por_1000_usuarios_q": 204.3
+  },
+  "contactar_a_todos_q": -194760.0,
+  "cuenta_contactar_a_todos": "10 · 6,387 − 5 · 51,726 = Q-194,760"
+}
