@@ -127,7 +127,7 @@ def main():
                    label=f'{nombre} (n={tabla.loc[nombre, "tamano"]:,}, abandono {tabla.loc[nombre, "tasa_abandono"]:.1%})')
     ax.set_xlabel(f'PC1 ({var[0]:.1%} de la varianza)')
     ax.set_ylabel(f'PC2 ({var[1]:.1%} de la varianza)')
-    ax.set_title(f'2.3 Segmentos KMeans (k={K_ELEGIDO}) en dos componentes principales · varianza explicada {var.sum():.1%}')
+    ax.set_title(f'2.3 Segmentos KMeans (k={K_ELEGIDO}) en PCA · varianza explicada {var.sum():.1%}')
     ax.legend(frameon=False, fontsize=8, markerscale=3)
     ax.spines[['top', 'right']].set_visible(False)
     fig.tight_layout()
