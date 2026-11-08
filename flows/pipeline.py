@@ -12,6 +12,7 @@ Idempotencia:
 
 Uso:
     python flows/pipeline.py --desde-cero       # Proyecto 2: vacía lake y warehouse y corre todo con un solo comando
+                                                # (incluye 2.1, 2.2, 2.3 y las predicciones del corte C)
     python flows/pipeline.py --corrida 1
     python flows/pipeline.py --corrida 2        # debe dar conteos idénticos
     STREAMING_MODO=kafka python flows/pipeline.py --corrida 1   (con docker compose up -d)
@@ -217,6 +218,45 @@ def modelos_base():
 
 
 @task
+@cronometrar("ensemble")
+def ensemble_fase2():
+    """Proyecto 2 (2.1): Random Forest y HistGradientBoosting con los mismos 5 folds del corte A."""
+    sys.path.insert(0, str(RAIZ / "proyecto2"))
+    import ensemble
+    ensemble.main()
+
+
+@task
+@cronometrar("umbral")
+def umbral_fase2():
+    """Proyecto 2 (2.2): umbral según el escenario de costos con las predicciones fuera de fold del corte A.
+    El modelo final (entrenar_final.py) y la evaluación única en B (test_b.py) NO están en el flujo a propósito:
+    el modelo de producción queda congelado y la etiqueta de B se usa una sola vez."""
+    sys.path.insert(0, str(RAIZ / "proyecto2"))
+    import umbral
+    umbral.main()
+
+
+@task
+@cronometrar("segmentos")
+def segmentos_fase2():
+    """Proyecto 2 (2.3): KMeans y PCA sobre las features escaladas del corte A."""
+    sys.path.insert(0, str(RAIZ / "proyecto2"))
+    import segmentos
+    segmentos.main()
+
+
+@task
+@cronometrar("prediccion")
+def prediccion_corte_c():
+    """Proyecto 2 (2.4): predicciones del corte C con el modelo guardado (predecir.py, sin reentrenar)."""
+    sys.path.insert(0, str(RAIZ / "proyecto2"))
+    from config import CORTES
+    subprocess.run([sys.executable, str(RAIZ / "predecir.py"), "--datos", os.environ["DATOS_RED"],
+                    "--fecha-corte", CORTES["C"]], cwd=RAIZ, check=True)
+
+
+@task
 @cronometrar("prueba_recorte")
 def prueba_recorte():
     """Reconstruye otro warehouse desde los archivos crudos recortados."""
@@ -234,7 +274,8 @@ def tiempos_y_conteos():
 
 
 @flow(name="red-metropolitana", log_prints=True)
-def pipeline(corrida: int = 1, desde_cero: bool = False, solo_carga: bool = False, con_auditoria: bool = False):
+def pipeline(corrida: int = 1, desde_cero: bool = False, solo_carga: bool = False, con_auditoria: bool = False,
+             fase2: bool = True):
     if desde_cero:
         vaciar_entorno()
     ingesta_batch()
@@ -250,6 +291,12 @@ def pipeline(corrida: int = 1, desde_cero: bool = False, solo_carga: bool = Fals
     poblacion_cortes()
     features_cortes()
     modelos_base()
+    if fase2:
+        ensemble_fase2()
+        umbral_fase2()
+        segmentos_fase2()
+        if (RAIZ / "modelos" / "modelo_abandono_v1.0.0.joblib").exists():
+            prediccion_corte_c()
     if con_auditoria:
         prueba_recorte()
     tiempos_y_conteos()
@@ -261,5 +308,7 @@ if __name__ == "__main__":
     p.add_argument("--desde-cero", action="store_true", help="vacía lake, warehouse y dbt/target antes de correr")
     p.add_argument("--solo-carga", action="store_true", help="solo Bronze y dbt (para la prueba de recorte)")
     p.add_argument("--auditoria", action="store_true", help="ejecuta la prueba de recorte desde los archivos crudos")
+    p.add_argument("--sin-fase2", action="store_true", help="omite 2.1, 2.2, 2.3 y la predicción del corte C")
     a = p.parse_args()
-    pipeline(corrida=a.corrida, desde_cero=a.desde_cero, solo_carga=a.solo_carga, con_auditoria=a.auditoria)
+    pipeline(corrida=a.corrida, desde_cero=a.desde_cero, solo_carga=a.solo_carga, con_auditoria=a.auditoria,
+             fase2=not a.sin_fase2)

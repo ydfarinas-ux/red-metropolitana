@@ -9,3 +9,11 @@ pandas==3.1.0
 scikit-learn==1.9.1
 matplotlib==3.11.2
 joblib==1.6.0
+# Proyecto 2 (Fase 2): dependencias indirectas fijadas para un entorno reproducible.
+# fastapi >= 0.156 rompe el servidor temporal de prefect 3.8.6 (Body(min_items=...)): se fija 0.150.0.
+fastapi==0.150.0
+starlette==1.10.0
+pydantic==2.14.1
+numpy==2.5.4
+scipy==1.18.1
+threadpoolctl==3.8.0

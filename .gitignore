@@ -11,3 +11,4 @@ __pycache__/
 .recorte/
 ~$*
 dbt/.user.yml
+.prediccion/
