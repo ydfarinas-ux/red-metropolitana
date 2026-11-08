@@ -162,3 +162,35 @@ conservan los resultados medidos, sin sustituirlos por los valores esperados.
 
 Pruebas de límites temporales, redondeo, control negativo, comparación y
 preservación de bytes: `python -m unittest discover -s proyecto2 -p "test_*.py"`.
+
+## Proyecto 2, Fase 2: modelos, decisión y producción
+
+Informe: **`Datos y conclusiones Proyecto 2 Fase 2.docx`** (y `.pdf`). Ficha del modelo: [docs/proyecto2/ficha-modelo.md](docs/proyecto2/ficha-modelo.md). Guion de la defensa: [docs/proyecto2/guion-defensa.md](docs/proyecto2/guion-defensa.md).
+
+### Predicciones del corte C (lo que se corre en la defensa)
+
+```bash
+.venv\Scripts\python.exe flows\pipeline.py --desde-cero                              # carga los datos de datos_red/ desde cero (incluye 2.1-2.3 y predice C)
+.venv\Scripts\python.exe predecir.py --datos datos_red --fecha-corte 2026-08-30     # CSV en predicciones/
+```
+
+`predecir.py` carga `modelos/modelo_abandono_v1.0.0.joblib` y **no reentrena**. Si el warehouse del proyecto se construyó con esos mismos archivos (compara el MD5 de cada uno con `control.ingest_log`), lo usa; si no, construye Silver con el flujo del Proyecto 1 en `.prediccion/` sin tocar el warehouse principal. Las features salen del mismo código de 1.3 (`proyecto2/features.py`) y las tarjetas de la unidad solo de la ventana anterior al corte, así que con 30 días más de datos el CSV sale idéntico.
+
+**Importante:** `unidad_id` es el seudónimo `usuario_sk`, que depende de `PSEUDO_SALT` en `.env`. La prueba de invariancia se debe correr con el mismo `.env` con el que se generó el CSV entregado.
+
+| Pieza | Archivo | Resultados |
+|---|---|---|
+| Carga de un corte, folds de la Fase 1, escenario de costos | `proyecto2/datos_modelo.py` | |
+| 2.1 Ensembles con los mismos 5 folds, sesgo-varianza, importancias por permutación en validación | `proyecto2/ensemble.py` | `entregables/proyecto2/2.1-*` |
+| 2.2 Umbral por costo con predicciones fuera de fold de A | `proyecto2/umbral.py` | `2.2-umbral.json`, `2.2-curva-ganancia.png` |
+| 2.2 Modelo final con todo A (versión en el nombre) | `proyecto2/entrenar_final.py` | `modelos/modelo_abandono_v1.0.0.joblib` y `.json` |
+| 2.2 Evaluación única en B (se niega a correr dos veces y exige commit limpio) | `proyecto2/test_b.py` | `2.2-test-b.json` |
+| 2.3 KMeans y PCA | `proyecto2/segmentos.py` | `2.3-*` |
+| 2.4 Predicción | `predecir.py` | `predicciones/predicciones_corte_2026-08-30.csv` |
+| 2.4 Ensayo de la prueba de invariancia | `proyecto2/invariancia.py` | `2.4-ensayo-invariancia.json` |
+
+Los scripts de la Fase 2 leen las features de `entregables/proyecto2/features-cortes.csv` (versionado en git), así que cada commit reproduce sus cifras en cualquier máquina. `P2_FUENTE=warehouse` hace que lean el warehouse local.
+
+`entrenar_final.py` y `test_b.py` no están en el flujo a propósito: el modelo de producción queda congelado y la etiqueta de B se usa una sola vez. El orden en que se corrió todo, con fecha y commit, está en `proyecto2/bitacora.md`.
+
+Entorno: Python 3.12 y `requirements.txt` con versiones fijas. Se fijó `fastapi==0.150.0` porque `fastapi` 0.156 o más nuevo rompe el servidor temporal de `prefect` 3.8.6. Si el `.venv` ya existe: `.venv\Scripts\python.exe -m pip install -r requirements.txt`.
